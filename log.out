@@ -1,0 +1,1808 @@
+TACC: Starting up job 3282976
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       57557 ion ID     5120001
+            //:\\
+         0    0.2013593590E-07    0.2426732650E-07    0.6788841250E-07   -0.2881497574E+06   5120001
+ called ionrun           2
+ Time reached   1.00009999999987       dti. Exiting and firing next one...
+Total time for      1th impact is  22678.318 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1702800429E+04 at_count      710 average    0.2398310464E+01 |
+| nt_time    0.1639944561E+04 nt_count      710 average    0.2309781072E+01 |
+| ds_time    0.6609486341E+01 ds_count       45 average    0.1468774743E+00 |
+|  f_time    0.1450795372E+05  f_count    22601 average    0.6419164513E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  42.00% of whole
+nt_time =  40.45% of whole
+ds_time =   2.57% of whole
+ f_time =  11.24% of whole
+ TIME PER STEP:    1.00337816255197     
+ Total Time in simulation:    22678.3532938957     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       13567 ion ID     5120002
+            //:\\
+     22602    0.2205403859E-07    0.2141907637E-07    0.6788841250E-07   -0.2881497574E+06   5120002
+ called ionrun           2
+ Time reached   2.00007999999840       dti. Exiting and firing next one...
+Total time for      2th impact is  22957.453 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1710806406E+04 at_count      716 average    0.2389394422E+01 |
+| nt_time    0.1651294174E+04 nt_count      716 average    0.2306276779E+01 |
+| ds_time    0.6731421709E+01 ds_count       46 average    0.1463352545E+00 |
+|  f_time    0.1473997890E+05  f_count    22958 average    0.6420410706E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  39.25% of whole
+nt_time =  37.88% of whole
+ds_time =   2.40% of whole
+ f_time =  10.55% of whole
+ TIME PER STEP:    1.00164339424177     
+ Total Time in simulation:    45635.8747529984     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       69510 ion ID     5120003
+            //:\\
+     45561    0.2202716944E-07    0.2383829910E-07    0.6788841250E-07   -0.2881497574E+06   5120003
+ called ionrun           2
+ Time reached   3.00006999999985       dti. Exiting and firing next one...
+Total time for      3th impact is  23077.642 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1714863514E+04 at_count      716 average    0.2395060774E+01 |
+| nt_time    0.1668388816E+04 nt_count      716 average    0.2330151978E+01 |
+| ds_time    0.6738866091E+01 ds_count       46 average    0.1464970889E+00 |
+|  f_time    0.1480023861E+05  f_count    22995 average    0.6436285546E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  38.31% of whole
+nt_time =  37.27% of whole
+ds_time =   2.34% of whole
+ f_time =  10.29% of whole
+ TIME PER STEP:    1.00228402093187     
+ Total Time in simulation:    68713.5856869221     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       13509 ion ID     5120004
+            //:\\
+     68557    0.1971453870E-07    0.1947163260E-07    0.6788841250E-07   -0.2881497574E+06   5120004
+ called ionrun           2
+ Time reached   4.00000000000275       dti. Exiting and firing next one...
+Total time for      4th impact is  23232.797 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1718019779E+04 at_count      716 average    0.2399468966E+01 |
+| nt_time    0.1675893095E+04 nt_count      716 average    0.2340632814E+01 |
+| ds_time    0.6833998680E+01 ds_count       46 average    0.1485651887E+00 |
+|  f_time    0.1490939920E+05  f_count    22998 average    0.6482911208E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  37.84% of whole
+nt_time =  36.91% of whole
+ds_time =   2.34% of whole
+ f_time =  10.22% of whole
+ TIME PER STEP:    1.00426458035401     
+ Total Time in simulation:    91946.4479808807     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       78269 ion ID     5120005
+            //:\\
+     91556    0.2289778290E-07    0.2045006390E-07    0.6788841250E-07   -0.2881497574E+06   5120005
+ called ionrun           2
+ Time reached   5.00004000000765       dti. Exiting and firing next one...
+Total time for      5th impact is  23185.617 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1716184980E+04 at_count      716 average    0.2396906397E+01 |
+| nt_time    0.1675344697E+04 nt_count      716 average    0.2339866895E+01 |
+| ds_time    0.6752111912E+01 ds_count       46 average    0.1467850416E+00 |
+|  f_time    0.1488077509E+05  f_count    23000 average    0.6469902211E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  37.59% of whole
+nt_time =  36.70% of whole
+ds_time =   2.30% of whole
+ f_time =  10.15% of whole
+ TIME PER STEP:    1.00502046062588     
+ Total Time in simulation:    115132.128971100     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       32038 ion ID     5120006
+            //:\\
+    114557    0.2274039280E-07    0.2402842500E-07    0.6788841250E-07   -0.2881497574E+06   5120006
+ called ionrun           2
+ Time reached   6.00007000001251       dti. Exiting and firing next one...
+Total time for      6th impact is  22714.877 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1696255017E+04 at_count      709 average    0.2392461237E+01 |
+| nt_time    0.1662536146E+04 nt_count      709 average    0.2344902886E+01 |
+| ds_time    0.6633122444E+01 ds_count       45 average    0.1474027210E+00 |
+|  f_time    0.1455674723E+05  f_count    22549 average    0.6455606559E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  37.35% of whole
+nt_time =  36.61% of whole
+ds_time =   2.30% of whole
+ f_time =  10.08% of whole
+ TIME PER STEP:    1.00539776572323     
+ Total Time in simulation:    137847.071527958     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       59548 ion ID     5120007
+            //:\\
+    137107    0.2001532860E-07    0.2339816790E-07    0.6788841250E-07   -0.2881497574E+06   5120007
+ called ionrun           2
+ Time reached   7.00000000001740       dti. Exiting and firing next one...
+Total time for      7th impact is  23147.477 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1717654037E+04 at_count      716 average    0.2398958152E+01 |
+| nt_time    0.1687361073E+04 nt_count      716 average    0.2356649544E+01 |
+| ds_time    0.6787454367E+01 ds_count       46 average    0.1475533558E+00 |
+|  f_time    0.1484794181E+05  f_count    22953 average    0.6468845821E+00 |
+| wr_time =     0.1308917999E-03
+-----------------------------------------------------------------------------
+at_time =  37.24% of whole
+nt_time =  36.58% of whole
+ds_time =   2.29% of whole
+ f_time =  10.04% of whole
+ TIME PER STEP:    1.00583285865378     
+ Total Time in simulation:    160994.613250971     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       62648 ion ID     5120008
+            //:\\
+    160061    0.2214379985E-07    0.2226214663E-07    0.6788841250E-07   -0.2881497574E+06   5120008
+TACC: Starting up job 3299764
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        3140 ion ID     5120008
+            //:\\
+    160061    0.2155389734E-07    0.1967462870E-07    0.6788841250E-07   -0.2881497574E+06   5120008
+ called ionrun           2
+ Time reached   8.00009000001706       dti. Exiting and firing next one...
+Total time for      8th impact is  29574.132 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1987713616E+04 at_count      829 average    0.2397724507E+01 |
+| nt_time    0.1989548842E+04 nt_count      829 average    0.2399938289E+01 |
+| ds_time    0.8693888664E+01 ds_count       59 average    0.1473540452E+00 |
+|  f_time    0.1927433132E+05  f_count    29746 average    0.6479638041E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  41.30% of whole
+nt_time =  41.34% of whole
+ds_time =   2.54% of whole
+ f_time =  11.16% of whole
+ TIME PER STEP:   0.994189881763887     
+ Total Time in simulation:    29574.1664788723     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       10874 ion ID     5120009
+            //:\\
+    189808    0.2036256960E-07    0.2253222036E-07    0.6788841250E-07   -0.2881497574E+06   5120009
+ called ionrun           2
+ Time reached   9.00001000000645       dti. Exiting and firing next one...
+Total time for      9th impact is  19233.357 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1545854967E+04 at_count      645 average    0.2396674368E+01 |
+| nt_time    0.1547602240E+04 nt_count      645 average    0.2399383318E+01 |
+| ds_time    0.5515434980E+01 ds_count       38 average    0.1451430258E+00 |
+|  f_time    0.1213311154E+05  f_count    18722 average    0.6480670624E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.15% of whole
+nt_time =  38.19% of whole
+ds_time =   2.31% of whole
+ f_time =  10.32% of whole
+ TIME PER STEP:    1.00696499310795     
+ Total Time in simulation:    48807.5932769775     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       95267 ion ID     5120010
+            //:\\
+    208531    0.2239093086E-07    0.2143921461E-07    0.6788841250E-07   -0.2881497574E+06   5120010
+ called ionrun           2
+ Time reached   10.0000999999850       dti. Exiting and firing next one...
+Total time for     10th impact is  33764.915 seconds
+-----------------------------------------------------------------------------
+| at_time    0.2161088684E+04 at_count      897 average    0.2409240450E+01 |
+| nt_time    0.2167994418E+04 nt_count      897 average    0.2416939151E+01 |
+| ds_time    0.1000129080E+02 ds_count       67 average    0.1492729970E+00 |
+|  f_time    0.2215478727E+05  f_count    33823 average    0.6550213545E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.17% of whole
+nt_time =  38.29% of whole
+ds_time =   2.36% of whole
+ f_time =  10.38% of whole
+ TIME PER STEP:    1.00338515271873     
+ Total Time in simulation:    82572.5777628422     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       75460 ion ID     5120011
+            //:\\
+    242355    0.2062896300E-07    0.2040887280E-07    0.6788841250E-07   -0.2881497574E+06   5120011
+ called ionrun           2
+ Time reached   11.0000499999692       dti. Exiting and firing next one...
+Total time for     11th impact is  25977.607 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1830394916E+04 at_count      764 average    0.2395804863E+01 |
+| nt_time    0.1832078005E+04 nt_count      764 average    0.2398007860E+01 |
+| ds_time    0.7621845484E+01 ds_count       52 average    0.1465739516E+00 |
+|  f_time    0.1680684748E+05  f_count    25880 average    0.6494145083E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.41% of whole
+nt_time =  37.45% of whole
+ds_time =   2.29% of whole
+ f_time =  10.14% of whole
+ TIME PER STEP:    1.00346907102348     
+ Total Time in simulation:    108550.266818047     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       81870 ion ID     5120012
+            //:\\
+    268236    0.2249103337E-07    0.2240206294E-07    0.6788841250E-07   -0.2881497574E+06   5120012
+ called ionrun           2
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289041 z =  0.499E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289042 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289043 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289044 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289045 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289046 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289047 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289048 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289049 z =  0.498E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289050 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289051 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289052 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289053 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289054 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289055 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289056 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289057 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289058 z =  0.497E-09  0.353E-06
+ERRRRRRROR: proc  6 atom 2526405 & 2526414 tstep =    289059 z =  0.496E-09  0.353E-06
+ Time reached   12.0000899999531       dti. Exiting and firing next one...
+Total time for     12th impact is  26516.216 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1854513742E+04 at_count      774 average    0.2396012587E+01 |
+| nt_time    0.1857341067E+04 nt_count      774 average    0.2399665462E+01 |
+| ds_time    0.7751401901E+01 ds_count       53 average    0.1462528661E+00 |
+|  f_time    0.1718433152E+05  f_count    26438 average    0.6499860624E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.21% of whole
+nt_time =  37.26% of whole
+ds_time =   2.27% of whole
+ f_time =  10.09% of whole
+ TIME PER STEP:    1.00336182086467     
+ Total Time in simulation:    135066.548213959     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       59004 ion ID     5120013
+            //:\\
+    294675    0.2045861270E-07    0.2185911270E-07    0.6788841250E-07   -0.2881497574E+06   5120013
+ called ionrun           2
+ Time reached   13.0000399999424       dti. Exiting and firing next one...
+Total time for     13th impact is  19528.127 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1555241862E+04 at_count      647 average    0.2403774130E+01 |
+| nt_time    0.1561413479E+04 nt_count      647 average    0.2413312951E+01 |
+| ds_time    0.5530878067E+01 ds_count       38 average    0.1455494228E+00 |
+|  f_time    0.1233725920E+05  f_count    18842 average    0.6547743975E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.84% of whole
+nt_time =  36.99% of whole
+ds_time =   2.23% of whole
+ f_time =  10.04% of whole
+ TIME PER STEP:    1.00741406673490     
+ Total Time in simulation:    154594.740507841     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       65975 ion ID     5120014
+            //:\\
+    313518    0.2003754310E-07    0.2290969470E-07    0.6788841250E-07   -0.2881497574E+06   5120014
+ called ionrun           2
+TACC: Starting up job 3312977
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       19530 ion ID     5120014
+            //:\\
+    313518    0.2274498680E-07    0.2066860380E-07    0.6788841250E-07   -0.2881497574E+06   5120014
+ called ionrun           2
+ Time reached   14.0000599999258       dti. Exiting and firing next one...
+Total time for     14th impact is  27199.706 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1881718783E+04 at_count      785 average    0.2397093991E+01 |
+| nt_time    0.1911932855E+04 nt_count      785 average    0.2435583255E+01 |
+| ds_time    0.7775390387E+01 ds_count       54 average    0.1439887109E+00 |
+|  f_time    0.1765415817E+05  f_count    27084 average    0.6518297951E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  41.04% of whole
+nt_time =  41.70% of whole
+ds_time =   2.47% of whole
+ f_time =  11.16% of whole
+ TIME PER STEP:    1.00423627354814     
+ Total Time in simulation:    27199.7395019531     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       52485 ion ID     5120015
+            //:\\
+    340603    0.2168705526E-07    0.2280090200E-07    0.6788841250E-07   -0.2881497574E+06   5120015
+ called ionrun           2
+ Time reached   15.0000299999150       dti. Exiting and firing next one...
+Total time for     15th impact is  19456.229 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1552202305E+04 at_count      648 average    0.2395373927E+01 |
+| nt_time    0.1577104399E+04 nt_count      648 average    0.2433803085E+01 |
+| ds_time    0.5636721373E+01 ds_count       38 average    0.1483347730E+00 |
+|  f_time    0.1229571168E+05  f_count    18907 average    0.6503258943E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.98% of whole
+nt_time =  38.59% of whole
+ds_time =   2.35% of whole
+ f_time =  10.31% of whole
+ TIME PER STEP:    1.01441589920234     
+ Total Time in simulation:    46656.0305209160     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       51045 ion ID     5120016
+            //:\\
+    359511    0.2085535134E-07    0.2244867024E-07    0.6788841250E-07   -0.2881497574E+06   5120016
+ called ionrun           2
+ Time reached   16.0000199999039       dti. Exiting and firing next one...
+Total time for     16th impact is  19953.891 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1572930597E+04 at_count      657 average    0.2394110498E+01 |
+| nt_time    0.1598101912E+04 nt_count      657 average    0.2432423002E+01 |
+| ds_time    0.5502426386E+01 ds_count       38 average    0.1448006944E+00 |
+|  f_time    0.1264309533E+05  f_count    19440 average    0.6503649860E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.42% of whole
+nt_time =  38.02% of whole
+ds_time =   2.26% of whole
+ f_time =  10.17% of whole
+ TIME PER STEP:    1.01797207688689     
+ Total Time in simulation:    66609.9849419594     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       43163 ion ID     5120017
+            //:\\
+    378952    0.1909236610E-07    0.1900566370E-07    0.6788841250E-07   -0.2881497574E+06   5120017
+ called ionrun           2
+ Time reached   17.0000999998921       dti. Exiting and firing next one...
+Total time for     17th impact is  20866.456 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1611782886E+04 at_count      673 average    0.2394922564E+01 |
+| nt_time    0.1637825584E+04 nt_count      673 average    0.2433618996E+01 |
+| ds_time    0.5982154131E+01 ds_count       41 average    0.1459061983E+00 |
+|  f_time    0.1327690576E+05  f_count    20394 average    0.6510201901E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.12% of whole
+nt_time =  37.72% of whole
+ds_time =   2.26% of whole
+ f_time =  10.09% of whole
+ TIME PER STEP:    1.01919530519957     
+ Total Time in simulation:    87476.5139138699     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       21127 ion ID     5120018
+            //:\\
+    399347    0.1968335430E-07    0.2115860216E-07    0.6788841250E-07   -0.2881497574E+06   5120018
+ called ionrun           2
+ Time reached   18.0000299998757       dti. Exiting and firing next one...
+Total time for     18th impact is  26901.613 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1868818688E+04 at_count      780 average    0.2395921394E+01 |
+| nt_time    0.1898429517E+04 nt_count      780 average    0.2433883996E+01 |
+| ds_time    0.7849437475E+01 ds_count       54 average    0.1453599532E+00 |
+|  f_time    0.1746398033E+05  f_count    26787 average    0.6519573052E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.12% of whole
+nt_time =  37.71% of whole
+ds_time =   2.25% of whole
+ f_time =  10.10% of whole
+ TIME PER STEP:    1.01563877564712     
+ Total Time in simulation:    114378.192059040     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       52255 ion ID     5120019
+            //:\\
+    426135    0.2014015150E-07    0.2261146557E-07    0.6788841250E-07   -0.2881497574E+06   5120019
+ called ionrun           2
+ Time reached   19.0000799998637       dti. Exiting and firing next one...
+Total time for     19th impact is  21155.507 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1624941952E+04 at_count      678 average    0.2396669546E+01 |
+| nt_time    0.1649742522E+04 nt_count      678 average    0.2433248557E+01 |
+| ds_time    0.5955812216E+01 ds_count       41 average    0.1452637126E+00 |
+|  f_time    0.1348074567E+05  f_count    20679 average    0.6519051051E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.77% of whole
+nt_time =  37.33% of whole
+ds_time =   2.23% of whole
+ f_time =  10.00% of whole
+ TIME PER STEP:    1.01678030008858     
+ Total Time in simulation:    135533.763723850     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       32641 ion ID     5120020
+            //:\\
+    446815    0.2166848224E-07    0.1895816610E-07    0.6788841250E-07   -0.2881497574E+06   5120020
+ called ionrun           2
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466061 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466062 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466063 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466064 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466065 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466066 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466067 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466068 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466069 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466070 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466071 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466072 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466073 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466074 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466075 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466076 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466077 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466078 z =  0.403E-07  0.376E-07
+ERRRRRRROR: proc118 atom 2522979 & 2523789 tstep =    466079 z =  0.403E-07  0.376E-07
+ Time reached   20.0000299998486       dti. Exiting and firing next one...
+Total time for     20th impact is  25246.545 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1798869636E+04 at_count      750 average    0.2398492848E+01 |
+| nt_time    0.1824912125E+04 nt_count      750 average    0.2433216167E+01 |
+| ds_time    0.7327546120E+01 ds_count       50 average    0.1465509224E+00 |
+|  f_time    0.1631267762E+05  f_count    25016 average    0.6520897673E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.79% of whole
+nt_time =  37.32% of whole
+ds_time =   2.25% of whole
+ f_time =  10.00% of whole
+ TIME PER STEP:    1.01557905953913     
+ Total Time in simulation:    160780.383295059     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       77842 ion ID     5120021
+            //:\\
+    471832    0.2341723990E-07    0.2238291357E-07    0.6788841250E-07   -0.2881497574E+06   5120021
+TACC: Starting up job 3312981
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        9196 ion ID     5120021
+            //:\\
+    471832    0.2260517050E-07    0.2293789980E-07    0.6788841250E-07   -0.2881497574E+06   5120021
+ called ionrun           2
+ Time reached   21.0000099998347       dti. Exiting and firing next one...
+Total time for     21th impact is  23588.857 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1724804248E+04 at_count      720 average    0.2395561456E+01 |
+| nt_time    0.1768426056E+04 nt_count      720 average    0.2456147300E+01 |
+| ds_time    0.6923271418E+01 ds_count       47 average    0.1473036472E+00 |
+|  f_time    0.1513713673E+05  f_count    23201 average    0.6524346679E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  40.85% of whole
+nt_time =  41.88% of whole
+ds_time =   2.51% of whole
+ f_time =  11.12% of whole
+ TIME PER STEP:    1.01667459934254     
+ Total Time in simulation:    23588.8840849400     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       75641 ion ID     5120022
+            //:\\
+    495034    0.2207339386E-07    0.2287111810E-07    0.6788841250E-07   -0.2881497574E+06   5120022
+ called ionrun           2
+ Time reached   22.0000699998223       dti. Exiting and firing next one...
+Total time for     22th impact is  21684.643 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1645903721E+04 at_count      687 average    0.2395784165E+01 |
+| nt_time    0.1687968202E+04 nt_count      687 average    0.2457013395E+01 |
+| ds_time    0.6185938835E+01 ds_count       42 average    0.1472842580E+00 |
+|  f_time    0.1382192850E+05  f_count    21220 average    0.6513632656E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.12% of whole
+nt_time =  39.10% of whole
+ds_time =   2.34% of whole
+ f_time =  10.36% of whole
+ TIME PER STEP:    1.01914744456783     
+ Total Time in simulation:    45273.5869600773     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       52970 ion ID     5120023
+            //:\\
+    516255    0.2065396100E-07    0.2185631367E-07    0.6788841250E-07   -0.2881497574E+06   5120023
+TACC: Starting up job 3444125
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       10646 ion ID     5120023
+            //:\\
+    516255    0.2312779690E-07    0.2040170240E-07    0.6788841250E-07   -0.2881497574E+06   5120023
+ called ionrun           2
+TACC: MPI job exited with code: 1
+ 
+TACC: Shutdown complete. Exiting.
+TACC: Starting up job 3444129
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       79101 ion ID     5120023
+            //:\\
+    516255    0.2094199461E-07    0.2244275546E-07    0.6788841250E-07   -0.2881497574E+06   5120023
+ called ionrun           2
+ Time reached   23.0000199998098       dti. Exiting and firing next one...
+Total time for     23th impact is  22009.181 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1738689243E+04 at_count      691 average    0.2516192827E+01 |
+| nt_time    0.1718649628E+04 nt_count      691 average    0.2487191936E+01 |
+| ds_time    0.7082796335E+01 ds_count       43 average    0.1647161938E+00 |
+|  f_time    0.1398939683E+05  f_count    21470 average    0.6515787999E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  41.72% of whole
+nt_time =  41.23% of whole
+ds_time =   2.73% of whole
+ f_time =  10.80% of whole
+ TIME PER STEP:    1.02506700214334     
+ Total Time in simulation:    22009.2136650085     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       80745 ion ID     5120024
+            //:\\
+    537726    0.2186537201E-07    0.2033583860E-07    0.6788841250E-07   -0.2881497574E+06   5120024
+ called ionrun           2
+ Time reached   24.0000599997988       dti. Exiting and firing next one...
+Total time for     24th impact is  19886.867 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1643257691E+04 at_count      654 average    0.2512626439E+01 |
+| nt_time    0.1625957793E+04 nt_count      654 average    0.2486173995E+01 |
+| ds_time    0.5987385273E+01 ds_count       38 average    0.1575627703E+00 |
+|  f_time    0.1252620002E+05  f_count    19247 average    0.6508131150E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.97% of whole
+nt_time =  38.56% of whole
+ds_time =   2.44% of whole
+ f_time =  10.09% of whole
+ TIME PER STEP:    1.02890891490597     
+ Total Time in simulation:    41896.1421680450     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       89964 ion ID     5120025
+            //:\\
+    556974    0.2421415980E-07    0.2099849604E-07    0.6788841250E-07   -0.2881497574E+06   5120025
+ called ionrun           2
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573521 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573522 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573523 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573524 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573525 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573526 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573527 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573528 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573529 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573530 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573531 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573532 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573533 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573534 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573535 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573536 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573537 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573538 z =  0.327E-07  0.319E-07
+ERRRRRRROR: proc101 atom 2332464 & 2333259 tstep =    573539 z =  0.327E-07  0.319E-07
+ Time reached   25.0000199997880       dti. Exiting and firing next one...
+Total time for     25th impact is  19753.860 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1635067916E+04 at_count      650 average    0.2515489101E+01 |
+| nt_time    0.1617396646E+04 nt_count      650 average    0.2488302533E+01 |
+| ds_time    0.5977681637E+01 ds_count       38 average    0.1573074115E+00 |
+|  f_time    0.1243677110E+05  f_count    19023 average    0.6537754873E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.21% of whole
+nt_time =  37.79% of whole
+ds_time =   2.39% of whole
+ f_time =   9.93% of whole
+ TIME PER STEP:    1.03192118890991     
+ Total Time in simulation:    61650.0676510334     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       42203 ion ID     5120026
+            //:\\
+    575998    0.2191627811E-07    0.2261944280E-07    0.6788841250E-07   -0.2881497574E+06   5120026
+ called ionrun           2
+ Time reached   26.0000399997771       dti. Exiting and firing next one...
+Total time for     26th impact is  19662.295 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1636645195E+04 at_count      651 average    0.2514047919E+01 |
+| nt_time    0.1618824386E+04 nt_count      651 average    0.2486673404E+01 |
+| ds_time    0.6124258995E+01 ds_count       39 average    0.1570322819E+00 |
+|  f_time    0.1235903644E+05  f_count    19002 average    0.6504071380E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.85% of whole
+nt_time =  37.44% of whole
+ds_time =   2.36% of whole
+ f_time =   9.79% of whole
+ TIME PER STEP:    1.03259127369181     
+ Total Time in simulation:    81312.4325070381     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       21529 ion ID     5120027
+            //:\\
+    595001    0.2106728691E-07    0.2222393307E-07    0.6788841250E-07   -0.2881497574E+06   5120027
+ called ionrun           2
+ Time reached   27.0000299997657       dti. Exiting and firing next one...
+Total time for     27th impact is  20635.214 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1675522248E+04 at_count      665 average    0.2519582328E+01 |
+| nt_time    0.1657958569E+04 nt_count      665 average    0.2493170781E+01 |
+| ds_time    0.6107509375E+01 ds_count       39 average    0.1566028045E+00 |
+|  f_time    0.1303562560E+05  f_count    19899 average    0.6550894818E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.65% of whole
+nt_time =  37.26% of whole
+ds_time =   2.34% of whole
+ f_time =   9.79% of whole
+ TIME PER STEP:    1.03347067514108     
+ Total Time in simulation:    101947.748281956     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        6221 ion ID     5120028
+            //:\\
+    614901    0.2087677965E-07    0.2119523970E-07    0.6788841250E-07   -0.2881497574E+06   5120028
+ called ionrun           2
+ Time reached   28.0000199997519       dti. Exiting and firing next one...
+Total time for     28th impact is  23629.506 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1809660238E+04 at_count      719 average    0.2516912709E+01 |
+| nt_time    0.1791171808E+04 nt_count      719 average    0.2491198620E+01 |
+| ds_time    0.7419120312E+01 ds_count       47 average    0.1578536237E+00 |
+|  f_time    0.1510600799E+05  f_count    23139 average    0.6528375464E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.59% of whole
+nt_time =  37.20% of whole
+ds_time =   2.36% of whole
+ f_time =   9.75% of whole
+ TIME PER STEP:    1.03113103568531     
+ Total Time in simulation:    125577.324374914     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       32736 ion ID     5120029
+            //:\\
+    638041    0.2016528830E-07    0.2060389050E-07    0.6788841250E-07   -0.2881497574E+06   5120029
+ called ionrun           2
+ Time reached   29.0000099997411       dti. Exiting and firing next one...
+Total time for     29th impact is  19685.167 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1637398434E+04 at_count      650 average    0.2519074513E+01 |
+| nt_time    0.1619083967E+04 nt_count      650 average    0.2490898411E+01 |
+| ds_time    0.6007718325E+01 ds_count       38 average    0.1580978506E+00 |
+|  f_time    0.1237527565E+05  f_count    18963 average    0.6526011522E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.37% of whole
+nt_time =  36.95% of whole
+ds_time =   2.35% of whole
+ f_time =   9.68% of whole
+ TIME PER STEP:    1.03206079140353     
+ Total Time in simulation:    145262.556456089     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       83016 ion ID     5120030
+            //:\\
+    657005    0.1897124330E-07    0.1923379710E-07    0.6788841250E-07   -0.2881497574E+06   5120030
+ called ionrun           2
+ Time reached   30.0000599997294       dti. Exiting and firing next one...
+Total time for     30th impact is  20988.255 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1693044916E+04 at_count      672 average    0.2519412077E+01 |
+| nt_time    0.1672280085E+04 nt_count      672 average    0.2488512031E+01 |
+| ds_time    0.6373340368E+01 ds_count       40 average    0.1593335092E+00 |
+|  f_time    0.1328548205E+05  f_count    20346 average    0.6529775903E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.33% of whole
+nt_time =  36.87% of whole
+ds_time =   2.36% of whole
+ f_time =   9.68% of whole
+ TIME PER STEP:    1.03199241802129     
+ Total Time in simulation:    166250.882627964     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       47890 ion ID     5120031
+            //:\\
+    677352    0.2299778640E-07    0.2305734130E-07    0.6788841250E-07   -0.2881497574E+06   5120031
+TACC: Starting up job 3444130
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       10993 ion ID     5120031
+            //:\\
+    677352    0.2137517557E-07    0.2234810089E-07    0.6788841250E-07   -0.2881497574E+06   5120031
+ called ionrun           2
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696901 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696902 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696903 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696904 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696905 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696906 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696907 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696908 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696909 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696910 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696911 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696912 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696913 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696914 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696915 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696916 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696917 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696918 z =  0.435E-07  0.445E-07
+ERRRRRRROR: proc118 atom 2332660 & 2395831 tstep =    696919 z =  0.435E-07  0.445E-07
+ Time reached   31.0000399997159       dti. Exiting and firing next one...
+Total time for     31th impact is  23174.857 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1708627328E+04 at_count      712 average    0.2399757483E+01 |
+| nt_time    0.1765421800E+04 nt_count      712 average    0.2479525000E+01 |
+| ds_time    0.6801696062E+01 ds_count       46 average    0.1478629579E+00 |
+|  f_time    0.1482540983E+05  f_count    22733 average    0.6521536898E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  40.72% of whole
+nt_time =  42.07% of whole
+ds_time =   2.51% of whole
+ f_time =  11.07% of whole
+ TIME PER STEP:    1.01939344672506     
+ Total Time in simulation:    23174.8906819820     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       78505 ion ID     5120032
+            //:\\
+    700086    0.2382949710E-07    0.2170393229E-07    0.6788841250E-07   -0.2881497574E+06   5120032
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710351 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710352 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710353 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710354 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710355 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710356 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710357 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710358 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710359 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710360 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710361 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710362 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710363 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710364 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710365 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710366 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710367 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710368 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710369 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710370 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710371 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710372 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710373 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710374 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710375 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710376 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710377 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710378 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710379 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710380 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710381 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710382 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710383 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710384 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710385 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710386 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710387 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710388 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710389 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710390 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710391 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710392 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710393 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710394 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710395 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710396 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710397 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710398 z =  0.404E-07  0.412E-07
+ERRRRRRROR: proc122 atom 2270995 & 2460605 tstep =    710399 z =  0.404E-07  0.412E-07
+ called ionrun           2
+ Time reached   32.0000799997025       dti. Exiting and firing next one...
+Total time for     32th impact is  23103.345 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1709241211E+04 at_count      709 average    0.2410777448E+01 |
+| nt_time    0.1767194909E+04 nt_count      709 average    0.2492517502E+01 |
+| ds_time    0.6674719810E+01 ds_count       45 average    0.1483271069E+00 |
+|  f_time    0.1476855029E+05  f_count    22523 average    0.6557097318E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.11% of whole
+nt_time =  39.40% of whole
+ds_time =   2.34% of whole
+ f_time =  10.36% of whole
+ TIME PER STEP:    1.02254403961327     
+ Total Time in simulation:    46278.2982089520     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       73882 ion ID     5120033
+            //:\\
+    722610    0.2392795510E-07    0.2299043050E-07    0.6788841250E-07   -0.2881497574E+06   5120033
+ called ionrun           2
+ Time reached   33.0000799996902       dti. Exiting and firing next one...
+Total time for     33th impact is  21756.545 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1652010347E+04 at_count      686 average    0.2408178349E+01 |
+| nt_time    0.1710398894E+04 nt_count      686 average    0.2493292848E+01 |
+| ds_time    0.6190627813E+01 ds_count       42 average    0.1473959003E+00 |
+|  f_time    0.1383960822E+05  f_count    21151 average    0.6543240611E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.23% of whole
+nt_time =  38.54% of whole
+ds_time =   2.28% of whole
+ f_time =  10.12% of whole
+ TIME PER STEP:    1.02446779331301     
+ Total Time in simulation:    68034.9062168598     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       82973 ion ID     5120034
+            //:\\
+    743762    0.1897125490E-07    0.2044863210E-07    0.6788841250E-07   -0.2881497574E+06   5120034
+ called ionrun           2
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758641 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758642 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758643 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758644 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758645 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758646 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758647 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758648 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758649 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758650 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758651 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758652 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758653 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758654 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758655 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758656 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758657 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758658 z =  0.398E-07  0.402E-07
+ERRRRRRROR: proc118 atom 2528576 & 2590166 tstep =    758659 z =  0.398E-07  0.402E-07
+ Time reached   34.0000599996799       dti. Exiting and firing next one...
+Total time for     34th impact is  19043.315 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1535921514E+04 at_count      638 average    0.2407400492E+01 |
+| nt_time    0.1591349693E+04 nt_count      638 average    0.2494278515E+01 |
+| ds_time    0.5427398920E+01 ds_count       37 average    0.1466864573E+00 |
+|  f_time    0.1196513128E+05  f_count    18314 average    0.6533324931E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.75% of whole
+nt_time =  38.07% of whole
+ds_time =   2.24% of whole
+ f_time =   9.97% of whole
+ TIME PER STEP:    1.02777569908419     
+ Total Time in simulation:    87078.2961688042     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       22537 ion ID     5120035
+            //:\\
+    762077    0.2164433081E-07    0.2375050650E-07    0.6788841250E-07   -0.2881497574E+06   5120035
+ called ionrun           2
+ Time reached   35.0000899996678       dti. Exiting and firing next one...
+Total time for     35th impact is  21243.924 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1630539116E+04 at_count      679 average    0.2401383086E+01 |
+| nt_time    0.1686325340E+04 nt_count      679 average    0.2483542474E+01 |
+| ds_time    0.6102644205E+01 ds_count       41 average    0.1488449806E+00 |
+|  f_time    0.1349548132E+05  f_count    20731 average    0.6509807207E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.65% of whole
+nt_time =  37.90% of whole
+ds_time =   2.27% of whole
+ f_time =   9.93% of whole
+ TIME PER STEP:    1.02717017749433     
+ Total Time in simulation:    108322.285471916     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       82702 ion ID     5120036
+            //:\\
+    782809    0.2002634080E-07    0.2085006548E-07    0.6788841250E-07   -0.2881497574E+06   5120036
+ called ionrun           2
+ Time reached   36.0000999996472       dti. Exiting and firing next one...
+Total time for     36th impact is  32705.214 seconds
+-----------------------------------------------------------------------------
+| at_time    0.2115131052E+04 at_count      878 average    0.2409033089E+01 |
+| nt_time    0.2188179713E+04 nt_count      878 average    0.2492232020E+01 |
+| ds_time    0.9603115082E+01 ds_count       65 average    0.1477402320E+00 |
+|  f_time    0.2139121356E+05  f_count    32672 average    0.6547261741E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.84% of whole
+nt_time =  38.12% of whole
+ds_time =   2.26% of whole
+ f_time =  10.01% of whole
+ TIME PER STEP:    1.02097712606159     
+ Total Time in simulation:    141027.570485830     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       48405 ion ID     5120037
+            //:\\
+    815482    0.2213601926E-07    0.2398118240E-07    0.6788841250E-07   -0.2881497574E+06   5120037
+ called ionrun           2
+ Time reached   37.0000799996360       dti. Exiting and firing next one...
+Total time for     37th impact is  20083.586 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1582580749E+04 at_count      658 average    0.2405137916E+01 |
+| nt_time    0.1634363387E+04 nt_count      658 average    0.2483834935E+01 |
+| ds_time    0.5711249828E+01 ds_count       39 average    0.1464423033E+00 |
+|  f_time    0.1269634790E+05  f_count    19466 average    0.6522319890E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.39% of whole
+nt_time =  37.58% of whole
+ds_time =   2.22% of whole
+ f_time =   9.87% of whole
+ TIME PER STEP:    1.02229886445093     
+ Total Time in simulation:    161111.234203815     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       89416 ion ID     5120038
+            //:\\
+    834949    0.2061972240E-07    0.2051219800E-07    0.6788841250E-07   -0.2881497574E+06   5120038
+TACC: Starting up job 3745157
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       33507 ion ID     5120038
+            //:\\
+    834949    0.2231530132E-07    0.2205301894E-07    0.6788841250E-07   -0.2881497574E+06   5120038
+ called ionrun           2
+ Time reached   38.0000899996236       dti. Exiting and firing next one...
+Total time for     38th impact is  21912.032 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1653259773E+04 at_count      689 average    0.2399506202E+01 |
+| nt_time    0.1711168401E+04 nt_count      689 average    0.2483553558E+01 |
+| ds_time    0.6323807001E+01 ds_count       43 average    0.1470652791E+00 |
+|  f_time    0.1396679398E+05  f_count    21296 average    0.6558411897E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  40.66% of whole
+nt_time =  42.09% of whole
+ds_time =   2.49% of whole
+ f_time =  11.11% of whole
+ TIME PER STEP:    1.02888029544248     
+ Total Time in simulation:    21912.0636780262     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        5054 ion ID     5120039
+            //:\\
+    856246    0.2248407062E-07    0.2106992566E-07    0.6788841250E-07   -0.2881497574E+06   5120039
+ called ionrun           2
+ Time reached   39.0000299996103       dti. Exiting and firing next one...
+Total time for     39th impact is  22887.175 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1696989142E+04 at_count      707 average    0.2400267527E+01 |
+| nt_time    0.1756048024E+04 nt_count      707 average    0.2483802014E+01 |
+| ds_time    0.6703955889E+01 ds_count       45 average    0.1489767975E+00 |
+|  f_time    0.1464359811E+05  f_count    22378 average    0.6543747478E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.11% of whole
+nt_time =  39.43% of whole
+ds_time =   2.37% of whole
+ f_time =  10.39% of whole
+ TIME PER STEP:    1.02571898145830     
+ Total Time in simulation:    44799.3022601604     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       96915 ion ID     5120040
+            //:\\
+    878625    0.2161547273E-07    0.2161430058E-07    0.6788841250E-07   -0.2881497574E+06   5120040
+ called ionrun           2
+ Time reached   40.0000799995986       dti. Exiting and firing next one...
+Total time for     40th impact is  20775.894 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1610143842E+04 at_count      671 average    0.2399618245E+01 |
+| nt_time    0.1662147810E+04 nt_count      671 average    0.2477120431E+01 |
+| ds_time    0.5972314358E+01 ds_count       40 average    0.1493078589E+00 |
+|  f_time    0.1319860482E+05  f_count    20238 average    0.6521694247E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.22% of whole
+nt_time =  38.43% of whole
+ds_time =   2.32% of whole
+ f_time =  10.12% of whole
+ TIME PER STEP:    1.02597604129158     
+ Total Time in simulation:    65575.2587070465     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       81895 ion ID     5120041
+            //:\\
+    898864    0.2409986200E-07    0.2079967107E-07    0.6788841250E-07   -0.2881497574E+06   5120041
+ called ionrun           2
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917261 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917262 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917263 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917264 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917265 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917266 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917267 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917268 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917269 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917270 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917271 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917272 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917273 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917274 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917275 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917276 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917277 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917278 z =  0.465E-07  0.467E-07
+ERRRRRRROR: proc138 atom 2335862 & 2845441 tstep =    917279 z =  0.465E-07  0.467E-07
+ Time reached   41.0000399995868       dti. Exiting and firing next one...
+Total time for     41th impact is  21121.900 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1624950846E+04 at_count      674 average    0.2410906299E+01 |
+| nt_time    0.1679219242E+04 nt_count      674 average    0.2491423208E+01 |
+| ds_time    0.6036981821E+01 ds_count       41 average    0.1472434591E+00 |
+|  f_time    0.1341965803E+05  f_count    20472 average    0.6555127993E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.90% of whole
+nt_time =  38.13% of whole
+ds_time =   2.25% of whole
+ f_time =  10.03% of whole
+ TIME PER STEP:    1.02736436719775     
+ Total Time in simulation:    86697.2242460251     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       27112 ion ID     5120042
+            //:\\
+    919337    0.2210113257E-07    0.2154601143E-07    0.6788841250E-07   -0.2881497574E+06   5120042
+ called ionrun           2
+ Time reached   42.0000699995746       dti. Exiting and firing next one...
+Total time for     42th impact is  21541.540 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1643517532E+04 at_count      683 average    0.2406321424E+01 |
+| nt_time    0.1697725484E+04 nt_count      683 average    0.2485688849E+01 |
+| ds_time    0.6160104036E+01 ds_count       42 average    0.1466691437E+00 |
+|  f_time    0.1370957135E+05  f_count    20947 average    0.6544885354E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.69% of whole
+nt_time =  37.90% of whole
+ds_time =   2.24% of whole
+ f_time =   9.98% of whole
+ TIME PER STEP:    1.02755780414278     
+ Total Time in simulation:    108238.828883171     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       34263 ion ID     5120043
+            //:\\
+    940285    0.1986071440E-07    0.2148477474E-07    0.6788841250E-07   -0.2881497574E+06   5120043
+ called ionrun           2
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964461 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964462 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964463 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964464 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964465 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964466 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964467 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964468 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964469 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964470 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964471 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964472 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964473 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964474 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964475 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964476 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964477 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964478 z =  0.379E-07  0.381E-07
+ERRRRRRROR: proc101 atom 1949374 & 2076571 tstep =    964479 z =  0.379E-07  0.381E-07
+ Time reached   43.0000199995594       dti. Exiting and firing next one...
+Total time for     43th impact is  25346.833 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1802725280E+04 at_count      751 average    0.2400433129E+01 |
+| nt_time    0.1864018783E+04 nt_count      751 average    0.2482048979E+01 |
+| ds_time    0.7265417099E+01 ds_count       50 average    0.1453083420E+00 |
+|  f_time    0.1635444660E+05  f_count    25043 average    0.6530546102E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.64% of whole
+nt_time =  37.88% of whole
+ds_time =   2.22% of whole
+ f_time =   9.97% of whole
+ TIME PER STEP:    1.02458756843910     
+ Total Time in simulation:    133585.727200031     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       33931 ion ID     5120044
+            //:\\
+    965329    0.2076714792E-07    0.2057353620E-07    0.6788841250E-07   -0.2881497574E+06   5120044
+ called ionrun           2
+ Time reached   44.0000299995440       dti. Exiting and firing next one...
+Total time for     44th impact is  25681.132 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1815997156E+04 at_count      758 average    0.2395774613E+01 |
+| nt_time    0.1874216015E+04 nt_count      758 average    0.2472580494E+01 |
+| ds_time    0.7401217222E+01 ds_count       51 average    0.1451219063E+00 |
+|  f_time    0.1660120709E+05  f_count    25454 average    0.6522042543E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.54% of whole
+nt_time =  37.71% of whole
+ds_time =   2.21% of whole
+ f_time =   9.95% of whole
+ TIME PER STEP:    1.02202281584412     
+ Total Time in simulation:    159266.925534010     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       18923 ion ID     5120045
+            //:\\
+    990784    0.2235913676E-07    0.2306559820E-07    0.6788841250E-07   -0.2881497574E+06   5120045
+TACC: Starting up job 3745159
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       77955 ion ID     5120045
+            //:\\
+    990784    0.2344568950E-07    0.2319729120E-07    0.6788841250E-07   -0.2881497574E+06   5120045
+ called ionrun           2
+ Time reached   45.0000899995324       dti. Exiting and firing next one...
+Total time for     45th impact is  20552.616 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1595324917E+04 at_count      668 average    0.2388210954E+01 |
+| nt_time    0.1655375759E+04 nt_count      668 average    0.2478107423E+01 |
+| ds_time    0.5856616259E+01 ds_count       40 average    0.1464154065E+00 |
+|  f_time    0.1303793523E+05  f_count    20095 average    0.6488148910E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  40.66% of whole
+nt_time =  42.19% of whole
+ds_time =   2.49% of whole
+ f_time =  11.05% of whole
+ TIME PER STEP:    1.02272385155936     
+ Total Time in simulation:    20552.6585500240     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       83166 ion ID     5120046
+            //:\\
+   1010880    0.2030478440E-07    0.2408082040E-07    0.6788841250E-07   -0.2881497574E+06   5120046
+ called ionrun           2
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026881 z =  0.319E-07  0.316E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026882 z =  0.319E-07  0.316E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026883 z =  0.319E-07  0.316E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026884 z =  0.319E-07  0.316E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026885 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026886 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026887 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026888 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026889 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026890 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026891 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026892 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026893 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026894 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026895 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026896 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026897 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026898 z =  0.319E-07  0.317E-07
+ERRRRRRROR: proc 89 atom 2142915 & 2201236 tstep =   1026899 z =  0.319E-07  0.317E-07
+ Time reached   46.0000899995192       dti. Exiting and firing next one...
+Total time for     46th impact is  22616.722 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1682386595E+04 at_count      704 average    0.2389753687E+01 |
+| nt_time    0.1746221029E+04 nt_count      704 average    0.2480427598E+01 |
+| ds_time    0.6641077280E+01 ds_count       45 average    0.1475794951E+00 |
+|  f_time    0.1444269132E+05  f_count    22258 average    0.6488764186E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.15% of whole
+nt_time =  39.60% of whole
+ds_time =   2.36% of whole
+ f_time =  10.36% of whole
+ TIME PER STEP:    1.01922894550909     
+ Total Time in simulation:    43169.4420158863     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       88783 ion ID     5120047
+            //:\\
+   1033139    0.2148856995E-07    0.2200162662E-07    0.6788841250E-07   -0.2881497574E+06   5120047
+ called ionrun           2
+ Time reached   47.0000999995037       dti. Exiting and firing next one...
+Total time for     47th impact is  25826.752 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1821251067E+04 at_count      761 average    0.2393233991E+01 |
+| nt_time    0.1890863360E+04 nt_count      761 average    0.2484708751E+01 |
+| ds_time    0.7515167952E+01 ds_count       51 average    0.1473562343E+00 |
+|  f_time    0.1668118287E+05  f_count    25625 average    0.6509729901E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.45% of whole
+nt_time =  38.88% of whole
+ds_time =   2.31% of whole
+ f_time =  10.19% of whole
+ TIME PER STEP:    1.01493439578492     
+ Total Time in simulation:    68996.2551889420     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       14105 ion ID     5120048
+            //:\\
+   1058765    0.2300215130E-07    0.2204527492E-07    0.6788841250E-07   -0.2881497574E+06   5120048
+ called ionrun           2
+ Time reached   48.0000499994940       dti. Exiting and firing next one...
+Total time for     48th impact is  18030.309 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1489090080E+04 at_count      623 average    0.2390192745E+01 |
+| nt_time    0.1544915845E+04 nt_count      623 average    0.2479800715E+01 |
+| ds_time    0.5167828083E+01 ds_count       35 average    0.1476522309E+00 |
+|  f_time    0.1128855594E+05  f_count    17411 average    0.6483577015E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.67% of whole
+nt_time =  38.05% of whole
+ds_time =   2.27% of whole
+ f_time =   9.95% of whole
+ TIME PER STEP:    1.01913090153857     
+ Total Time in simulation:    87026.6451048851     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       68384 ion ID     5120049
+            //:\\
+   1076177    0.2163798836E-07    0.2289995600E-07    0.6788841250E-07   -0.2881497574E+06   5120049
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084651 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084652 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084653 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084654 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084655 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084656 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084657 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084658 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084659 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084660 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084661 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084662 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084663 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084664 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084665 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084666 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084667 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084668 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084669 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084670 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084671 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084672 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084673 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084674 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084675 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084676 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084677 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084678 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084679 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084680 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084681 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084682 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084683 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084684 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084685 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084686 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084687 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084688 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084689 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084690 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084691 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084692 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084693 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084694 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084695 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084696 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084697 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084698 z =  0.439E-07  0.438E-07
+ERRRRRRROR: proc133 atom 1945384 & 2080597 tstep =   1084699 z =  0.439E-07  0.438E-07
+ called ionrun           2
+ Time reached   49.0000799994778       dti. Exiting and firing next one...
+Total time for     49th impact is  26616.919 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1855621350E+04 at_count      775 average    0.2394350129E+01 |
+| nt_time    0.1926077713E+04 nt_count      775 average    0.2485261565E+01 |
+| ds_time    0.7765490055E+01 ds_count       53 average    0.1465186803E+00 |
+|  f_time    0.1722478514E+05  f_count    26491 average    0.6502127189E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.81% of whole
+nt_time =  38.21% of whole
+ds_time =   2.25% of whole
+ f_time =  10.00% of whole
+ TIME PER STEP:    1.01571818877360     
+ Total Time in simulation:    113643.629580021     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       40219 ion ID     5120050
+            //:\\
+   1102669    0.2313498870E-07    0.1953527030E-07    0.6788841250E-07   -0.2881497574E+06   5120050
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105351 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105352 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105353 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105354 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105355 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105356 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105357 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105358 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105359 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105360 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105361 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105362 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105363 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105364 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105365 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105366 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105367 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105368 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105369 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105370 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105371 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105372 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105373 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105374 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105375 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105376 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105377 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105378 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105379 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105380 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105381 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105382 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105383 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105384 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105385 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105386 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105387 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105388 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105389 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105390 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105391 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105392 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105393 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105394 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105395 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105396 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105397 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105398 z =  0.417E-07  0.421E-07
+ERRRRRRROR: proc118 atom 2012612 & 2017430 tstep =   1105399 z =  0.417E-07  0.421E-07
+ called ionrun           2
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114701 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114702 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114703 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114704 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114705 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114706 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114707 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114708 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114709 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114710 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114711 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114712 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114713 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114714 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114715 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114716 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114717 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114718 z =  0.510E-07  0.517E-07
+ERRRRRRROR: proc153 atom 2082375 & 2207935 tstep =   1114719 z =  0.510E-07  0.517E-07
+ Time reached   50.0000899994665       dti. Exiting and firing next one...
+Total time for     50th impact is  20268.912 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1583345076E+04 at_count      662 average    0.2391759933E+01 |
+| nt_time    0.1643560169E+04 nt_count      662 average    0.2482719288E+01 |
+| ds_time    0.5727300644E+01 ds_count       39 average    0.1468538627E+00 |
+|  f_time    0.1282773588E+05  f_count    19748 average    0.6495713935E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.43% of whole
+nt_time =  37.81% of whole
+ds_time =   2.24% of whole
+ f_time =   9.89% of whole
+ TIME PER STEP:    1.01731017291847     
+ Total Time in simulation:    133912.607333899     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       71127 ion ID     5120051
+            //:\\
+   1122418    0.2049425420E-07    0.2229127256E-07    0.6788841250E-07   -0.2881497574E+06   5120051
+ called ionrun           2
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139781 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139782 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139783 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139784 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139785 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139786 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139787 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139788 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139789 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139790 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139791 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139792 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139793 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139794 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139795 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139796 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139797 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139798 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc117 atom 2846236 & 2975019 tstep =   1139799 z =  0.435E-07  0.429E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144361 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144362 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144363 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144364 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144365 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144366 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144367 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144368 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144369 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144370 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144371 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144372 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144373 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144374 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144375 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144376 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144377 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144378 z =  0.420E-07  0.424E-07
+ERRRRRRROR: proc121 atom 2077471 & 2147048 tstep =   1144379 z =  0.420E-07  0.424E-07
+ Time reached   51.0000099994530       dti. Exiting and firing next one...
+Total time for     51th impact is  22976.940 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1699515815E+04 at_count      711 average    0.2390317602E+01 |
+| nt_time    0.1761958696E+04 nt_count      711 average    0.2478141626E+01 |
+| ds_time    0.6728364468E+01 ds_count       46 average    0.1462687928E+00 |
+|  f_time    0.1471496553E+05  f_count    22673 average    0.6490083151E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  36.42% of whole
+nt_time =  37.76% of whole
+ds_time =   2.23% of whole
+ f_time =   9.89% of whole
+ TIME PER STEP:    1.01673032539420     
+ Total Time in simulation:    156889.623079062     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       26908 ion ID     5120052
+            //:\\
+   1145092    0.2412125570E-07    0.2157282431E-07    0.6788841250E-07   -0.2881497574E+06   5120052
+ called ionrun           2
+TACC: Starting up job 3745162
+TACC: Setting up parallel environment for MVAPICH2+mpispawn.
+TACC: Starting parallel tasks...
+ ----------------Parallel Environment Initialized, 
+         160  processors are alive and running ....-------------------
+ READING PARAMETERS
+ Si atoms     5120000
+  4.344858399999999E-008
+  4.344858399999999E-008
+  5.431073000000000E-008
+ called ionrun           1
+ DONE INITIALIZING
+ --------------------------------
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       25470 ion ID     5120052
+            //:\\
+   1145092    0.2218098192E-07    0.2125581068E-07    0.6788841250E-07   -0.2881497574E+06   5120052
+ called ionrun           2
+ Time reached   52.0000899994390       dti. Exiting and firing next one...
+Total time for     52th impact is  23897.209 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1738345977E+04 at_count      724 average    0.2401030355E+01 |
+| nt_time    0.1807536178E+04 nt_count      724 average    0.2496596931E+01 |
+| ds_time    0.6976084948E+01 ds_count       47 average    0.1484273393E+00 |
+|  f_time    0.1534647040E+05  f_count    23418 average    0.6553279698E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  40.59% of whole
+nt_time =  42.21% of whole
+ds_time =   2.51% of whole
+ f_time =  11.08% of whole
+ TIME PER STEP:    1.02042161834510     
+ Total Time in simulation:    23897.2539100647     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX       32469 ion ID     5120053
+            //:\\
+   1168511    0.2449896840E-07    0.2270152581E-07    0.6788841250E-07   -0.2881497574E+06   5120053
+ called ionrun           2
+ Time reached   53.0000799994224       dti. Exiting and firing next one...
+Total time for     53th impact is  27353.654 seconds
+-----------------------------------------------------------------------------
+| at_time    0.1883357814E+04 at_count      785 average    0.2399181929E+01 |
+| nt_time    0.1958733615E+04 nt_count      785 average    0.2495202057E+01 |
+| ds_time    0.7995727301E+01 ds_count       54 average    0.1480690241E+00 |
+|  f_time    0.1772857315E+05  f_count    27090 average    0.6544323790E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  38.18% of whole
+nt_time =  39.71% of whole
+ds_time =   2.36% of whole
+ f_time =  10.41% of whole
+ TIME PER STEP:    1.01466989384102     
+ Total Time in simulation:    51250.9763669968     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        8414 ion ID     5120054
+            //:\\
+   1195602    0.2039168280E-07    0.2222567630E-07    0.6788841250E-07   -0.2881497574E+06   5120054
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200951 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200952 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200953 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200954 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200955 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200956 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200957 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200958 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200959 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200960 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200961 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200962 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200963 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200964 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200965 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200966 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200967 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200968 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200969 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200970 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200971 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200972 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200973 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200974 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200975 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200976 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200977 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200978 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200979 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200980 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200981 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200982 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200983 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200984 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200985 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200986 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200987 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200988 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200989 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200990 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200991 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200992 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200993 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200994 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200995 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200996 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200997 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200998 z =  0.483E-07  0.493E-07
+ERRRRRRROR: proc134 atom 2085473 & 2336696 tstep =   1200999 z =  0.483E-07  0.493E-07
+ called ionrun           2
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219301 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219302 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219303 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219304 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219305 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219306 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219307 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219308 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219309 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219310 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219311 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219312 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219313 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219314 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219315 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219316 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219317 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219318 z =  0.453E-07  0.457E-07
+ERRRRRRROR: proc138 atom 2211112 & 2786276 tstep =   1219319 z =  0.453E-07  0.457E-07
+ Time reached   54.0000599994030       dti. Exiting and firing next one...
+Total time for     54th impact is  30996.457 seconds
+-----------------------------------------------------------------------------
+| at_time    0.2039686929E+04 at_count      851 average    0.2396811902E+01 |
+| nt_time    0.2118920182E+04 nt_count      851 average    0.2489917957E+01 |
+| ds_time    0.9163222075E+01 ds_count       62 average    0.1477939044E+00 |
+|  f_time    0.2027396391E+05  f_count    31058 average    0.6527775100E+00 |
+| wr_time =     0.0000000000E+00
+-----------------------------------------------------------------------------
+at_time =  37.47% of whole
+nt_time =  38.93% of whole
+ds_time =   2.31% of whole
+ f_time =  10.21% of whole
+ TIME PER STEP:    1.00831805488636     
+ Total Time in simulation:    82247.4954481125     
+ called ionrun           1
+              |
+            .\:/.
+ KNOCK    --=>*<=--    RANINDEX        2720 ion ID     5120055
+            //:\\
+   1226661    0.2143847841E-07    0.2252911582E-07    0.6788841250E-07   -0.2881497574E+06   5120055
