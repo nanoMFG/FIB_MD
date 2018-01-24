@@ -1,2 +1,0 @@
-slurmd[c520-701]: *** JOB 3745162 CANCELLED AT 2014-07-29T14:26:41 ***
-[c520-701.stampede.tacc.utexas.edu:mpirun_rsh][signal_processor] Caught signal 15, killing job
