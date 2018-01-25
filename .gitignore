@@ -1,0 +1,4 @@
+# Ignore object and library files
+*.[oa]
+# Ignore fortran .mod files
+*.mod
