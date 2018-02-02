@@ -23,7 +23,7 @@ CONTAINS
 
   SUBROUTINE tint
 
-    integer    				:: lt       
+    integer    				:: lt
     real       				:: time,temp, tmprt
     real,dimension(3) 		:: Mom
     real,dimension(Natm,3)	:: F,Fp, W, masslong
@@ -40,14 +40,14 @@ CONTAINS
     masslong(:,3) = mass
     test = .false.
     freerun = .false.
-  
+
     call temperature(V,temp)
     if(lt.eq.0) then
         wr_time = MPI_WTIME()
-        call writeatoms(X,V,F,lt,temp) !X = X + Ts*V  !call sendposN(X)
+        call writeatoms(X,V,F,lt,time,temp) !X = X + Ts*V  !call sendposN(X)
         wr_time = MPI_WTIME()-wr_time
     end if
-    
+
     call si_force(X,F,lt)
     wtime = MPI_WTIME()
 
@@ -57,31 +57,33 @@ CONTAINS
         call calc_time(lt)
         call MPI_BARRIER(MPI_COMM_WORLD,ierr); call MPI_FINALIZE(ierr); stop
     end if
-    
-    ! temperature increase
-    !if (Nt0 .eq. 0) then
+
+!     temperature increase
+    if (Nt0 .eq. 0) then
         !initially increase the temperature
-    !    call TI(X,V,F,masslong,0,Ttar1,Nt,time,lt,temp)
-    !    call writerestart (X,V,lt)
-    !    call calc_time(lt)
-    !end if
+        Tau = 1.E-15
+        call TI(X,V,F,masslong,0,Ttar1,Nt,time,lt,temp)
+!        call writerestart (X,V,lt)
+        call calc_time(lt)
+        Tau = Tau_i
+    end if
 
     ! doing impacts
     if(freerun) then
         call ionrun(2)
         call TI(X,V,F,masslong,2,Ttar1,Nt,time,lt,temp)
-        
+
     else
         do impact = ions+1,Nlj
-            write(cmd,"('mkdir -p ',I4.4,'_det')")impact
-            call system(cmd)
-            write(cmd,"('mkdir -p ',I4.4,'_dim')")impact
-            call system(cmd)
+!            write(cmd,"('mkdir -p ',I4.4,'_det')")impact
+!            call system(cmd)
+!            write(cmd,"('mkdir -p ',I4.4,'_dim')")impact
+!            call system(cmd)
             ion_time = MPI_WTIME()
             ! not writing now, will write at the end of impact
             !write(ion_traj,"('G/ion_traj_',I6.6,'.dat')")impact
             !open(ion_unit, file=ion_traj, POSITION='APPEND')
-            
+
             atom_is_slow = .false.
             atom_is_fast = .true.
             moved_index_l = 0
@@ -93,24 +95,24 @@ CONTAINS
             ion_data = 0.0
             ion_data_l = 0.0
 
-            call initvel
+!            call initvel
             call TI(X,V,F,masslong,1,Ttar1,Nt,time,lt,temp)
-            call finalizevel
+!            call finalizevel
             !call finalizevelts(lt)
-            call write_ion
-            call cntsputter(X,V,F,lt,impact)
-            call writeatoms(X,V,F,lt,temp)
-            call writerestart (X,V,lt)
+!            call write_ion
+!            call cntsputter(X,V,F,lt,impact)
+            call writeatoms(X,V,F,lt,time,temp)
+!            call writerestart (X,V,lt)
             !close(ion_unit)
             call calc_time(lt)
             ! *************IMPORTANT******************
             ! apply this only for legolas
-            !if(mod(impact,2).eq.0)then  
+            !if(mod(impact,2).eq.0)then
                 !call MPI_BARRIER(MPI_COMM_WORLD,ierr); call MPI_FINALIZE(ierr); stop
             !end if
         end do
     end if
-    
+
     if (myid.eq.0) print *,"TIME PER STEP: ", (MPI_WTIME()-wtime)/REAL(lt-Nt0)
     if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
 
@@ -130,7 +132,7 @@ CONTAINS
             call onestep(X,V,F,masslong,whichctrl,Ttar,lt,time,temp)
         end do
         if(myid.eq.0) print*, "Equalized to temperature ", temp
-        
+
     elseif (whichctrl .eq. 1) then
         do while (.not. atom_is_slow)
             lt = lt+1
@@ -157,8 +159,8 @@ CONTAINS
             call onestep(X,V,F,masslong,whichctrl,Ttar,lt,time,temp)
         end do
     end if
-        
-    
+
+
 
   END SUBROUTINE TI
 
@@ -180,18 +182,18 @@ CONTAINS
     end if
     if(whichctrl .gt. 0) call controlsidetemp (X,V,F, Ttar)
     !call temperature(V,temp)
-    
+
     !X = X + V*Ts + 0.5*F*Ts*Ts/masslong
     do ii=1,Nl
         i=il(ii)
         X(i,:) = X(i,:) + V(i,:)*Ts + 0.5*F(i,:)*Ts*Ts/masslong(i,1)
     end do
-    
+
     !call freezbottom(X,Xi,V)
     call freezsidesN (X,Xi,V)
     call rebox(X)
     call sendposN(X)
-    
+
     ! geometrically divides atoms and updates X
     if (mod(lt,atlist).eq.0) then
         at_time1 = MPI_WTIME()
@@ -205,7 +207,7 @@ CONTAINS
         at_time = at_time + (MPI_WTIME()-at_time1)
         !call frzsptrdatms (X,V,F,lt)
     end if
-    
+
     ! neighborlist redone
     if (mod(lt,ntlist).eq.0) then
         nt_time1 = MPI_WTIME()
@@ -231,33 +233,33 @@ CONTAINS
     call si_force(X,Fp,lt)
     f_time = f_time + (MPI_WTIME()-f_time1)
 
-    
     !V = V + 0.5*(F + Fp)*Ts/masslong
     do ii=1,Nl
         i=il(ii)
         V(i,:) = V(i,:) + 0.5*(F(i,:) + Fp(i,:))*Ts/masslong(i,1)
     end do
-    
+
     F = Fp
+
     call iostuff(X,V,F,lt,time,temp)
     !call diagnostics(X,V,lt,time)
     !X_new = X
-    if (whichctrl .eq. 1) then
-        call calc_ion (lt,time, F)
+!    if (whichctrl .eq. 1) then
+!        call calc_ion (lt,time, F)
 
-        velstart = velstart+1
-        veltscnt = veltscnt+1
-        call profvel
-        if(mod(lt,1000) .eq. 0) then
-            call finalizevelts(lt)
-            !call midsec(lt)
-        end if
-        if(Ts.eq.Ts_i .and. mod(lt,500) .eq. 0) then
-            call bub_dim (X,V,lt,impact,time)
-        elseif (Ts.eq.Ts_r .and. mod(lt,25) .eq. 0) then
-            call bub_dim (X,V,lt,impact,time)
-        end if
-    end if
+!        velstart = velstart+1
+!        veltscnt = veltscnt+1
+!        call profvel
+!        if(mod(lt,1000) .eq. 0) then
+!            call finalizevelts(lt)
+!            !call midsec(lt)
+!        end if
+!        if(Ts.eq.Ts_i .and. mod(lt,500) .eq. 0) then
+!            call bub_dim (X,V,lt,impact,time)
+!        elseif (Ts.eq.Ts_r .and. mod(lt,25) .eq. 0) then
+!            call bub_dim (X,V,lt,impact,time)
+!        end if
+!    end if
 
   END SUBROUTINE onestep
 
@@ -267,15 +269,15 @@ CONTAINS
     integer :: i,lt
     real :: time
     real, dimension(Natm,3) :: F
-    
+
     i = Nsg+impact
-    
+
     if (myid .eq. P(i)) then
         ion_tstep_l = ion_tstep_l+1
         ion_data_l(ion_tstep_l,:) = (/ X(i,:),V(i,:),F(i,:),real(lt),time,real(i)  /)
         !write(ion_unit, "(3E20.10E3, 2I4, 3E20.10E3, 2I9, E15.5)")X(i,:),atype(i),P(i),V(i,:),i,lt, time
     end if
-    
+
   END SUBROUTINE calc_ion
 
   SUBROUTINE write_ion
@@ -290,7 +292,7 @@ CONTAINS
             write(ion_unit,"(12E15.6)")ion_data_l(i,:)
         end do
     end if
-    
+
   END SUBROUTINE write_ion
 
   SUBROUTINE calc_atm(lt,time)
@@ -312,7 +314,7 @@ CONTAINS
     call MPI_ALLREDUCE(ke_l, ke, Natm, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ierr)
     !call MPI_ALLREDUCE(moved_index_l, moved_index, Natm, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ierr)
 
-    
+
     !if(myid.eq.0) print*,MAXVAL(ke)
 
     if(MAXVAL(ke).lt.ke_limit_1 .and. atom_is_fast) then
@@ -323,7 +325,7 @@ CONTAINS
     !if(MAXVAL(ke).lt.ke_limit_2) then
     !    atom_is_slow = .true.
     !end if
-    
+
     !len(1) = Lb(1); len(2) = Lb(2); len(3) = Lb(3)/10.0
     !minlength = MIN(len(1),len(2),len(3))
     !minlength = minlength/2.0
@@ -336,7 +338,7 @@ CONTAINS
     !    sqds_l(i) = SQRT(SUM(ds(i,:)**2))
     !    if( (sqds_l(i).gt.tol1) .or. (moved_index(i).gt.0) ) then
     !        write(ds_unit,"(3E20.10E3,2I3,3E20.10E3)")X(i,:),atype(i),P(i),V(i,:)
-        
+
 
   END SUBROUTINE calc_atm
 
@@ -344,7 +346,7 @@ CONTAINS
   SUBROUTINE calc_time(lt)
 
     integer :: lt
-    
+
     if(myid.eq.0) write(*,"('Total time for ',I6,'th impact is ',F10.3,' seconds')")impact,MPI_WTIME()-ion_time
     if(myid.eq.0) then
         write(*, "('-----------------------------------------------------------------------------')")
@@ -358,7 +360,7 @@ CONTAINS
 
     time_per_step = ((MPI_WTIME()-wtime-at_time-ds_time-nt_time-f_time)/REAL(lt-Nt0))+at_time/at_count+nt_time/nt_count+ds_time/ds_count+f_time/f_count
     if(ds_count .eq. 0) time_per_step = ((MPI_WTIME()-wtime-at_time-nt_time-f_time)/REAL(lt-Nt0))+at_time/at_count+nt_time/nt_count+f_time/f_count
-    
+
     if (myid.eq.0) write(*, "('at_time = ',F6.2,'% of whole')")at_time/at_count / time_per_step*100
     if (myid.eq.0) write(*, "('nt_time = ',F6.2,'% of whole')")nt_time/nt_count / time_per_step*100
     if (myid.eq.0) write(*, "('ds_time = ',F6.2,'% of whole')")ds_time/ds_count / time_per_step*100
@@ -367,12 +369,12 @@ CONTAINS
     if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
     at_time = 0.0; nt_time = 0.0; ds_time = 0.0; f_time=0.0
     at_count = 0; nt_count = 0; ds_count = 0; f_count = 0;
-    
+
   END SUBROUTINE calc_time
 
 
   SUBROUTINE initvel
-    
+
     integer :: i, j, k, cnt
 
     velstart = 0
@@ -401,7 +403,7 @@ CONTAINS
                 vel(cnt,2) = j*dr
                 vel_ts(cnt,1) = i*dr
                 vel_ts(cnt,2) = j*dr
-                
+
             end do
         end do
     else
@@ -409,9 +411,9 @@ CONTAINS
         vel_all (:,3:8) = 0.0
         vel_ts (:,3:8) = 0.0
         vel_ts_all (:,3:8) = 0.0
-        
+
     end if
-    
+
 
   END SUBROUTINE initvel
 
@@ -424,7 +426,7 @@ CONTAINS
 
     vel_all = 0.0
     call MPI_REDUCE(vel,vel_all,vel_size*8,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)
-    
+
     if(myid .eq. 0) then
         cnt = 0
         do i=1,nrmax
@@ -441,17 +443,17 @@ CONTAINS
                     vel_all(cnt,6) = vel_all(cnt,6)/vel_all(cnt,3)*vel_all(cnt,8)
                     vel_all(cnt,7) = vel_all(cnt,7)/vel_all(cnt,3)
                 end if
-                
+
             end do
         end do
-        
+
         write(fn,"('E/velp_all_',I4.4,'.dat')")impact
         open(30, file=fn)
         do i=1,vel_size
             write(30,"(8E20.10E3)") vel(i,1:2), vel_all(i,3:8)
         end do
         close(30)
-        
+
     end if
 
   END SUBROUTINE finalizevel
@@ -464,7 +466,7 @@ CONTAINS
 
     do ii=1,Nl
         i=il(ii)
-        
+
         if(X(i,3).gt. (Lb(3)-dz)) then
             sz = X(i,3)-Lb(3)
             sz = sz + dz
@@ -503,13 +505,13 @@ CONTAINS
 
             end if
             !end if
-            
+
         end do
-        
+
     !if(myid .eq. 0) print *, globcnt
-    
+
   END SUBROUTINE profvel
-  
+
   SUBROUTINE finalizevelts(lt)
 
     integer :: cnt, i, j, k, ierr, lt
@@ -616,24 +618,21 @@ CONTAINS
             end if
         end do
     end if
-    
-    
+
+
     if(myid.eq.0) then
-        
+
         write(fn,"('out/mid_',I9.9,'.dat')")lt
         open(21, file=fn)
-        
+
         do i=1,cnt
             write(21,"(8E20.10)")outx(i,:)
         end do
         close(21)
 
     end if
-    
-    
+
+
   END SUBROUTINE midsec
-  
+
 END MODULE timeint
-
-
-

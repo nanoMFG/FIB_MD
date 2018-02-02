@@ -1,6 +1,6 @@
 PROGRAM silicon
 
-  USE prms         
+  USE prms
   USE data
   USE stillweb
   USE timeint
@@ -16,7 +16,7 @@ PROGRAM silicon
 
 CONTAINS
 
-  SUBROUTINE init 
+  SUBROUTINE init
 
     call initparallel
 	print *, "Initparallel done"
@@ -24,10 +24,10 @@ CONTAINS
 	print *, "readprms done"
     call initran
 	print *, "initran done"
-    call initdata 
+    call initdata
 	print *, "initdata done"
     call initparaops(X) ! previously Xi
-	print *, "initparaops done" 
+	print *, "initparaops done"
     call init_nlist
 	print *, "init_nlist done"
     call initio
@@ -48,16 +48,17 @@ CONTAINS
   END SUBROUTINE init
 
   SUBROUTINE initran
-    
+
     real    :: r
     real    :: ran1
 
     !if (myid.eq.0) write(out_unit,*) "INTIALIZING RANDOM"
     r = ran1(ranseed)
+    call initranions
 
   END SUBROUTINE initran
 
-  SUBROUTINE close 
+  SUBROUTINE close
 
     call closeio
     call closeparaops

@@ -6,7 +6,7 @@ MODULE prms
 
   integer              :: Natm                ! number of atoms
   integer              :: Nlj 				  ! number of lj atoms
-  integer			   :: Nsg				  ! number of si-ge atoms
+  integer			         :: Nsg				  ! number of si-ge atoms
   integer              :: Nrand                 ! number of random points
   integer              :: impact               ! impact number
   integer              :: startimpact          ! starting impact number, only valid if which=0, if 0, start from last, else strat from that impact using restart file.
@@ -14,6 +14,7 @@ MODULE prms
   integer, dimension(3):: divdir              ! direction of the division of atoms. 111 means division in 3 directions, 101 means in x and z direction
   integer, dimension(3):: Npc                 ! number of pieces in the x,y,z direction for atom division
   integer              :: Nt                  ! number timesteps
+  real                 :: fwhm              !full width half max of ion distribution
   real                 :: Ts                  ! timestep
   real                 :: Ts_i, Ts_r          ! initial and secondary timestep
   real,dimension(3)    :: Lb                  ! box sixe
@@ -54,12 +55,12 @@ MODULE prms
   real,dimension(3,3)  :: aamol               ! A Moliere
   real,dimension(3)    :: Zmol                ! Z Moliere
   real                 :: ie0                 ! one over eps0 (constant for unit matching)
-  
 
-  
+
+
   real,dimension(2,2)  :: isigma              ! 1./sigma
-  real,dimension(2,2)  :: eps                 ! eps 
-  real,dimension(2,2,2):: leps                ! lambda * eps 
+  real,dimension(2,2)  :: eps                 ! eps
+  real,dimension(2,2,2):: leps                ! lambda * eps
   real,dimension(2,2)  :: epssig              ! eps * sigma
 
   real                 :: Ttar1               ! Target Temperature 1
@@ -100,7 +101,7 @@ MODULE prms
   integer              :: ntlist, ntlist_i, ntlist_r              ! how often to reconstruct the neighborlist
   integer              :: atlist, atlist_i, atlist_r              ! how often updates global X
   integer              :: dslist, dslist_i, dslist_r              ! displaced atom update intercval
-  
+
   integer              :: Ntable              ! number of values is Fsr table
 
   integer              :: ranseed             ! random number seed
@@ -108,8 +109,8 @@ MODULE prms
   integer              :: amorcrys             ! amorphous or crystalline target? 0-cryst, 1-amorphous
   real 				   :: Teps               ! epsilon of temperature
 
-  
-            
+
+
   integer, parameter :: prm_unit  =   4  ! read unit for parameters
   integer, parameter :: out_unit  =   6  ! stdout
   integer, parameter :: atm_unit  =   7  ! atom locations
@@ -130,10 +131,11 @@ MODULE prms
   integer, parameter :: pby_unit  =  22  ! y histories
   integer, parameter :: bce_unit  =  23  ! bc energy
   integer, parameter :: ion_unit  =  24  ! ion trajectory
-  integer, parameter :: ds_unit  =  25  ! atoms trajectory
+  integer, parameter :: ds_unit   =  25  ! atoms trajectory
+  integer, parameter :: ran_unit  =  26  ! generated random ion positions
 
   real               :: Pi                         ! Pi (duh)
-  real               :: srPi                       ! SQRT(Pi) 
+  real               :: srPi                       ! SQRT(Pi)
   real               :: thrd                       ! 1./3.
   real   , parameter :: kB        =   1.381E-23    ! k-Boltzmann (J/K)
   real   , parameter :: eps0      =   8.854187E-12 ! permittivity constant (F/m = C^2/J m)
@@ -152,8 +154,8 @@ CONTAINS
     integer   :: ierr
     integer :: Nc1, Nc2, Nc3
     integer, dimension (8) :: seed
-    
-    if (myid.eq.0) write(out_unit,*) "READING PARAMETERS"  
+
+    if (myid.eq.0) write(out_unit,*) "READING PARAMETERS"
 
     Pi = 4.*ATAN(1.0)
     srPi = SQRT(Pi)
@@ -216,35 +218,35 @@ CONTAINS
         read(prm_unit,*) Npc(1), Npc(2), Npc(3)
         read(prm_unit,*) divdir(1),divdir(2),divdir(3)
         read(prm_unit,*) Nlj
-        
+
         read(prm_unit,*) Nt
         read(prm_unit,*) Ts_i
         read(prm_unit,*) Ts_r
-        
-        read(prm_unit,*) Ttar1              
-        read(prm_unit,*) Ttar2             
+
+        read(prm_unit,*) Ttar1
+        read(prm_unit,*) Ttar2
         read(prm_unit,*) ke_limit_1
         read(prm_unit,*) ke_limit_2
-        
+
         read(prm_unit,*) Tau_i
         read(prm_unit,*) Tau_r
         read(prm_unit,*) Teps
-        
+
         read(prm_unit,*) Uo
-        
+
         read(prm_unit,*) ntlist_i
         read(prm_unit,*) ntlist_r
         read(prm_unit,*) atlist_i
         read(prm_unit,*) atlist_r
         read(prm_unit,*) dslist_i
         read(prm_unit,*) dslist_r
-        
+
         read(prm_unit,*) atm_out_i
         read(prm_unit,*) atm_out_r
         read(prm_unit,*) res_out
         read(prm_unit,*) eng_out
         read(prm_unit,*) tmp_out
-        
+
         read(prm_unit,*) Nrand
 
         read(prm_unit,*) outz(1)
@@ -258,7 +260,9 @@ CONTAINS
         read(prm_unit,*) knockz
         read(prm_unit,*) sidewidth
         read(prm_unit,*) dti
-        
+
+        read(prm_unit,*) fwhm
+
         close(prm_unit)
 
         if (amorcrys .eq. 0) then
@@ -269,7 +273,7 @@ CONTAINS
             !Lb(1) = Lb(1)*Nc1
             !Lb(2) = Lb(2)*Nc2
             !Lb(3) = Lb(3)*Nc3*10
-            
+
         else
             Lb = 5.431073E-10
             Lb(1) = Lb(1)*Nc1
@@ -279,7 +283,7 @@ CONTAINS
         end if
 
         ranseed = -seed(7)*seed(8)
-        
+
     end if
 
     call MPI_BCAST(amorcrys,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
@@ -328,13 +332,14 @@ CONTAINS
     call MPI_BCAST(knockz,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(sidewidth,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(dti,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
+    call MPI_BCAST(fwhm,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
     call MPI_BCAST(Lb,3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
     !add these two lines in production run
     if(myid .ne. 0) allocate (xsides(Natm))
     call MPI_BCAST(xsides,Nsg,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-    
+
     call setupSiGe
     call setupMol
     call ionrun(1)
@@ -366,19 +371,19 @@ CONTAINS
        write(out_unit,*) "Nrand   = ",Nrand
        write(out_unit,*) "Uo      = ",Uo
        write(out_unit,*) "Lb      = ",Lb
-       write(out_unit,*) "A       = ",A          
-       write(out_unit,*) "B       = ",B          
-       write(out_unit,*) "psi     = ",psi         
-       write(out_unit,*) "qsi     = ",qsi          
-       write(out_unit,*) "al      = ",al         
-       write(out_unit,*) "lambdaSi= ",lambdaSi     
+       write(out_unit,*) "A       = ",A
+       write(out_unit,*) "B       = ",B
+       write(out_unit,*) "psi     = ",psi
+       write(out_unit,*) "qsi     = ",qsi
+       write(out_unit,*) "al      = ",al
+       write(out_unit,*) "lambdaSi= ",lambdaSi
        write(out_unit,*) "lambdaGe= ",lambdaGe
-       write(out_unit,*) "gamma   = ",gamma      
+       write(out_unit,*) "gamma   = ",gamma
        write(out_unit,*) "epsSi   = ",epsSi
        write(out_unit,*) "epsGe   = ",epsGe
-       write(out_unit,*) "sigmaSi = ",sigmaSi    
+       write(out_unit,*) "sigmaSi = ",sigmaSi
        write(out_unit,*) "sigmaGe = ",sigmaGe
-       write(out_unit,*) "massSi  = ",massSi    
+       write(out_unit,*) "massSi  = ",massSi
        write(out_unit,*) "massGe  = ",massGe
        write(out_unit,*)
        write(out_unit,*) " --- Temperature parameters ---- "
@@ -430,10 +435,10 @@ CONTAINS
     !  where eps0 is the permittivity of free space
 
   END SUBROUTINE setupMol
-  
+
 
   SUBROUTINE setupSiGe
-   
+
     eps(1,1) =  epsSi
     eps(1,2) = 0.5*(epsSi+epsGe)
     eps(2,2) =  epsGe
@@ -443,7 +448,7 @@ CONTAINS
     isigma(1,2) = 2./(sigmaSi+sigmaGe)
     isigma(2,2) = 1./sigmaGe
     isigma(2,1) = 2./(sigmaSi+sigmaGe)
- 
+
     leps(1,1,1) = lambdaSi*epsSi
     leps(1,1,2) = 2.*lambdaSi*epsSi/3. + lambdaGe*epsGe/3.
     leps(1,2,1) = 2.*lambdaSi*epsSi/3. + lambdaGe*epsGe/3.
@@ -471,12 +476,12 @@ CONTAINS
     real, allocatable, dimension(:,:)  :: XX
     integer                            ::  l,i,j,k,cnt, ns
     real                               :: shift, maxx, maxy
-    
+
     allocate(XX(8*Nc1*Nc2*Nc3,3))
-    
+
     Lb = 5.431073E-10;
     !Lb(3) = 10E-10;
-    
+
     ! VALUES r fr MATERIAL ONE with X MLs in [001] DIRECTION
     uc(1,1) = 0.00;         uc(1,2) = 0.00;            uc(1,3) = 0.00
     uc(2,1) = 0.00;         uc(2,2) = 0.50*Lb(2) ;     uc(2,3) = 0.50*Lb(3)
@@ -486,7 +491,7 @@ CONTAINS
     uc(6,1) = 0.50*Lb(1);   uc(6,2) = 0.50*Lb(2) ;     uc(6,3) = 0.0*Lb(3)
     uc(7,1) = 0.750*Lb(1);  uc(7,2) = 0.250*Lb(2) ;    uc(7,3) = 0.250*Lb(3)
     uc(8,1) = 0.750*Lb(1);  uc(8,2) = 0.750*Lb(2) ;    uc(8,3) = 0.750*Lb(3)
-    
+
     m = 1
     do i = 1,Nc1
         do j = 1,Nc2
@@ -500,7 +505,7 @@ CONTAINS
             end do
         end do
     end do
-    
+
     mnew = m-1
     cnt = 0
     open (2,file = 'si.dat')
@@ -509,7 +514,7 @@ CONTAINS
         cnt =cnt+1
     end do
     close(2)
-    
+
     print *,"Si atoms",m-1
     print*,Lb(1)*Nc1
     print*,Lb(2)*Nc2
@@ -518,7 +523,7 @@ CONTAINS
     Lb(1) = Lb(1)*Nc1
     Lb(2) = Lb(2)*Nc2
     Lb(3) = Lb(3)*Nc3*10
-        
+
     Nsg = cnt
     Natm = Nsg+Nlj
 
@@ -535,7 +540,7 @@ CONTAINS
         end if
     end do
     close(2)
-                        
+
   END SUBROUTINE pureepi
 
   SUBROUTINE ionrun(tic)
@@ -543,7 +548,7 @@ CONTAINS
     integer  :: tic
 
     if(myid .eq. 0) print*, 'called ionrun', tic
-    
+
     if(tic .eq. 1) then
         Ts = Ts_i
         atm_out = atm_out_i
@@ -559,7 +564,7 @@ CONTAINS
         Tau = Tau_r
         dslist = dslist_r
     end if
-    
+
   END SUBROUTINE ionrun
 
 END MODULE prms

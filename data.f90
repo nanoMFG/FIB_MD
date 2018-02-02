@@ -1,5 +1,5 @@
 MODULE data
-  
+
   USE prms
   USE tools
   USE parallel
@@ -36,11 +36,11 @@ CONTAINS
   END SUBROUTINE initdata
 
   SUBROUTINE ic
-    
+
     integer   :: i,ierr, reason
     real      :: ran1
     character(100) :: cmd, fn
-    
+
 
     if (whichic.gt.0) then
         Nt0 = 0
@@ -55,7 +55,7 @@ CONTAINS
         call assignmass
         if(amorcrys.eq.0) call randvel
         !call constrainmom(V,mass)
-        
+
     case(0)
         !call initlat(X,Xi,atype)
         call readlat(Xi,atype)
@@ -68,7 +68,7 @@ CONTAINS
             write(fn,"('F/restart_list_',I3.3,'.dat')")myid
             open(33, file=fn)
             read(33,"(A28)",IOSTAT=reason)fn
-            close (33)            
+            close (33)
             open(res_unit,file=fn,form='UNFORMATTED',status='OLD')
             if (myid .eq. 0) print*, "-----Restarting from ", startimpact, "th impact with restart file ", trim(fn)," -----"
         end if
@@ -94,7 +94,7 @@ CONTAINS
         Xi(Nsg+1:Natm,:) = X(Nsg+1:Natm,:)
         V(Nsg+ions+1:Natm,:) = 0.0
         call readrandimp(Xrand)
-        
+
     case default
         stop 'bad whichic'
     end select
@@ -119,7 +119,7 @@ CONTAINS
     integer                  :: ierr
     integer                  :: i
     real                     :: ran1
-    
+
     if (myid.eq.0) then
         if (amorcrys .eq. 0) then
             open(1,file='si.dat')
@@ -146,7 +146,7 @@ CONTAINS
     real                     :: ran1
 
     if (myid.eq.0) then
-        open(1,file='fwhm35.dat')
+        open(1,file='fwhm.dat')
         do i = 1,Nrand
             read(1,*)Xrand(i,:)
         end do
@@ -217,7 +217,7 @@ CONTAINS
             !V(i,:) = 0.
             atype(i) = 3
         end do
-        
+
         !  Check Ion positions and reassign if necessary
         do i=Nsg+1,Natm
             do j=Nsg+1,Natm
@@ -236,9 +236,33 @@ CONTAINS
 
     call MPI_BCAST(X,Natm*3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(atype,Natm,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-    
+
 
   END SUBROUTINE initIons
-  
+
+  SUBROUTINE initranions
+    real          :: rion1, rion2, rion3, rion4, ran1
+    integer       :: i
+    character(30) :: fn
+
+    write(fn,"('fwhm.dat')")
+    open(ran_unit,file=fn)
+
+    do i=1,Nrand
+      rion1 = ran1(ranseed)
+      rion2 = ran1(ranseed)
+
+      !convert to a normal distribution
+      !also scale to a fwhm given in nm
+      rion3 = sqrt(-2*LOG(rion1))*COS(2*Pi*rion2)*fwhm/2.35*1.E-9
+      rion4 = sqrt(-2*LOG(rion2))*SIN(2*Pi*rion1)*fwhm/2.35*1.E-9
+
+      write(ran_unit,"(E12.6,A1,E12.6)")rion3,' ',rion4
+    end do
+
+    close(ran_unit)
+
+  END SUBROUTINE initranions
+
 
 END MODULE data

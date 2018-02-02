@@ -1,4 +1,4 @@
-MODULE out 
+MODULE out
 
   USE prms
   USE stats
@@ -29,7 +29,7 @@ CONTAINS
 
     call updateroot(X)
     call updateroot(V)
-    
+
     if (myid.eq.0) then
         write(fn,"('D/restart.in_old')")
         open(res_unit,file=fn,form='UNFORMATTED')
@@ -37,7 +37,7 @@ CONTAINS
         write(res_unit)X,V,mass,atype
         write(res_unit)impact
         close(res_unit)
-        
+
         write(fn,"('D/restart.in',I6.6,'_',I9.9)")impact,lt
         open(res_unit,file=fn,form='UNFORMATTED')
         write(res_unit)lt,restart_time
@@ -45,21 +45,42 @@ CONTAINS
         write(res_unit)impact
         close(res_unit)
     end if
-   
+
   END SUBROUTINE writerestart
-  
-  SUBROUTINE writeatoms(X,V,F,lt,temp)
+
+  SUBROUTINE writeatoms(X,V,F,lt,time,temp)
     real, dimension(Natm,3) :: X,V,F
     real, dimension(Natm) :: kin_eng
     integer  :: lt, fon
     integer  :: i,k,l,j,ii
     integer :: ierr
-    real    :: keprint, temp
+    real    :: keprint, temp, TE, time
     character(30)           :: fn
-
+    character(2)            :: tempatype
     !call updateroot(X)
     !call updateroot(F)
     !call updateroot(V)
+
+    if (myid.eq.0) then		!added by Josh, converted output to xyz format
+!        write(fn,"('XYZfiles/mdrun2.xyz')") !moved to general initio / closeio
+!        open(atm_unit,file=fn,action='write',position='append')
+        write(atm_unit,"(I9)"),Natm !heads the section with # of atoms
+        write(atm_unit,"(1A12,F12.5,3A12,2A8,3A16,A8,F14.5)")'Time (ps) = ',time*1e12,'x (A)','y (A)','z (A)','type','proc#','Vx','Vy','Vz','atom#',temp
+        do i = 1,Natm
+            kin_eng(i) = 0.5*mass(i)*SUM(V(i,:)**2)/ec
+      	    if(atype(i).eq.1) then
+			          tempatype = "Si"
+            elseif(atype(i).eq.3) then
+		            tempatype = "Ga"
+            end if
+    	      !write(atm_unit,"(3E20.10E3,A5,I3,7E20.10E3, I8)")X(i,:)*1e10,tempatype,P(i),kin_eng(i),V(i,:),F(i,:),i
+        	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:),i
+        end do
+!        close(atm_unit)
+        !write a line tracking the current ion's trajectory and system temperature
+    		write(*,"(I10,6E20.10)")lt,temp,V(Nsg+impact,3)
+            !write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
+        end if
 
     if (myid.eq.-1) then
         write(fn,"('G/atoms',I9.9,'.dat')")lt
@@ -71,8 +92,8 @@ CONTAINS
         close(atm_unit)
         write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
     end if
-        
-    if (myid .eq. -1) then 
+
+    if (myid .eq. -1) then
         !added by Kallol
         if(lt .gt. 0) then
             write(fn, "('D/proc_',I2.2,'_',I9.9,'.dat')"),myid,lt
@@ -105,9 +126,9 @@ CONTAINS
             end do
         end if
         close(atm_unit)
-        
+
     end if
-    
+
   END SUBROUTINE writeatoms
 
   SUBROUTINE writeabn(X,V,lt)
@@ -138,6 +159,7 @@ CONTAINS
        if (zen_out.gt.0) open(zen_unit,file='G/zen.out'//fn)
        if (tmp_out.gt.0) open(tmp_unit,file='G/tmp.out'//fn)
        if (eng_out.gt.0) open(eng_unit,file='G/eng.out'//fn)
+       if (atm_out.gt.0) open(atm_unit,file='XYZfiles/mdrun2.xyz')
     end if
 
   END SUBROUTINE initio
@@ -148,6 +170,7 @@ CONTAINS
        if (tmp_out.gt.0) close(tmp_unit)
        if (eng_out.gt.0) close(eng_unit)
        if (zen_out.gt.0) close(zen_unit)
+       if (atm_out.gt.0) close(atm_unit)
     end if
 
   END SUBROUTINE closeio
@@ -161,16 +184,19 @@ CONTAINS
     if (res_out.gt.0.and.MOD(lt,res_out).eq.0.or.   &
          abn_out.gt.0.and.MOD(lt,abn_out).eq.0.or.   &
          atm_out.gt.0.and.MOD(lt,atm_out).eq.0)  then
-        if (res_out.gt.0.and.MOD(lt,res_out).eq.0) then
-            call writerestart(X,V,lt)
-        end if
-        if (abn_out.gt.0.and.MOD(lt,abn_out).eq.0) then
-            call updateglobal(V)
-            call writeabn(X,V,lt)
-        end if
-        if (atm_out.gt.0.and.MOD(lt,atm_out).eq.0) then
-            call writeatoms(X,V,F,lt,temp)
-        end if
+          call updateroot(X)
+          call updateroot(V)
+          call temperature(V,temp)
+          if (res_out.gt.0.and.MOD(lt,res_out).eq.0) then
+              call writerestart(X,V,lt)
+          end if
+          if (abn_out.gt.0.and.MOD(lt,abn_out).eq.0) then
+!              call updateglobal(V)
+              call writeabn(X,V,lt)
+          end if
+          if (atm_out.gt.0.and.MOD(lt,atm_out).eq.0) then
+              call writeatoms(X,V,F,lt,time,temp)
+          end if
     end if
     call diagnostics(X,V,lt,time)
 
@@ -226,7 +252,7 @@ CONTAINS
           write(fn,"('D/Tbar.out',I9.9)")lt
           open(Tbr_unit,file=fn)
           do j = 1,Nlat(1)
-             write(Tbr_unit,"(3E20.10)")Xlat(j),TbarS(j) 
+             write(Tbr_unit,"(3E20.10)")Xlat(j),TbarS(j)
           end do
           close(Tbr_unit)
           NTbar = 0

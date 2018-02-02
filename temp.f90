@@ -7,7 +7,7 @@ MODULE temp
   USE parallel
   USE par
 
-  IMPLICIT none 
+  IMPLICIT none
 
   integer   ::  Ntemp1,Ntemp2,NtempTot1,NtempTot2
   integer,allocatable,dimension(:)   ::  T1list,T2list
@@ -39,15 +39,15 @@ CONTAINS
         nzmax = ceiling(lz/dc);
         nmax = nxmax*nymax*nzmax
         ncryst = dc*dc*dc/(uc*uc*uc)*8.0
-        
+
         if(.not.allocated(bbl_dtls)) then
             allocate(bbl_dtls(nmax,11),blist(nmax),blist_vol(nmax,4))
         end if
-        
+
         bbl_dtls = 0.0;
         blist = 0.0
         blist_vol = 0.0
-        
+
         do i=1,natm
             if(X(i,3).lt.lz .and. X(i,3).gt.0.0) then
                 nx = ceiling(X(i,1)/dc)
@@ -61,14 +61,14 @@ CONTAINS
                 if(nz .gt. nzmax) nz = nzmax
                 if(nx*ny*nz .gt. nmax) print*, 'ERROR!'
                 n = (nx-1)*nymax*nzmax + (ny-1)*nzmax + nz
-                
+
                 bbl_dtls(n,4) = bbl_dtls(n,4) + 1      ! count atoms
                 bbl_dtls(n,7) = 0                      ! atom id
                 bbl_dtls(n,8) = bbl_dtls(n,8) + m*(sum(V(i,:)**2))/3.0/kb ! temperature addition
-                
+
             end if
         end do
-        
+
         do nx=1,nxmax
             do ny=1,nymax
                 do nz=1,nzmax
@@ -83,14 +83,14 @@ CONTAINS
                 end do
             end do
         end do
-        
+
         bigc = 0
         id = 0
         bi=1
         bf=0
         bfnew=1
         binew=1
-        
+
         do k=1,nmax
             if(bbl_dtls(k,6).eq.0.0 .and. bbl_dtls(k,10).eq.0.0) then
                 bigc=bigc+1
@@ -98,14 +98,14 @@ CONTAINS
                 id = id+1
                 bbl_dtls(k,7) = id
                 blist(bigc) = k
-                
+
                 !blist_vol(id,1:3) = blist_vol(id,1:3) + bbl_dtls(k,1:3)
                 !blist_vol(id,4) = blist_vol(id,4)+1
-                
+
                 !print*, k
-                
+
                 do
-                    
+
                     do i=bi,bf
                         !binew = i+1
                         !bfnew = bf
@@ -115,7 +115,7 @@ CONTAINS
                             bbl_dtls(indx,11)=1;
                             blist_vol(id,1:3) = blist_vol(id,1:3) + bbl_dtls(indx,1:3)
                             blist_vol(id,4) = blist_vol(id,4)+1
-                            
+
                             xx = bbl_dtls(indx,1);
                             yy = bbl_dtls(indx,2);
                             zz = bbl_dtls(indx,3);
@@ -140,18 +140,18 @@ CONTAINS
                             end do
                         end if
                     end do
-                    
+
                     bi = bf+1
                     bf = bigc
                     !print*, bi,bf,bigc,id
                     if(bi.gt.bf) exit
-                    
-                    
+
+
                 end do
-                
+
             end if
         end do
-        
+
         ! disabling for now
         !open(31,file='details_bubble.dat')
         write(fn,"(I4.4,'_det/bubble_details_',I4.4,'_',I9.9,'.dat')")impact,impact,lt
@@ -167,7 +167,7 @@ CONTAINS
             end do
         end do
         close(31)
-        
+
         write(fn,"(I4.4,'_dim/bubble_vol_',I4.4,'_',I9.9,'.dat')")impact,impact,lt
         open(32,file=fn)
         do i=1,id
@@ -179,9 +179,9 @@ CONTAINS
         close(32)
 
     end if
-        
+
   END SUBROUTINE bub_dim
-  
+
   SUBROUTINE controlsidetemp (X,V,F, Ttar)
     real, dimension(Natm,3)     :: X,V,F
     real                        :: tempside, tempside_l, s, Ttar, nm
@@ -195,11 +195,14 @@ CONTAINS
     nm = 1.0e-9
     do ii=1,Nl
         i = il(ii)
-        if(   ((X(i,1).lt.sidewidth*nm) .or. (X(i,1).gt.(Lb(1)-sidewidth*nm)))  .or. ((X(i,2).lt.sidewidth*nm) .or. (X(i,2).gt.(Lb(2)-sidewidth*nm)))  .and.  ((X(i,3).lt.outz(1)*Lb(3)/10.0) .or. (X(i,3).gt.outz(4)*Lb(3)/10.0))) then
-            tempside_l = tempside_l + mass(i)*(V(i,1)**2   + V(i,2)**2   + V(i,3)**2  )
-            kk_l = kk_l+1
-            tempside_list(kk_l) = i
-            
+        if(   ((X(i,1).lt.sidewidth*nm) .or. (X(i,1).gt.(Lb(1)-sidewidth*nm)))  &
+        .or. ((X(i,2).lt.sidewidth*nm) .or. (X(i,2).gt.(Lb(2)-sidewidth*nm)))  &
+        .and.  ((X(i,3).lt.outz(1)*Lb(3)/10.0) .or. (X(i,3).gt.outz(4)*Lb(3)/10.0))) then
+          if( atype(i) < 3 ) then
+              tempside_l = tempside_l + mass(i)*(V(i,1)**2   + V(i,2)**2   + V(i,3)**2  )
+              kk_l = kk_l+1
+              tempside_list(kk_l) = i
+          end if
         end if
     end do
 
@@ -210,10 +213,10 @@ CONTAINS
     ! Disabling previous lines, because scaling in local processors, no need for global scaling.
     if(kk_l .gt. 0) then
         tempside_l = tempside_l/3./REAL(kk_l)/kB
-    
+
         !s = SQRT(1. + Ts/Tau*(Ttar/tempside-1.))
         s = SQRT(1. + Ts/Tau*(Ttar/tempside_l-1.))
-    
+
         do ii = 1,kk_l
             i = tempside_list(ii)
             !if(myid.eq.0) write(51,*)V(i,:)
@@ -221,7 +224,7 @@ CONTAINS
             !if(myid.eq.0) write(52,*)V(i,:)
         end do
     end if
-    
+
   END SUBROUTINE controlsidetemp
 
   SUBROUTINE cntsputter(X,V,F,lt,impact)
@@ -251,8 +254,8 @@ CONTAINS
 
 
   END SUBROUTINE CNTSPUTTER
-  
-  
+
+
   SUBROUTINE frzsptrdatms (X,V,F,lt)
     real, dimension(Natm,3)     :: X,V,F
     integer                     :: i,ii,ierr,lt
@@ -294,9 +297,9 @@ CONTAINS
     !call MPI_ALLREDUCE(sputter_index_l, sputter_index, Natm, MPI_INTEGER, MPI_SUM, MPI_COMM_WORLD, ierr)
 
   END SUBROUTINE frzsptrdatms
-  
-  
-  
+
+
+
   SUBROUTINE compute_TProf(V,Tbar)
     real, dimension(Natm,3)  :: V
     real, dimension(Nlat(1))    :: Tbar
@@ -320,7 +323,7 @@ CONTAINS
 
     call MPI_REDUCE(Tbarl,  Tbar,  Nlat(1), MPI_REAL8,   MPI_SUM, 0, MPI_COMM_WORLD, ierr)
     call MPI_REDUCE(nTbarl, nTbar, Nlat(1), MPI_INTEGER, MPI_SUM, 0, MPI_COMM_WORLD, ierr)
-    
+
     Tbar = Tbar/REAL(nTbar)
 
   END SUBROUTINE compute_TProf
@@ -341,7 +344,7 @@ CONTAINS
     if (whichtemp.eq.1) then
        do i = 1,Natm
           if (Lijk(i,1).le.Nltemp1+1.and. &
-                                  Lijk(i,1).gt.1.and.P(i).eq.myid) then 
+                                  Lijk(i,1).gt.1.and.P(i).eq.myid) then
              Ntemp1 = Ntemp1 + 1
              T1tmp(Ntemp1) = i
           else if (Lijk(i,1).gt.Nlat(1)-Nltemp2-1.and. &
@@ -352,7 +355,7 @@ CONTAINS
        end do
     else if (whichtemp.eq.2) then
        do i = 1,Natm
-          if (Lijk(i,1).le.Nltemp1.and.P(i).eq.myid) then  
+          if (Lijk(i,1).le.Nltemp1.and.P(i).eq.myid) then
              Ntemp1 = Ntemp1 + 1
              T1tmp(Ntemp1) = i
           else if (Lijk(i,1).gt.Nlat(1)/2.and.Lijk(i,1).le.Nlat(1)/2+Nltemp2.and.P(i).eq.myid) then
@@ -442,7 +445,7 @@ CONTAINS
     real, dimension(Natm,3)  :: V
 
     integer                  :: Ntemp
-    integer,dimension(Ntemp) :: Tlist    
+    integer,dimension(Ntemp) :: Tlist
     real                     :: Temp
     real                     :: Ttar
 
@@ -451,25 +454,25 @@ CONTAINS
 
     integer                  :: l
     real, dimension(3)       :: Vb
-    
+
     real                     :: ran1
 
     real   :: PE,Bltz
 
 
-    do i = 1,Ntemp                       
-       if (ran1(ranseed).lt.nu) then          
- 
+    do i = 1,Ntemp
+       if (ran1(ranseed).lt.nu) then
+
           ii = Tlist(i)
- 
+
           do l = 1,3
-             do 
+             do
                 Vb(l) = -Vmax + 2.*Vmax*ran1(ranseed)
                 Bltz =EXP(-mass(ii)*Vb(l)*Vb(l)/(2.*kB*Ttar))
                 if (ran1(ranseed).lt.Bltz) exit
              end do
-          end do          
- 
+          end do
+
           V(ii,:) = Vb
 
        end if
@@ -482,7 +485,7 @@ CONTAINS
     real, dimension(Natm,3)  :: V
 
     integer                  :: Ntemp
-    integer,dimension(Natm)  :: Tlist    
+    integer,dimension(Natm)  :: Tlist
     real                     :: Temp
     real                     :: Ttar
 
@@ -501,16 +504,16 @@ CONTAINS
 
   SUBROUTINE adjusttemp(V,Temp,Ttar)
     real, dimension(Natm,3)  :: V
-   
+
     real                     :: Temp
     real                     :: Ttar
 
     real                     :: s
-    
+
     integer                  :: i,ii
 
     s = SQRT(1. + Ts/Tau*(Ttar/Temp-1.))
-    
+
     !print *,myid,": ",Ttar,Temp,s
     !if (myid .eq. 0) print*,s, Temp
     do ii = 1,Nl
@@ -524,7 +527,7 @@ CONTAINS
     real, dimension(Natm,3)  :: V
 
     integer                  :: Ntemp,NtempTot
-    integer,dimension(Natm)  :: Tlist    
+    integer,dimension(Natm)  :: Tlist
     real                     :: Temp,KE,KE_l
 
     integer                  :: ierr
@@ -546,8 +549,8 @@ CONTAINS
     KE = KE/2.
 
   END SUBROUTINE zonetemperature
-  
-!  Compute the mean temperature 
+
+!  Compute the mean temperature
   SUBROUTINE temperature(V,Temp)
     real, dimension(Natm,3)  :: V
     real                     :: Temp,Temp_l
@@ -572,6 +575,5 @@ CONTAINS
     call MPI_ALLREDUCE(Temp_l, Temp, 1, MPI_REAL8, MPI_SUM, MPI_COMM_WORLD, ierr)
 
   END SUBROUTINE temperature
-  
-END MODULE temp
 
+END MODULE temp

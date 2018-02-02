@@ -1,9 +1,9 @@
 0		amorcrys, 0-crystalline target, Nsg is calculated, 1-amorphous, reads from a specified data file.
 4		whichic, initial condition, 4-starts from scratch, 0-starts from restart file, -2 starts from .dat file, modify details inside
 0		startimpact, it is activated only when whichic=0, if 0, start from last impact, if >0, start from that impact
-30000.0		eV, ion energy
+1000.0		eV, ion energy
 31992		Nsg, number of silicon/germanium
-4 4 5	 	Nc1,Nc2,Nc3, number of unit cells in x,y,z direction
+4 4 8	 	Nc1,Nc2,Nc3, number of unit cells in x,y,z direction
 1 1 2		Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors.
 1 0 0		divdir, division of atoms in x,y,z directions, 111 means division of atoms in xyz direction, 100 means division in x direction only
 1			Nlj, number of Ga ions
@@ -14,14 +14,14 @@
 
 300.0		Ttar1, target temperature 1
 280.0		Ttar2, target temperature 2
-1000.0		ke_limit_1, limit when to choose higher Tstep
+600.0		ke_limit_1, limit when to choose higher Tstep (changed from 1000)
 10.0		ke_limit_2, limit when to impact next ion
 
 1.E-13		Tau_i, time constant for velocity rescaling thermostat, use 1.E-15 for quenchin
 1.E-13		Tau_r, for the rest of the time
-50.0		Teps, tolerance in temperature
+30.0		Teps, tolerance in temperature
 
-150.0		Uo, initial velocities of atoms 
+150.0		Uo, initial velocities of atoms
 
 50		ntlist_i, how frequently neighborlist is updated
 20		ntlist_r, rest of the time
@@ -30,11 +30,11 @@
 500		dslist_i, write interval of the displaced atom, how often to check KE of the system to apply different Ts
 500		dslist_r, rest of the time
 
--4000		atm_out_i, output frequency
--4000		atm_out_r, when the Ts has been increased, we need to increase the atm_out
+100		atm_out_i, output frequency
+1000		atm_out_r, when the Ts has been increased, we need to increase the atm_out
 -5000		res_out, restart files write frequency
 -10		eng_out, energy files write frequency
-100		tmp_out, temperature write frequency
+-100		tmp_out, temperature write frequency
 
 10000		Nrand, number of random impact points
 
@@ -48,4 +48,6 @@
 5.5		ionz, where the ions are kept before giving them knocking velocity. outz(2) < ionz < atomz
 1.25		knockz, where the ions start, initial position before impact. knockz < outz(1)
 1.5		sidewidth, control temperature on sides in nm.
-2.0E-12		dti, time between impacts
+1.0E-12		dti, time between impacts (was 2.0E-12)
+
+2.0   fwhm, full width half max of incident ion distribution in (nm)
