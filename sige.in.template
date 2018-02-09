@@ -1,0 +1,53 @@
+0    \ amorcrys, 0-crystalline target, Nsg is calculated, 1-amorphous, reads from a specified data file. 1
+4    \ whichic, initial condition, 4-starts from scratch, 0-starts from restart file, -2 starts from .dat file, modify details inside 2
+0    \ startimpact, it is activated only when whichic=0, if 0, start from last impact, if >0, start from that impact 3
+${keV}    \ eV, ion energy 4
+31992    \ Nsg, number of silicon/germanium 5
+${xdim} ${ydim} ${zdim}   \ Nc1,Nc2,Nc3, number of unit cells in x,y,z direction 6
+1 1 ${procs}    \ Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors. 7
+1 0 0    \ divdir, division of atoms in x,y,z directions, 111 means division of atoms in xyz direction, 100 means division in x direction only 8
+${nlj}    \ Nlj, number of Ga ions 9
+
+2000    \ Nt, number of total timesteps, frequency of ion bombardments 10
+2.0E-17    \ Ts_i, initial timestep 11
+2.0E-16    \ Ts_r, secondary timestep 12
+
+300.0    \ Ttar1, target temperature 1 13
+280.0    \ Ttar2, target temperature 2 14
+600.0    \ ke_limit_1, limit when to choose higher Tstep (changed from 1000) 15
+10.0    \ ke_limit_2, limit when to impact next ion 16
+
+1.E-13    \ Tau_i, time constant for velocity rescaling thermostat, use 1.E-15 for quenchin 17
+1.E-13    \ Tau_r, for the rest of the time 18
+30.0    \ Teps, tolerance in temperature 19
+
+150.0    \ Uo, initial velocities of atoms 20
+
+50    \ ntlist_i, how frequently neighborlist is updated 21
+20    \ ntlist_r, rest of the time 22
+50    \ atlist_i, how frequently atoms are divided, also position is updated globally 23
+20    \ atlist_r, rest of the time 24
+500    \ dslist_i, write interval of the displaced atom, how often to check KE of the system to apply different Ts 25
+500    \ dslist_r, rest of the time 26
+
+${atmout1}    \ atm_out_i, output frequency 27
+${atmout2}    \ atm_out_r, when the Ts has been increased, we need to increase the atm_out 28
+-5000    \ res_out, restart files write frequency 29
+-10    \ eng_out, energy files write frequency 30
+-100    \ tmp_out, temperature write frequency 31
+
+10000    \ Nrand, number of random impact points 32
+
+1.3    \ outz(1), range in multiples of Lb(3)/10.0 33
+3.5    \ outz(2), where the out of simulation atoms 34
+7.5    \ outz(3), will be collected, 1-2 for lower range just above the box 35
+9.8    \ outz(4), 3-4 are for the top range, atoms that come back from top 36
+
+4.5    \ atomz(1), atoms coming from top of target. where the out of simulation atoms will be collected. ionz < atomz < outz(3) 37
+6.5    \ atomz(2), atoms coming from bottom of target. 38
+5.5    \ ionz, where the ions are kept before giving them knocking velocity. outz(2) < ionz < atomz 39
+1.25    \ knockz, where the ions start, initial position before impact. knockz < outz(1) 40
+1.5    \ sidewidth, control temperature on sides in nm. 41
+${dtion}    \ dti, time between impacts (was 2.0E-12) 42
+
+${fwhm}    \ FWHM, full width half max of incident ion distribution (in nm) 43
