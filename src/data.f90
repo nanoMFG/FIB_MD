@@ -160,16 +160,26 @@ CONTAINS
 
     integer :: i, ierr
     real    :: ran1
+    real, dimension(3)	:: mmtm
 
     !print*,"Ranseed = ", ranseed
     !added by Kallol
     if (myid.eq.0) then
+        mmtm = 0.0
         if (amorcrys .eq.0) then
             do i = 1,Nsg
                 V(i,1) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
                 V(i,2) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
                 V(i,3) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
+                mmtm(:) = mmtm(:)+mass(i)*V(i,:)
             end do
+      			mmtm = mmtm/Nsg
+
+      			!subtract average momentum per particle from each particle (to make net zero)
+      			do i = 1,Nsg
+      				V(i,:) = V(i,:) - mmtm/mass(i)
+      			end do
+
             do i = Nsg+1, Natm
                 V(i,:) = 0.0
             end do

@@ -6,7 +6,7 @@
 4 4 8	 	Nc1,Nc2,Nc3, number of unit cells in x,y,z direction
 1 1 2		Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors.
 1 0 0		divdir, division of atoms in x,y,z directions, 111 means division of atoms in xyz direction, 100 means division in x direction only
-1			Nlj, number of Ga ions
+2			Nlj, number of Ga ions
 
 20000		Nt, number of total timesteps, frequency of ion bombardments
 2.0E-17		Ts_i, initial timestep
@@ -50,4 +50,4 @@
 1.5		sidewidth, control temperature on sides in nm.
 1.0E-12		dti, time between impacts (was 2.0E-12)
 
-2.0   fwhm, full width half max of incident ion distribution in (nm)
+2.0   fwhm, full width half max of incident ion distribution (in nm)

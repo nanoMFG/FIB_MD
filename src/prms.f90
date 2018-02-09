@@ -530,16 +530,16 @@ CONTAINS
     maxx = MAXVAL(XX(:,1))
     maxy = MAXVAL(XX(:,2))
 
-    open(2, file='si_sides.dat')
+!    open(2, file='si_sides.dat')
     allocate(xsides(Natm))
     xsides = 0
     do i=1,Nsg
         if(XX(i,1).lt.1.0e-10 .or. XX(i,2).lt.1.0e-10 .or. XX(i,1).gt.maxx-1.0e-10 .or. XX(i,2).gt.maxy-1.0e-10) then
             xsides(i) = i
-            write(2,"(I10)")i
+!            write(2,"(I10)")i
         end if
     end do
-    close(2)
+!    close(2)
 
   END SUBROUTINE pureepi
 
