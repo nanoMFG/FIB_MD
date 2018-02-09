@@ -1,5 +1,5 @@
-FORT    =  mpifort
-FORT77  =  mpifort
+FORT    =  mpif90
+FORT77  =  mpif90
 NICE    = -fdefault-real-8
 LIB     = 
 OPTS    =  -O3 -fbacktrace -ffree-line-length-none
