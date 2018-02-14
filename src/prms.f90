@@ -1,3 +1,16 @@
+!------------------------------------------------------------------------------
+!
+! `prms` Source File
+!
+! prms.f90 source function file. This file contains all of the subroutines
+! responsible for defining physical constants, reading input parameters from
+! sige.in, and broadcasting all of these parameters to the parallel
+! processes. Also contains subroutines for creating the initial diamond cubic
+! crystal structure for Si and for swapping between the fast/slow timestepping
+! and thermostat regimes based on current ion energy.
+!
+!------------------------------------------------------------------------------
+
 MODULE prms
 
   USE parallel

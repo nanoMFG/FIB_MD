@@ -1,3 +1,12 @@
+!------------------------------------------------------------------------------
+!
+! `ran1` Source File
+!
+! ran.f source function file. This contains a fortran routine for generating a
+! uniformly distributed random number in [0,1].
+!
+!------------------------------------------------------------------------------
+
       FUNCTION ran1(idum)
       INTEGER idum,IA,IM,IQ,IR,NTAB,NDIV
       real  ran1,AM,EPS,RNMX

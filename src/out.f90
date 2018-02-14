@@ -1,3 +1,13 @@
+!------------------------------------------------------------------------------
+!
+! `OUT` Source File
+!
+! out.f90 source function file. This contains all of the subroutines used for
+! initializing data outputs and then actually writing output data when called
+! during the simulation.
+!
+!------------------------------------------------------------------------------
+
 MODULE out
 
   USE prms

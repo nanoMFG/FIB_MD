@@ -1,15 +1,26 @@
+!------------------------------------------------------------------------------
+!
+! `Si` Source File
+!
+! si.f90 source function file. This file contains subroutines for the actual
+! generation of neighborlists. It also contains the subroutines that use these
+! neighborlists to calculate interatomic forces and potential energies using
+! stillinger-weber and molliere functions.
+!
+!------------------------------------------------------------------------------
+
 MODULE stillweb
 
   USE prms
   USE par
   USE nlistmod
 
-  IMPLICIT none 
+  IMPLICIT none
 
   integer                        :: MaxList,ML2, MaxListlj, mnlistcnt, mlistcnt
   integer,allocatable, dimension(:,:)  :: nlist
   integer,allocatable, dimension(:,:)  :: mnlist
-  
+
   integer                       :: Nbrs,Mbrs
 
   integer,allocatable,dimension(:)   :: list, listlj
@@ -39,7 +50,7 @@ CONTAINS
     ML2 = Nl*30        !Natm*50 ! kallol prev 20
     mnlistcnt = 150*Nl
     mlistcnt = 15*Nl
-    
+
     rc = listfac*al*MAX(sigmaGe,sigmaSi)
     Nc = MAX(1,INT(Lb/rc))
     rlj2 = 2.5*MAX(sigmaGe,sigmaSi)
@@ -62,7 +73,7 @@ CONTAINS
         allocate (mnlist(mnlistcnt,3),mlist(mlistcnt))
         allocate (mlistlj(MaxListlj)) !check the hard coded number
     end if
-    
+
   END SUBROUTINE init_nlist
 
   SUBROUTINE si_nlist(X,lt)
@@ -103,7 +114,7 @@ CONTAINS
     nsslj(:,1) = 0
     flagi = .true.
     flagj = .true.
-    
+
     do ic3 = 1,Nc(3)
         do ic2 = 1,Nc(2)
             do ic1 = 1,Nc(1)
@@ -112,14 +123,14 @@ CONTAINS
 
                     flagi = .true.
                     if(P_big(i).ne. myid) flagi = .false.
-                    
+
                     nss(i,1) = nbr_cnt
                     nsslj(i,1) = nbr_cntlj
-                    
+
                     do n1 = -1,1
                         do n2 = -1,1
                             do n3 = -1,1
-                                j = HOC(ic1+n1,ic2+n2,ic3+n3)                    
+                                j = HOC(ic1+n1,ic2+n2,ic3+n3)
                                 do while(j.ne.0)
 
                                     flagj = .true.
@@ -143,9 +154,9 @@ CONTAINS
                                             end if
                                         end if
                                     end if
-                                    
+
                                     j = LL(j)
-                                    
+
                                 end do
                             end do
                         end do
@@ -156,12 +167,12 @@ CONTAINS
                     i = LL(i)
 
                 end do
-                
+
             end do
         end do
     end do
 
-!  This bit finds all threesomes.  
+!  This bit finds all threesomes.
 !
 !   RULES:  -2nd and third atoms have index > first
 !           -first get 3-somes from present i-row
@@ -208,13 +219,13 @@ CONTAINS
     do i = 1,Natm
        do l = nss(i,1),nss(i,2)
           j = list(l)
-          do while (j.lt.i.and.nss(i,2).gt.l) 
+          do while (j.lt.i.and.nss(i,2).gt.l)
              list(l) = list(nss(i,2))
              j = list(l)
              nss(i,2) = nss(i,2) - 1
           end do
           if (nss(i,2).eq.l.and.j.lt.i) nss(i,2) = nss(i,2) - 1
-          
+
        end do
    end do
 
@@ -245,7 +256,7 @@ CONTAINS
    end if
 
    !print*,myid, Nbrs, nbr_cnt, nbr_cntlj, Nl
-   
+
   END SUBROUTINE si_nlistG
 
   SUBROUTINE si_potential(X,Utot,u)
@@ -268,7 +279,7 @@ CONTAINS
     Utot = 0.
     u = 0.
     do ii = 1,Nl
-        i = il(ii) 
+        i = il(ii)
         do l = mss(ii,1),mss(ii,2)
             j = mlist(l)
             xxij = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
@@ -296,10 +307,10 @@ CONTAINS
                 Utot = Utot + ul
             end if
         end do
-        
-      
-    end do           
-    
+
+
+    end do
+
     do l = 1,Mbrs
 
        i = mnlist(l,1)
@@ -321,7 +332,7 @@ CONTAINS
        ctjik = (xxij(1)*xxik(1) + xxij(2)*xxik(2) + xxij(3)*xxik(3))/rij/rik
        ctijk = -(xxij(1)*xxjk(1) + xxij(2)*xxjk(2) + xxij(3)*xxjk(3))/rij/rjk
        ctikj = (xxik(1)*xxjk(1) + xxik(2)*xxjk(2) + xxik(3)*xxjk(3))/rik/rjk
-       
+
        ul = 1./3.*leps(atype(i),atype(j),atype(k))  &
             *(h(rijs,riks,ctjik) + h(rijs,rjks,ctijk) + h(riks,rjks,ctikj))
        u(i) = u(i) + ul
@@ -361,24 +372,24 @@ CONTAINS
     real, dimension(3)      :: dxxij,dxxik,dxxjk
 
     real                    :: ctjik,ctijk,ctikj
-    real, dimension(3)      :: dctjik,dctijk,dctikj 
+    real, dimension(3)      :: dctjik,dctijk,dctikj
 
     real                    :: aa
     real                    :: fjik,fijk,fikj
     real                    :: Erijs,Eriks,Erjks
     real                    :: dErijs,dEriks,dErjks
     real                    :: Wjik,Wijk,Wikj
-      
+
     real                    :: irijsal,iriksal,irjksal
 
     real                    :: isigij,isigik,isigjk,lepsijk
     integer                 :: i,j,k,l,m,ii,lt
     integer                 :: ierr
-    
+
     F = 0.
     do ii = 1,Nl
         i = il(ii)
-        do l = mss(ii,1),mss(ii,2)         
+        do l = mss(ii,1),mss(ii,2)
             j = mlist(l)
             !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle !kallol
             if (i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle
@@ -414,10 +425,10 @@ CONTAINS
                 F(j,:) = F(j,:) - fi
             end if
         end do
-            
-      
+
+
     end do
-    
+
     do l = 1,Mbrs
 
        i = mnlist(l,1)
@@ -454,7 +465,7 @@ CONTAINS
        dctikj = + dxxjk*rik - ctikj*dxxik*rik
 
        Erijs = 0.; Eriks = 0.; Erjks = 0.
-      
+
        irijsal = 1./(rijs-al)
        iriksal = 1./(riks-al)
        irjksal = 1./(rjks-al)
@@ -515,7 +526,7 @@ CONTAINS
        F(i,:) = F(i,:) + fi
        F(j,:) = F(j,:) + fj
        F(k,:) = F(k,:) + fk
-       
+
 
    end do
    call combfN(F, lt)
@@ -524,11 +535,11 @@ CONTAINS
 
   FUNCTION itable2bd(ue,ii,jj,lt)
     real      ::  itable2bd
-    real      ::  ue,rij    
+    real      ::  ue,rij
     integer   ::  i,ii,jj,lt,j
     real      ::  d1,d2,d3
     real, dimension(3)::xxij
-    
+
     i = INT(ue/umax*REAL(Ntable-1)) + 1
     if (i .gt. Ntable) then
         write(*,"('ERRRRRRROR: proc',I3,' atom',I8,' &',I8, ' tstep = ',I9,' z =',2E11.3)")myid, ii,jj,lt,X(ii,3),X(jj,3)
@@ -568,6 +579,3 @@ CONTAINS
   END SUBROUTINE mktables
 
 END MODULE stillweb
-
-
-

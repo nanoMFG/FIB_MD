@@ -1,3 +1,13 @@
+!------------------------------------------------------------------------------
+!
+! `PAR` Source File
+!
+! par.f90 source function file. This file contains functions for assigning
+! atoms to processors, creating maps for data assigned to each processor,
+! and distributing neighborlist information to relevant processors
+!
+!------------------------------------------------------------------------------
+
 MODULE par
 
   USE prms
@@ -612,7 +622,6 @@ CONTAINS
             end if
         end do
     end do
-
 
     do l = 1,Mbrs
         do ll = 2,3

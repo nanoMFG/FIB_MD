@@ -1,3 +1,15 @@
+!------------------------------------------------------------------------------
+!
+! `knock` Source File
+!
+! knock.f90 source function file. This file contains the subroutine for
+! placing the ion currently being fired at the surface within its random
+! position distribution. It also assigns the ion's velocity vector, according
+! to the assigned beam energy and angle of incidence.
+!
+!------------------------------------------------------------------------------
+
+
 MODULE knockmod
 
   USE prms
@@ -31,11 +43,11 @@ CONTAINS
     V(Nsg+knc,1) = 0.0
     V(Nsg+knc,2) = 0.0
     V(Nsg+knc,3) = -1.0*knock_vel
-    
+
     X(Nsg+knc,1) = Xrand(ranindex,1)+Lb(1)/2.0
     X(Nsg+knc,2) = Xrand(ranindex,2)+Lb(2)/2.0
     X(Nsg+knc,3) = knockz*Lb(3)/10.0
-    
+
     !write(*,*)X(Nsg+knc,1),X(Nsg+knc,2),X(Nsg+knc,3)
 
     if(myid .eq. 0) then

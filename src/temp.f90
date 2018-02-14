@@ -1,3 +1,19 @@
+!------------------------------------------------------------------------------
+!
+! `temp` Source File
+!
+! temp.f90 source function file. This file contains subroutines for calculating
+! temperatures in the system, as well as subroutines for controlling the
+! temperature using thermostats applied to various locations. Also contains
+! the subroutine responsible for relocating and freezing atoms that were
+! sputtered from the target.
+!
+! Also contains a function for calculating `bubble dimensions` as an unused
+! post-processing step. This should probably be removed.
+!
+!------------------------------------------------------------------------------
+
+
 MODULE temp
 
   USE prms

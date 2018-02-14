@@ -1,3 +1,15 @@
+!------------------------------------------------------------------------------
+!
+! `MAIN` Source File
+!
+! Main source function file. Contains top level calls to functions for
+! initialization of data structures, parallel routines, and input/output.
+! Also contains the top level function call for the entire MD operation, as
+! dictated by the input file's parameters. Ends by closing out all parallel
+! and input/output operations.
+!
+!------------------------------------------------------------------------------
+
 PROGRAM silicon
 
   USE prms

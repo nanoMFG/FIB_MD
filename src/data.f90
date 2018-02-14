@@ -1,3 +1,13 @@
+!------------------------------------------------------------------------------
+!
+! `data` Source File
+!
+! data.f90 source file. This contains subroutines for initializing the
+! positions, velocities, and masses for atoms in the simulation. 
+!
+!------------------------------------------------------------------------------
+
+
 MODULE data
 
   USE prms

@@ -1,10 +1,20 @@
+!------------------------------------------------------------------------------
+!
+! `tools` Source File
+!
+! tools.f90 source function file. This file contains subroutines for reboxing
+! individual atoms according to periodic boundary conditions, as well as
+! freezing atoms that are defined as part of the simulation edge, or boundary.
+!
+!------------------------------------------------------------------------------
+
 MODULE tools
 
   USE prms
   USE parallel
   USE par
 
-  IMPLICIT none 
+  IMPLICIT none
 
   integer,dimension(3)                  ::  Nlat ! number of lattice rungs
   real, allocatable, dimension(:)       ::  Xlat ! x1 of each lattice rung
@@ -13,12 +23,12 @@ MODULE tools
   integer,allocatable,dimension(:,:) ::  Lijk ! x lattice index of each atom
 
 CONTAINS
-  
+
   SUBROUTINE rebox(X)
     real, dimension(Natm,3) :: X
 
     integer :: l
-  
+
 ! Put wandering atoms back in box
     do l = 1,3
        X(:,l) = MOD(X(:,l) + 2.*Lb(l),Lb(l))
@@ -51,10 +61,10 @@ CONTAINS
         i = il(ii)
         if (Lijk(i,3).eq.1) then
             X(i,:) = Xi(i,:)
-            V(i,:) = 0.  
+            V(i,:) = 0.
         end if
     end do
-    
+
     !do i = 1,Natm
     !    if (Lijk(i,3).eq.1) then
     !        !write(31,*)X(i,:),Xi(i,:),i
@@ -62,10 +72,10 @@ CONTAINS
     !        V(i,:) = 0.
     !    end if
     !end do
-    
+
   END SUBROUTINE freezbottom
 
-  
+
   SUBROUTINE freezsides (X, Xi, V)
 
     real, dimension(Natm,3) :: X,Xi,V
@@ -77,7 +87,7 @@ CONTAINS
     end if
     call MPI_BCAST(xmax,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(ymax,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-        
+
     !print*,"xmax and ymax, myid", xmax, ymax,myid
     do ii = 1,Nl
         i = il(ii)
@@ -85,9 +95,9 @@ CONTAINS
             X(i,:) = Xi(i,:)
             V(i,:) = 0.
         end if
-        
+
     end do
-    
+
   END SUBROUTINE FREEZSIDES
 
 
@@ -103,7 +113,7 @@ CONTAINS
             V(i,:) = 0.
         end if
     end do
-    
+
   END SUBROUTINE freezsidesN
 
   SUBROUTINE flatrow1(X,V)
@@ -128,7 +138,7 @@ CONTAINS
              xvm(6) = xvm(6) + 1.
           end if
        end do
-       
+
        call MPI_ALLREDUCE(xvm,xvm_g,6, MPI_REAL8,MPI_SUM,MPI_COMM_WORLD,ierr)
 
        xvm_g(1:2) = xvm_g(1:2)/xvm_g(5)
@@ -143,7 +153,7 @@ CONTAINS
              X(i,1) = xvm_g(3)
              V(i,1) = xvm_g(4)
           end if
-       end do      
+       end do
     end if
 
   END SUBROUTINE flatrow1
@@ -207,7 +217,7 @@ CONTAINS
           end do
           if (flag.AND.ABS(X(i,l)-Xli_loc(Nlat(l),l)).gt.eps) then
              Nlat(l) = Nlat(l) + 1
-             Xli_loc(Nlat(l),l) = X(i,l)       
+             Xli_loc(Nlat(l),l) = X(i,l)
              Lijk(i,l) = Nlat(l)
           end if
        end do
@@ -245,15 +255,15 @@ CONTAINS
         do i = 1,Nsg
             do j = 1,Nsg-1
                 if (X(j,1).gt.X(j+1,1)) then
-                    
+
                     Xt = X(j,:)
                     X(j,:) = X(j+1,:)
                     X(j+1,:) = Xt
-                    
+
                     Xt = Xi(j,:)
                     Xi(j,:) = Xi(j+1,:)
                     Xi(j+1,:) = Xt
-                    
+
                     Lt = Lijk(j,:)
                     Lijk(j,:) = Lijk(j+1,:)
                     Lijk(j+1,:) = Lt
@@ -285,11 +295,8 @@ CONTAINS
            write(33,"(6E30.15e3)")X(i,:),Xi(i,:)
        end do
    end if
-   
+
 
   END SUBROUTINE lattice
 
 END MODULE tools
-
-
-

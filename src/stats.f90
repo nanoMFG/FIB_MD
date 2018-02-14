@@ -1,4 +1,14 @@
-MODULE stats 
+!------------------------------------------------------------------------------
+!
+! `stats` Source File
+!
+! stats.f90 source function file. This file contains subroutines for compiling
+! kinetic, potential, and momentum data from across as many processors as
+! are being used.
+!
+!------------------------------------------------------------------------------
+
+MODULE stats
 
   USE prms
   USE data
@@ -6,9 +16,9 @@ MODULE stats
   USE parallel
   USE par
 
-  IMPLICIT none 
+  IMPLICIT none
 
-CONTAINS  
+CONTAINS
 
   SUBROUTINE totalenergy(X,V,TE)
     real, dimension(Natm,3)  :: X,V
@@ -31,7 +41,7 @@ CONTAINS
     call si_potential(X,PE_l,u)
     !print *,myid,":  ",PE_l
 
-    call MPI_REDUCE(PE_l,PE,1,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)    
+    call MPI_REDUCE(PE_l,PE,1,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)
 
   END SUBROUTINE potentialenergy
 
@@ -48,7 +58,7 @@ CONTAINS
     k = k /2.
 
   END SUBROUTINE kineticenergyL
-    
+
   SUBROUTINE kineticenergy(V,KE)
     real, dimension(Natm,3)  :: V
     real                     :: KE,KE_l
@@ -63,7 +73,7 @@ CONTAINS
      end do
     KE_l = KE_l/2.
 
-    call MPI_REDUCE(KE_l,KE,1,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)    
+    call MPI_REDUCE(KE_l,KE,1,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)
 
   END SUBROUTINE kineticenergy
 
@@ -80,9 +90,8 @@ CONTAINS
        i = il(ii)
        Pm_l = Pm_l + mass(i)*V(i,:)
     end do
-    call MPI_REDUCE(Pm_l,Pm,3,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)    
+    call MPI_REDUCE(Pm_l,Pm,3,MPI_REAL8,MPI_SUM, 0, MPI_COMM_WORLD, ierr)
 
   END SUBROUTINE momentum
 
 END MODULE stats
-

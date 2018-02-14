@@ -1,9 +1,19 @@
-MODULE nlistmod 
+!------------------------------------------------------------------------------
+!
+! `nlist` Source File
+!
+! nlist.f90 source function file. This contains subroutines for the for defining
+! pointers for the neighborlist, and for determining the spatial `cell` each
+! atom is located in.
+!
+!------------------------------------------------------------------------------
+
+MODULE nlistmod
 
   USE prms
   USE data
 
-  IMPLICIT none 
+  IMPLICIT none
 
 CONTAINS
 
@@ -18,7 +28,7 @@ CONTAINS
     do l = 1,3
        Icell(:,l) = INT( ( X(:,l) - FLOOR( X(:,l)*iLb(l) )*Lb(l) )/hspace(l) ) + 1
     end do
- 
+
   END SUBROUTINE atomcell
 
   SUBROUTINE chainlist(LL,HOC,N,X)
@@ -33,7 +43,7 @@ CONTAINS
 
     HMf = Lb/REAL(N)
     call atomcell(X,Icell,HMf,N)
-    
+
     HOC = 0
     do i = 1,Natm
        LL(i) = HOC(Icell(i,1),Icell(i,2),Icell(i,3))
@@ -63,7 +73,3 @@ CONTAINS
   END SUBROUTINE chainlist
 
 END MODULE nlistmod
-
-
-
-

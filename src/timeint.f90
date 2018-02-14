@@ -1,3 +1,14 @@
+!------------------------------------------------------------------------------
+!
+! `timeint` Source File
+!
+! timeint.f90 source function file. This file contains all the subroutines for
+! calling necessary force calculations at each timestep, as well as time
+! integrating the results to update atomic positions and velocities. Can
+! generally be considered the next step down from the top level, main.f90.
+!
+!------------------------------------------------------------------------------
+
 MODULE timeint
 
   USE prms

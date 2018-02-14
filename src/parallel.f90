@@ -1,3 +1,12 @@
+!------------------------------------------------------------------------------
+!
+! `parallel` Source File
+!
+! parallel.f90 source function file. This file contains the subroutine for
+! initializing the parallel mpi environment.
+!
+!------------------------------------------------------------------------------
+
 MODULE parallel
 
   USE mpi
@@ -16,7 +25,7 @@ CONTAINS
   END SUBROUTINE initparallel
 
   SUBROUTINE initmpi
-    
+
     integer  ::  ierr
 
     call MPI_INIT( ierr )
@@ -38,7 +47,7 @@ CONTAINS
 
 
   SUBROUTINE closeparallel
-    
+
     call closempi
 
   END SUBROUTINE closeparallel
