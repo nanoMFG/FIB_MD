@@ -1,12 +1,12 @@
 0    \ amorcrys, 0-crystalline target, Nsg is calculated, 1-amorphous, reads from a specified data file. 1
 4    \ whichic, initial condition, 4-starts from scratch, 0-starts from restart file, -2 starts from .dat file, modify details inside 2
 0    \ startimpact, it is activated only when whichic=0, if 0, start from last impact, if >0, start from that impact 3
-2000.0    \ eV, ion energy 4
+${keV}    \ eV, ion energy 4
 31992    \ Nsg, number of silicon/germanium 5
-4 4 12   \ Nc1,Nc2,Nc3, number of unit cells in x,y,z direction 6
-1 1 1    \ Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors. 7
+${xdim} ${ydim} ${zdim}   \ Nc1,Nc2,Nc3, number of unit cells in x,y,z direction 6
+1 1 ${procs}    \ Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors. 7
 1 0 0    \ divdir, division of atoms in x,y,z directions, 111 means division of atoms in xyz direction, 100 means division in x direction only 8
-1    \ Nlj, number of Ga ions 9
+${nlj}    \ Nlj, number of Ga ions 9
 
 2000    \ Nt, number of total timesteps, frequency of ion bombardments 10
 2.0E-17    \ Ts_i, initial timestep 11
@@ -30,8 +30,8 @@
 500    \ dslist_i, write interval of the displaced atom, how often to check KE of the system to apply different Ts 25
 500    \ dslist_r, rest of the time 26
 
-50    \ atm_out_i, output frequency 27
-500    \ atm_out_r, when the Ts has been increased, we need to increase the atm_out 28
+${atmout1}    \ atm_out_i, output frequency 27
+${atmout2}    \ atm_out_r, when the Ts has been increased, we need to increase the atm_out 28
 -5000    \ res_out, restart files write frequency 29
 -10    \ eng_out, energy files write frequency 30
 -100    \ tmp_out, temperature write frequency 31
@@ -48,6 +48,9 @@
 5.5    \ ionz, where the ions are kept before giving them knocking velocity. outz(2) < ionz < atomz 39
 1.25    \ knockz, where the ions start, initial position before impact. knockz < outz(1) 40
 1.5    \ sidewidth, control temperature on sides in nm. 41
-1e-12    \ dti, time between impacts (was 2.0E-12) 42
+${dtion}    \ dti, time between impacts (was 2.0E-12) 42
 
-2.0    \ FWHM, full width half max of incident ion distribution (in nm) 43
+${fwhm}    \ FWHM, full width half max of incident ion distribution (in nm) 43
+
+${phiz}   \angles of incidence for ion impacts, from z axis
+${phixy}  \angles of incidence for ion impacts, from x axis

@@ -28,6 +28,7 @@ MODULE prms
   integer, dimension(3):: Npc                 ! number of pieces in the x,y,z direction for atom division
   integer              :: Nt                  ! number timesteps
   real                 :: fwhm              !full width half max of ion distribution
+  real                 :: phiz, phixy         !angles of incidence for ion
   real                 :: Ts                  ! timestep
   real                 :: Ts_i, Ts_r          ! initial and secondary timestep
   real,dimension(3)    :: Lb                  ! box sixe
@@ -220,7 +221,7 @@ CONTAINS
     if (myid.eq.0) then
 
         call DATE_AND_TIME(values=seed)
-        open(prm_unit,file='sige.in')
+        open(prm_unit,file='siga.in')
 
         read(prm_unit,*) amorcrys
         read(prm_unit,*) whichic
@@ -275,6 +276,9 @@ CONTAINS
         read(prm_unit,*) dti
 
         read(prm_unit,*) fwhm
+
+        read(prm_unit,*) phiz
+        read(prm_unit,*) phixy
 
         close(prm_unit)
 
@@ -346,6 +350,8 @@ CONTAINS
     call MPI_BCAST(sidewidth,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(dti,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(fwhm,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
+    call MPI_BCAST(phiz,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
+    call MPI_BCAST(phixy,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
     call MPI_BCAST(Lb,3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
@@ -376,6 +382,8 @@ CONTAINS
        write(out_unit,*) "ionz    = ", ionz
        write(out_unit,*) "knockz  = ", knockz
        write(out_unit,*) "Npc =     ", Npc
+       write(out_unit,*) "phiz =     ", phiz
+       write(out_unit,*) "phixy =     ", phixy
        write(out_unit,*)
        write(out_unit,*) " ----- Physical parameters ----- "
        write(out_unit,*) "Natm    = ",Natm

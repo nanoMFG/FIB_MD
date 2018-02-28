@@ -2,3 +2,5 @@
 *.[oa]
 # Ignore fortran .mod files
 *.mod
+# Ignore .dat files
+*.dat

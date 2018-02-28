@@ -72,7 +72,7 @@ CONTAINS
     !call updateroot(V)
 
     if (myid.eq.0) then		!added by Josh, converted output to xyz format
-!        write(fn,"('XYZfiles/mdrun2.xyz')") !moved to general initio / closeio
+!        write(fn,"('data/mdrun2.xyz')") !moved to general initio / closeio
 !        open(atm_unit,file=fn,action='write',position='append')
         write(atm_unit,"(I9)"),Natm !heads the section with # of atoms
         write(atm_unit,"(1A12,F12.5,3A12,2A8,3A16,A8,F14.5)")'Time (ps) = ',time*1e12,'x (A)','y (A)','z (A)','type','proc#','Vx','Vy','Vz','atom#',temp
@@ -169,7 +169,7 @@ CONTAINS
        if (zen_out.gt.0) open(zen_unit,file='G/zen.out'//fn)
        if (tmp_out.gt.0) open(tmp_unit,file='G/tmp.out'//fn)
        if (eng_out.gt.0) open(eng_unit,file='G/eng.out'//fn)
-       if (atm_out.gt.0) open(atm_unit,file='XYZfiles/mdrun2.xyz')
+       if (atm_out.gt.0) open(atm_unit,file='data/mdrun2.xyz')
     end if
 
   END SUBROUTINE initio
