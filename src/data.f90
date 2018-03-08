@@ -3,7 +3,7 @@
 ! `data` Source File
 !
 ! data.f90 source file. This contains subroutines for initializing the
-! positions, velocities, and masses for atoms in the simulation. 
+! positions, velocities, and masses for atoms in the simulation.
 !
 !------------------------------------------------------------------------------
 
@@ -27,6 +27,9 @@ MODULE data
 
 CONTAINS
 
+!This function initializes array storage for data stored for each atom
+!X: position, V: velocities, mass:mass, atype:integer flag for type of atom
+!Xrand: randomized starting ion positions
   SUBROUTINE initdata
 
     integer   :: i,l,j,jo
@@ -45,6 +48,9 @@ CONTAINS
 
   END SUBROUTINE initdata
 
+!determines which initial conditions to start the simulation with
+!4 starts from scratch, 0 starts from a previously generated restart file
+!-2 starts from a .dat file containing atomic positions and atom types
   SUBROUTINE ic
 
     integer   :: i,ierr, reason
@@ -52,6 +58,7 @@ CONTAINS
     character(100) :: cmd, fn
 
 
+!for a from-scratch run, set timestep, time, and ion count to 0
     if (whichic.gt.0) then
         Nt0 = 0
         ions = 0
@@ -59,7 +66,7 @@ CONTAINS
     end if
 
     select case (whichic)
-    case (4) ! added by Kallol
+    case (4) ! added by Kallol, from-scratch run
         call initlat(X,Xi,atype)
         call readrandimp(Xrand)
         call assignmass
@@ -67,6 +74,7 @@ CONTAINS
         !call constrainmom(V,mass)
 
     case(0)
+        !from a .restart file generated in a previous run
         !call initlat(X,Xi,atype)
         call readlat(Xi,atype)
         call MPI_BCAST(Xi,Natm*3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
@@ -111,18 +119,19 @@ CONTAINS
 
   END SUBROUTINE ic
 
-
+!initlat(X,Xi,atyp) reads in initial lattice conditions as X, assigns to Xi
   SUBROUTINE initlat(X,Xi,atype)
     integer, dimension(Natm) :: atype
     real, dimension(Natm,3)     :: X,Xi
 
     call readlat(X,atype)
-    call initIons(X,Xi,atype)
+    call initIons(X,atype)
     Xi = X
     !call lattice(X,Xi)
 
   END SUBROUTINE initlat
 
+!readlat(X,atype) reads positions and types from si.dat to X and atype
   SUBROUTINE readlat(X,atype)
     integer, dimension(Natm) :: atype
     real, dimension(Natm,3)     :: X
@@ -149,6 +158,7 @@ CONTAINS
 
   END SUBROUTINE readlat
 
+!readrandimp(Xrand) reads randomized ion positions from fwhm.dat
   SUBROUTINE readrandimp(Xrand)
     real, dimension(Nrand,2)     :: Xrand
     integer                  :: ierr
@@ -166,21 +176,20 @@ CONTAINS
 
   END SUBROUTINE readrandimp
 
+!randvel assigns initially random velocities to atoms, sets net momentum to zero
   SUBROUTINE randvel
-
     integer :: i, ierr
     real    :: ran1
     real, dimension(3)	:: mmtm
 
-    !print*,"Ranseed = ", ranseed
     !added by Kallol
     if (myid.eq.0) then
         mmtm = 0.0
         if (amorcrys .eq.0) then
             do i = 1,Nsg
-                V(i,1) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
-                V(i,2) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
-                V(i,3) = Uo*(ran1(ranseed)-0.5)*SQRT((massSi+massGe)/(2.*mass(i)))
+                V(i,1) = Uo*(ran1(ranseed)-0.5)
+                V(i,2) = Uo*(ran1(ranseed)-0.5)
+                V(i,3) = Uo*(ran1(ranseed)-0.5)
                 mmtm(:) = mmtm(:)+mass(i)*V(i,:)
             end do
       			mmtm = mmtm/Nsg
@@ -193,18 +202,20 @@ CONTAINS
             do i = Nsg+1, Natm
                 V(i,:) = 0.0
             end do
+
         else
             do i = Nsg+1, Natm
                 V(i,:) = 0.0
             end do
         end if
+
     end if
     call MPI_BCAST(V,Natm*3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
   END SUBROUTINE randvel
 
+!assignmass initializes mass to each atom, according to its atype value
   SUBROUTINE assignmass
-
     integer :: i
 
     do i = 1,Natm
@@ -219,12 +230,12 @@ CONTAINS
 
   END SUBROUTINE assignmass
 
-  SUBROUTINE initIons(X,Xi,atype)
+!initIons(X,atype) initializes ion positions in the pre-firing layer, into X
+  SUBROUTINE initIons(X,atype)
     integer ,dimension(Natm)	:: atype
     integer                    	:: ii,i
     integer                     :: j, ierr
     real,dimension(Natm,3)      :: X
-    real, dimension(Natm,3)     :: Xi
     real,dimension(3)           :: xxij
     real                        :: ran1
     real                        :: rij
@@ -257,9 +268,9 @@ CONTAINS
     call MPI_BCAST(X,Natm*3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(atype,Natm,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 
-
   END SUBROUTINE initIons
 
+!initranions creates fwhm.dat, a random 2D gaussian distribution for ion impact locations
   SUBROUTINE initranions
     real          :: rion1, rion2, rion3, rion4, ran1
     integer       :: i

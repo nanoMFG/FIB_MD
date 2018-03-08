@@ -44,10 +44,8 @@ CONTAINS
 	print *, "init_nlist done"
     call initio
 	print *, "initio done"
-    !call writeatoms(X,0)
     call mktables
 	print *, "mktables done"
-    !call TempList(X)
     call initmeans
 	print *, "initmeans done"
     call si_nlist(X,0) ! previously Xi
@@ -64,8 +62,9 @@ CONTAINS
     real    :: r
     real    :: ran1
 
-    !if (myid.eq.0) write(out_unit,*) "INTIALIZING RANDOM"
-    r = ran1(ranseed)
+    !initranions generates fwhm.dat which dictates the random gaussian distribution
+    !of initial ion locations, based on parameters from siga.in, prms.f90
+
     call initranions
 
   END SUBROUTINE initran

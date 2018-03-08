@@ -163,6 +163,7 @@ MODULE prms
 
 CONTAINS
 
+!readprms() defines material parameters and reads input from siga.in
   SUBROUTINE readprms ()
 
     integer   :: ierr
@@ -439,6 +440,7 @@ CONTAINS
 
   END SUBROUTINE readprms
 
+!setupMol defines cross interaction coefficients for moliere potential
   SUBROUTINE setupMol
 
     Zmol(1) = ZSi
@@ -457,7 +459,7 @@ CONTAINS
 
   END SUBROUTINE setupMol
 
-
+!setupSiGe sets up cross interaction constants for Si-Ge Stillinger-Weber potential
   SUBROUTINE setupSiGe
 
     eps(1,1) =  epsSi
@@ -488,10 +490,10 @@ CONTAINS
 
   END SUBROUTINE setupSiGe
 
+!pureepi(Nc1,Nc2,Nc3) defines a perfect starting diamond cubic lattice,
+!according to unit cell counts Nc1,Nc2,Nc3 in the x,y,z directions respectively
   SUBROUTINE pureepi(Nc1,Nc2,Nc3)
-
     ! GROWTH DIRECTION is Z
-
     real,dimension(8,3)                :: uc
     integer                            :: Nc1, Nc2, Nc3, m, mnew
     real, allocatable, dimension(:,:)  :: XX
@@ -564,8 +566,11 @@ CONTAINS
 
   END SUBROUTINE pureepi
 
+!ionrun(tic) adjusts frequency of operations based on whether simulations is
+!in fast or slow regimes (by ion energy theshold), tic = 1 or 2 respectively
+!controls file write frequency, neighborlist generation frequency, core assignment frequency
+!thermostat coefficient, dslist
   SUBROUTINE ionrun(tic)
-
     integer  :: tic
 
     if(myid .eq. 0) print*, 'called ionrun', tic

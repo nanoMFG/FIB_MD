@@ -17,6 +17,7 @@ MODULE knockmod
 
 CONTAINS
 
+!knock(knc,lt) assigns the 'knc'th ion fired at timestep lt to its firing location
   SUBROUTINE knock(knc,lt)
 
     integer            ::knc, ierr,lt
@@ -25,12 +26,11 @@ CONTAINS
     integer         :: ranindex
     real            :: dr, dx, dy
 
-    knock_vel = 1663.6334*SQRT(eV)  !this is for Ga, prev. 2198.312*SQRT(eV)    ! 1KeV  Knock on velocity (of Ar atom) in m/s
+    knock_vel = 1663.6334*SQRT(eV)  !this is for Ga, in m/s
 
     dr = TAN(phiz*Pi/180)*(knockz*Lb(3)/10 - Lb(3)/10)
     dx = dr*COS(phixy*Pi/180)*SIN(phiz*Pi/180)
     dy = dr*SIN(phixy*Pi/180)*SIN(phiz*Pi/180)
-
 
     if (myid .eq. 0) then
         ranindex = NINT(ran1(ranseed)*Nrand)
@@ -41,8 +41,6 @@ CONTAINS
     end if
 
     call MPI_BCAST(ranindex,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-!    call MPI_BCAST(dx,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
-!    call MPI_BCAST(dy,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
 
     V(Nsg+knc,1) = knock_vel*COS(phixy*Pi/180)*SIN(phiz*Pi/180)
     V(Nsg+knc,2) = knock_vel*SIN(phixy*Pi/180)*SIN(phiz*Pi/180)
@@ -54,10 +52,7 @@ CONTAINS
 
     if(myid .eq. 0) then
         write(*,"(I10,4E20.10,I10)")lt,X(Nsg+knc,1:3),V(Nsg+knc,3),Nsg+knc
-        !print*, " KNOCK...the ion is",Nsg+knc, "z velocity is",V(Nsg+knc,3)
-        !print*, " The X position is ", X(Nsg+knc,1:3)
     end if
-    !print *, "theta equals", theta
 
   END SUBROUTINE knock
 

@@ -31,6 +31,9 @@ MODULE out
 
 CONTAINS
 
+!writerestart(X,V,lt) writes a restart file containing atom positions X,
+!velocities V, and current timestep lt
+!requires output folder 'D/'
   SUBROUTINE writerestart(X,V,lt)
     real, dimension(Natm,3) :: X,V
     integer                 :: lt
@@ -58,6 +61,8 @@ CONTAINS
 
   END SUBROUTINE writerestart
 
+!writeatoms(X,V,F,lt,time,temp) writes current atomic values to .xyz file, also
+!writes basic tracking info to command line
   SUBROUTINE writeatoms(X,V,F,lt,time,temp)
     real, dimension(Natm,3) :: X,V,F
     real, dimension(Natm) :: kin_eng
@@ -67,42 +72,26 @@ CONTAINS
     real    :: keprint, temp, TE, time
     character(30)           :: fn
     character(2)            :: tempatype
-    !call updateroot(X)
-    !call updateroot(F)
-    !call updateroot(V)
 
-    if (myid.eq.0) then		!added by Josh, converted output to xyz format
-!        write(fn,"('data/mdrun2.xyz')") !moved to general initio / closeio
-!        open(atm_unit,file=fn,action='write',position='append')
+    if (myid.eq.0) then		!added by Josh, output in xyz format appended to atm_unit
         write(atm_unit,"(I9)"),Natm !heads the section with # of atoms
-        write(atm_unit,"(1A12,F12.5,3A12,2A8,3A16,A8,F14.5)")'Time (ps) = ',time*1e12,'x (A)','y (A)','z (A)','type','proc#','Vx','Vy','Vz','atom#',temp
+        write(atm_unit,"(1A12,F12.5,3A12,2A8,3A16,A8,F14.5)")'Time (ps) = ',time*1e12,'x (A)','y (A)','z (A)','type','proc#','Vx','Vy','Vz'
+
         do i = 1,Natm
-            kin_eng(i) = 0.5*mass(i)*SUM(V(i,:)**2)/ec
       	    if(atype(i).eq.1) then
 			          tempatype = "Si"
             elseif(atype(i).eq.3) then
 		            tempatype = "Ga"
             end if
-    	      !write(atm_unit,"(3E20.10E3,A5,I3,7E20.10E3, I8)")X(i,:)*1e10,tempatype,P(i),kin_eng(i),V(i,:),F(i,:),i
-        	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:),i
+        	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:)
         end do
-!        close(atm_unit)
+
         !write a line tracking the current ion's trajectory and system temperature
     		write(*,"(I10,6E20.10)")lt,temp,V(Nsg+impact,3)
             !write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
         end if
 
-    if (myid.eq.-1) then
-        write(fn,"('G/atoms',I9.9,'.dat')")lt
-        open(atm_unit,file=fn)
-        do i = 1,Natm
-            kin_eng(i) = 0.5*mass(i)*SUM(V(i,:)**2)/ec
-            write(atm_unit,"(3E20.10E3,2I3,7E20.10E3, I8)")X(i,:),atype(i),P(i),kin_eng(i),V(i,:),F(i,:),i
-        end do
-        close(atm_unit)
-        write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
-    end if
-
+!disabled, would ideally write output in parallel mode
     if (myid .eq. -1) then
         !added by Kallol
         if(lt .gt. 0) then
@@ -141,28 +130,11 @@ CONTAINS
 
   END SUBROUTINE writeatoms
 
-  SUBROUTINE writeabn(X,V,lt)
-    real, dimension(Natm,3) :: X,V
-    integer  :: lt
-    integer  :: i,k
-
-    character(30)           :: fn
-
-    if (myid.eq.0) then
-       write(fn,"('D/abn.out',I9.9)")lt
-       open(atm_unit,file=fn,form='UNFORMATTED')
-       write(atm_unit)X,V
-       close(atm_unit)
-    end if
-
-  END SUBROUTINE writeabn
-
+!initio initializes definitions for intput/output files
   SUBROUTINE initio
-
     character(10)  fn
 
-    !if (myid.eq.0) write(out_unit,*) "INITIALIZING I/O"
-
+!Nt0 is the starting timestep, 0 or set by restart file
     write(fn,"(I10.10)")Nt0
 
     if (myid.eq.0) then
@@ -174,8 +146,8 @@ CONTAINS
 
   END SUBROUTINE initio
 
+!closeio closes any output files that were opened
   SUBROUTINE closeio
-
     if (myid.eq.0) then
        if (tmp_out.gt.0) close(tmp_unit)
        if (eng_out.gt.0) close(eng_unit)
@@ -185,6 +157,8 @@ CONTAINS
 
   END SUBROUTINE closeio
 
+!iostuff(X,V,F,lt,time,temp) is general function call to check if data should
+!be output at any given timestep
   SUBROUTINE iostuff(X,V,F,lt,time,temp)
     real, dimension(Natm,3)  :: X,V,F
     real, dimension(Natm)    :: q
@@ -192,7 +166,6 @@ CONTAINS
     integer                  :: lt
 
     if (res_out.gt.0.and.MOD(lt,res_out).eq.0.or.   &
-         abn_out.gt.0.and.MOD(lt,abn_out).eq.0.or.   &
          atm_out.gt.0.and.MOD(lt,atm_out).eq.0)  then
           call updateroot(X)
           call updateroot(V)
@@ -200,28 +173,22 @@ CONTAINS
           if (res_out.gt.0.and.MOD(lt,res_out).eq.0) then
               call writerestart(X,V,lt)
           end if
-          if (abn_out.gt.0.and.MOD(lt,abn_out).eq.0) then
-!              call updateglobal(V)
-              call writeabn(X,V,lt)
-          end if
           if (atm_out.gt.0.and.MOD(lt,atm_out).eq.0) then
               call writeatoms(X,V,F,lt,time,temp)
           end if
     end if
-    call diagnostics(X,V,lt,time)
+!    call diagnostics(X,V,lt,time)
 
   END SUBROUTINE iostuff
 
+!initmeans initializes rolling average temperature parameters
   SUBROUTINE initmeans
-
-    !if (myid.eq.0) write(out_unit,*) "INIT MEANS"
-
     allocate (TbarS(Nlat(1)))
     NTbar = 0
     TbarS = 0.
-
   END SUBROUTINE initmeans
 
+!diagnostics(X,V,lt,time) outputs temperatures and energies
   SUBROUTINE diagnostics(X,V,lt,time)
     real, dimension(Natm,3)  :: X,V
     real, dimension(Natm)    :: q
@@ -240,11 +207,13 @@ CONTAINS
     character(30)             :: fn
     integer                   :: ib,i,j
 
+!instantaneous temperature output
     if (tmp_out.gt.0.and.MOD(lt,tmp_out).eq.0) then
        call temperature(V,T)
        if (myid.eq.0) write(tmp_unit,"(I11, E20.10,F30.10)") lt, time,T
     end if
 
+!potential and kinetic energy output
     if (eng_out.gt.0.and.MOD(lt,eng_out).eq.0) then
        call kineticenergy(V,KE)
        call potentialenergy(X,PE)
@@ -254,6 +223,7 @@ CONTAINS
        write(eng_unit,"(E20.10,3F25.15,3E10.2)") time,KE,PE,KE+PE,Pm(:)
     end if
 
+!rolling average temperature since last output
     if (Tbr_out.gt.0) then
        call compute_Tprof(V,Tbar)
        TbarS = (Tbar + REAL(NTbar)*TbarS)/REAL(NTbar+1)
