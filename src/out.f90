@@ -87,7 +87,7 @@ CONTAINS
 		            tempatype = "Ga"
             end if
         	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:)
-            write(snap_unit,"(A8,3F10.5)")tempatype,X(i,:)*1e9
+            write(snap_unit,"(A8,3F10.5)")tempatype,X(i,:)*1e10
         end do
         close(snap_unit)
         !write a line tracking the current system temperature and step number
