@@ -73,9 +73,12 @@ CONTAINS
     character(30)           :: fn
     character(2)            :: tempatype
 
-    if (myid.eq.0) then		!added by Josh, output in xyz format appended to atm_unit
+      if (myid.eq.0) then		!added by Josh, output in xyz format appended to atm_unit
         write(atm_unit,"(I9)"),Natm !heads the section with # of atoms
         write(atm_unit,"(1A12,F12.5,3A12,2A8,3A16,A8,F14.5)")'Time (ps) = ',time*1e12,'x (A)','y (A)','z (A)','type','proc#','Vx','Vy','Vz'
+        open(snap_unit,file='data/3dmol2.xyz',STATUS="REPLACE")
+        write(snap_unit,"(I9)"),Natm
+        write(snap_unit,"(5A12,F12.5)")'type','x (A)','y (A)','z (A)','Time (ps) = ',time*1e12
 
         do i = 1,Natm
       	    if(atype(i).eq.1) then
@@ -84,12 +87,13 @@ CONTAINS
 		            tempatype = "Ga"
             end if
         	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:)
+            write(snap_unit,"(A8,3F10.5)")tempatype,X(i,:)*1e9
         end do
-
+        close(snap_unit)
         !write a line tracking the current system temperature and step number
     		write(*,"(I10,2F10.4)")lt,time*1e12,temp
             !write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
-        end if
+      end if
 
 !disabled, would ideally write output in parallel mode
     if (myid .eq. -1) then

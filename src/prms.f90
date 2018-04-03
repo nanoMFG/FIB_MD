@@ -147,7 +147,8 @@ MODULE prms
   integer, parameter :: ion_unit  =  24  ! ion trajectory
   integer, parameter :: ds_unit   =  25  ! atoms trajectory
   integer, parameter :: ran_unit  =  26  ! generated random ion positions
-
+  integer, parameter :: snap_unit =  27  ! snapshot xyz file
+  
   real               :: Pi                         ! Pi (duh)
   real               :: srPi                       ! SQRT(Pi)
   real               :: thrd                       ! 1./3.
