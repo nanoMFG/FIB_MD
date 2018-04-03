@@ -33,7 +33,7 @@ CONTAINS
 
   SUBROUTINE chainlist(LL,HOC,N,X)
     integer,dimension(Natm)                          :: LL    ! next in list pointer
-    integer,dimension(3)                             :: N     ! either Ncsr or Nclj
+    integer,dimension(3)                             :: N     ! either Ncsr or Nclj (# cells in each dimension)
     integer,dimension(0:N(1)+1,0:N(2)+1,0:N(3)+1)    :: HOC   ! Head-of-Chain pointer
                                                               ! with perioidic continuation
     real   ,dimension(Natm,3)                        :: X     ! particle positions
