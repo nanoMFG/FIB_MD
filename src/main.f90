@@ -48,8 +48,8 @@ CONTAINS
 	print *, "mktables done"
     call initmeans
 	print *, "initmeans done"
-    call si_nlist(X,0) ! previously Xi
-    print *,"si_nlist done"
+    call si_nlist(X) ! previously Xi
+  print *,"si_nlist done"
     if (myid.eq.0) then
        write(out_unit,*) "DONE INITIALIZING"
        write(out_unit,*) "--------------------------------"

@@ -52,6 +52,9 @@ CONTAINS
     test = .false.
     freerun = .false.
 
+    if(myid.eq.1) then
+      print *,"Timestep #, Time (ps), Temperature (K)"
+    end if
     call temperature(V,temp)
     if(lt.eq.0) then
         wr_time = MPI_WTIME()
@@ -69,10 +72,10 @@ CONTAINS
         call MPI_BARRIER(MPI_COMM_WORLD,ierr); call MPI_FINALIZE(ierr); stop
     end if
 
-!     temperature increase
+!     initial temperature increase
     if (Nt0 .eq. 0) then
         !initially increase the temperature
-        Tau = 1.E-15
+        Tau = 1.E-14 !accelerated for testing
         call TI(X,V,F,masslong,0,Ttar1,Nt,time,lt,temp)
 !        call writerestart (X,V,lt)
         call calc_time(lt)
@@ -191,6 +194,7 @@ CONTAINS
         call adjusttemp(V,temp,Ttar)
         call temperature(V,temp)
     end if
+
     if(whichctrl .gt. 0) call controlsidetemp (X,V,F, Ttar)
     !call temperature(V,temp)
 
@@ -223,7 +227,7 @@ CONTAINS
     if (mod(lt,ntlist).eq.0) then
         nt_time1 = MPI_WTIME()
         nt_count = nt_count+1
-        call si_nlist(X,lt)
+        call si_nlist(X)
         nt_time = nt_time + (MPI_WTIME()-nt_time1)
     end if
 

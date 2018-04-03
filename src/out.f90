@@ -86,8 +86,8 @@ CONTAINS
         	  write(atm_unit,"(3F12.5,A8,I8,3E14.5, I8)")X(i,:)*1e10,tempatype,P(i),V(i,:)
         end do
 
-        !write a line tracking the current ion's trajectory and system temperature
-    		write(*,"(I10,6E20.10)")lt,temp,V(Nsg+impact,3)
+        !write a line tracking the current system temperature and step number
+    		write(*,"(I10,2F10.4)")lt,time*1e12,temp
             !write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
         end if
 
@@ -101,7 +101,7 @@ CONTAINS
                 i = il(ii)
                 write(atm_unit,"(3E20.10,3I3,7E20.10)")X(i,:),atype(i),P(i),i,0.5*mass(i)*SUM(V(i,:)**2),V(i,:),F(i,:)
                 do l = mss(ii,1),mss(ii,2)
-                    j = mlist(l)
+                    j = mnlist2(l)
                     if(P(j).eq.myid) then
                         !write(atm_unit,"(3E20.10,2I3)")X(j,:),atype(j),P(j)
                     else
@@ -110,9 +110,9 @@ CONTAINS
                 end do
             end do
             do l = 1,Mbrs
-                i = mnlist(l,1)
-                j = mnlist(l,2)
-                k = mnlist(l,3)
+                i = mnlist3(l,1)
+                j = mnlist3(l,2)
+                k = mnlist3(l,3)
                 if(P(i).ne.myid) then
                     write(atm_unit,"(3E20.10,3I3,7E20.10)")X(i,:),atype(i),30,i,0.5*mass(i)*SUM(V(i,:)**2),V(i,:),F(i,:)
                 end if

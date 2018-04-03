@@ -17,16 +17,16 @@ MODULE stillweb
 
   IMPLICIT none
 
-  integer                        :: MaxList,ML2, MaxListlj, mnlistcnt, mlistcnt
-  integer,allocatable, dimension(:,:)  :: nlist
-  integer,allocatable, dimension(:,:)  :: mnlist
+  integer                        :: ML3, ML2, MLlj, mnlistcnt, mlistcnt
+  integer,allocatable, dimension(:,:)  :: nlist3 !3 body neighborlist
+  integer,allocatable, dimension(:,:)  :: mnlist3 !3 body neighborlist that each processor uses
 
-  integer                       :: Nbrs,Mbrs
+  integer                       :: Nbrs, Mbrs !Nbrs number of 3body neighbors
 
-  integer,allocatable,dimension(:)   :: list, listlj
-  integer,allocatable,dimension(:,:) :: nss, nsslj
+  integer,allocatable,dimension(:)   :: nlist2, nlistlj !2 body neighborlists, Si-Si and Si-Ga
+  integer,allocatable,dimension(:,:) :: nss, nsslj !index pointers for 2 body lists
 
-  integer,allocatable,dimension(:)   :: mlist, mlistlj
+  integer,allocatable,dimension(:)   :: mnlist2, mnlistlj
   integer,allocatable,dimension(:,:) :: mss, msslj
 
 !  Lookup tables
@@ -38,72 +38,84 @@ MODULE stillweb
   integer,dimension(3) :: Nc                ! number of cells for neighborlist (**computed**)
   real                 :: rc                ! cuttoff for neighborlist
   real                 :: rlj2              ! cuttoff for L-J neighborlist
-  real                 :: rclj              ! list cuttoff for L-J neighborlist
+  real                 :: rclj              ! nlist2 cuttoff for L-J neighborlist
 
 CONTAINS
 
+!init_nlist initializes the neighborlist for each processor,
+!needs to be called every time atoms are reallocated
+!Nl is # atoms on each processor, Nlj is # ions fired
   SUBROUTINE init_nlist
 
-    !if (myid.eq.0) write(out_unit,*) "INIT NEIGHBOR LIST"
-    MaxList = Nl*150   !Natm*110
-    MaxListlj = Nlj*1500  !Nlj*10000 ! changed value kallol
+    ML3 = Nl*150   !Natm*110
+    MLlj = Nlj*1500  !Nlj*10000 ! changed value kallol
     ML2 = Nl*30        !Natm*50 ! kallol prev 20
     mnlistcnt = 150*Nl
     mlistcnt = 15*Nl
 
-    rc = listfac*al*MAX(sigmaGe,sigmaSi)
-    Nc = MAX(1,INT(Lb/rc))
-    rlj2 = 2.5*MAX(sigmaGe,sigmaSi)
-    rclj = listfac*rlj2      ! 2.5 sigma max hard coded
-    rlj2 = rlj2**2
+    rc = listfac*al*MAX(sigmaGe,sigmaSi) !SW cutoff radius plus 10% buffer
+    Nc = MAX(1,INT(Lb/rc))               !cell size to split atoms into
+
+    rlj2 = 2.5*MAX(sigmaGe,sigmaSi)      !cutoff radius for moliere
+    rclj = listfac*rlj2                  !moliere cutoff with 10% buffer
+    rlj2 = rlj2**2                       !squared
 
     if (allocated(mss)) then
-        deallocate(nlist, list, listlj, mss, msslj, mnlist, mlist, mlistlj)
-        allocate (nlist(MaxList,3),list(ML2))
-        allocate (listlj(MaxListlj)) !check the number, also check with par.f90
+        deallocate(nlist3, nlist2, nlistlj, mss, msslj, mnlist3, mnlist2, mnlistlj)
+        allocate (nlist3(ML3,3),nlist2(ML2))
+        allocate (nlistlj(MLlj)) !check the number, also check with par.f90
         allocate (mss(Nl,2), msslj(Nl,2))
-        allocate (mnlist(mnlistcnt,3),mlist(mlistcnt))
-        allocate (mlistlj(MaxListlj)) !check the hard coded number
+        allocate (mnlist3(mnlistcnt,3),mnlist2(mlistcnt))
+        allocate (mnlistlj(MLlj)) !check the hard coded number
     else
         allocate (nss(Natm,2))
         allocate (nsslj(Natm,2))
-        allocate (nlist(MaxList,3),list(ML2))
-        allocate (listlj(MaxListlj)) !check the number, also check with par.f90
+        allocate (nlist3(ML3,3),nlist2(ML2))
+        allocate (nlistlj(MLlj)) !check the number, also check with par.f90
         allocate (mss(Nl,2), msslj(Nl,2))
-        allocate (mnlist(mnlistcnt,3),mlist(mlistcnt))
-        allocate (mlistlj(MaxListlj)) !check the hard coded number
+        allocate (mnlist3(mnlistcnt,3),mnlist2(mlistcnt))
+        allocate (mnlistlj(MLlj)) !check the hard coded number
     end if
 
   END SUBROUTINE init_nlist
 
-  SUBROUTINE si_nlist(X,lt)
+
+!si_nlist(X) is the top level call for generating the neighborlists for silicon
+!interactions. First calls the global neighborlist generator, then the per-processor
+!nlist2 generator
+
+  SUBROUTINE si_nlist(X)
     real   ,dimension(Natm,3)                               :: X   ! particle positions
-    integer :: ierr,lt
+    integer :: ierr !,lt
 
-    call si_nlistG(X,lt)
-	!print *, "si_nlistG done"
-    call si_nlistL(nlist,MaxList,Nbrs,mnlist,Mbrs, nss, list,ML2, mss,mlist, listlj,nsslj,mlistlj,msslj,MaxListlj,mnlistcnt, mlistcnt)
-    !call MPI_BARRIER(MPI_COMM_WORLD,ierr) ! debuggind, take it off in production runs
-    !print*, 'Everybody reached the point'
+    call si_nlistG(X)
+!    print*, "si_nlistG done"
+    call si_nlistL(nlist3, ML3, Nbrs, mnlist3, Mbrs, nss, nlist2, ML2, mss, &
+          mnlist2, nlistlj, nsslj, mnlistlj, msslj, MLlj, mnlistcnt, mlistcnt)
 
+    !call MPI_BARRIER(MPI_COMM_WORLD,ierr) ! debugging, take it off in production runs
 
   END SUBROUTINE si_nlist
 
-
-  SUBROUTINE si_nlistG(X,lt)
+!si_nlistG(X) generates the neighborlist for each processor, both Si-Si and Si-Ga
+!uses current positions X
+  SUBROUTINE si_nlistG(X)
     real   ,dimension(Natm,3)                               :: X   ! particle positions
-    integer,dimension(Natm)                                 :: LL  ! next in list pointer
+    integer,dimension(Natm)                                 :: LL  ! next in nlist2 pointer
     integer,dimension(0:Nc(1)+1,0:Nc(2)+1,0:Nc(3)+1)        :: HOC ! Head-of-Chain pointer
                                                                 ! with perioidic continuation
     real,dimension(3)     :: xx
-    integer               :: ic1,ic2,ic3,lt
+    integer               :: ic1,ic2,ic3 !,lt
     real                  :: rij2,rv2, rv2lj
     integer               :: i,j,k,l,m,n,n1,n2,n3
     integer               :: nbr_cnt, nbr_cntlj
     logical               :: flagi, flagj
 
-    rv2 = rc*rc
-    rv2lj = rclj*rclj
+    !parameters used
+    rv2 = rc*rc !cutoff radius squared, for silicon SW
+    rv2lj = rclj*rclj !cutoff squared for ion interactions
+
+    !generate LL and HOC, which describe how atoms are split apart into NC cells
     call chainlist(LL,HOC,Nc,X)
 
     nbr_cnt = 1
@@ -118,52 +130,56 @@ CONTAINS
     do ic3 = 1,Nc(3)
         do ic2 = 1,Nc(2)
             do ic1 = 1,Nc(1)
-                i = HOC(ic1,ic2,ic3)         ! start with atom at the head of the linked list
-                do while(i.ne.0)             ! loop over all atoms in the linked list if any
+                i = HOC(ic1,ic2,ic3)         ! start with atom at the head of the linked nlist2
+                do while(i.ne.0)             ! loop over all atoms in the linked nlist2 if any
 
                     flagi = .true.
+                      !P_big(i) is the processor assigned to atom i; check whether the processor, myid,
+                      !locally assembling this nlist2, is associated with one of the atoms linked together
                     if(P_big(i).ne. myid) flagi = .false.
 
                     nss(i,1) = nbr_cnt
                     nsslj(i,1) = nbr_cntlj
 
+                    !loop through atoms in the neighboring cells to find neighbors
                     do n1 = -1,1
                         do n2 = -1,1
                             do n3 = -1,1
+                                !take atom j as the head in cell atom for cell ic1+n1,ic2+nc2,ic3+nc3
                                 j = HOC(ic1+n1,ic2+n2,ic3+n3)
                                 do while(j.ne.0)
 
                                     flagj = .true.
-                                    if (P_big(j).ne. myid) flagj = .false.
+                                    if (P_big(j).ne. myid) flagj = .false. !again, check which processor is assigned
 
                                     if ( (flagi .or. flagj) .and. (i.ne.j) ) then
                                         xx = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
                                         rij2 = xx(1)*xx(1)+xx(2)*xx(2)+xx(3)*xx(3)
-                                        if (MAX(atype(i),atype(j)).lt.3) then
-                                            if ( (rij2 .lt. rv2) ) then !kallol removed i.ne.j
-                                                list(nbr_cnt) = j
-                                                nbr_cnt = nbr_cnt + 1              ! increment number in list
+                                        if (MAX(atype(i),atype(j)).lt.3) then !if not ions, record for `nlist2`
+                                            if ( (rij2 .lt. rv2) ) then !check against nlist3 cutoff radius
+                                                nlist2(nbr_cnt) = j       !record atom 2's index
+                                                nbr_cnt = nbr_cnt + 1              ! increment number of neighbors found
                                             end if
-                                        else
-                                            if ( (rij2 .lt. rv2lj) ) then !kallol removed i.ne.j
-                                                listlj(nbr_cntlj) = j
+                                        else !if an ion is involved with pair, use separate `nlistlj`
+                                            if ( (rij2 .lt. rv2lj) ) then
+                                                nlistlj(nbr_cntlj) = j
                                                 nbr_cntlj = nbr_cntlj+1
-                                                if (nbr_cntlj .eq. MaxListlj) then  !check the previously hardcoded value
-                                                    print *, "******nbr_Cntlj exceeded******"
+                                                if (nbr_cntlj .eq. MLlj) then  !check the previously hardcoded value
+                                                    print *, "******nbr_Cntlj exceeded****** (too many ion neighbors)"
                                                 end if
                                             end if
                                         end if
                                     end if
 
-                                    j = LL(j)
+                                    j = LL(j) !iterate
 
                                 end do
                             end do
                         end do
                     end do
 
-                    nss(i,2) = nbr_cnt-1
-                    nsslj(i,2) = nbr_cntlj-1
+                    nss(i,2) = nbr_cnt-1 !last nlist2 index for i's neighbors
+                    nsslj(i,2) = nbr_cntlj-1 !last nlist2 index for ion i's neighbors
                     i = LL(i)
 
                 end do
@@ -178,36 +194,36 @@ CONTAINS
 !           -first get 3-somes from present i-row
 !           -look at lower (higher i) rows only for determining second neighbor
 !           -check present i-row to make sure no repeat
-    Nbrs = 0
+    Nbrs = 0 !number of triplets found
 
     do i = 1,Natm
         do l = nss(i,1),nss(i,2)
-            j = list(l)
+            j = nlist2(l)
             if (j.gt.i) then
                 ! get threesomes from present i-row
                 do m = l+1,nss(i,2)
-                    k = list(m)
+                    k = nlist2(m)
                     if (k.gt.i) then
                         ! add threesome
                         Nbrs = Nbrs + 1
-                        nlist(Nbrs,1) = MIN(i,j,k)
-                        nlist(Nbrs,2) = j+k+i - MIN(i,j,k) - MAX(i,j,k)
-                        nlist(Nbrs,3) = MAX(i,j,k)
+                        nlist3(Nbrs,1) = MIN(i,j,k)
+                        nlist3(Nbrs,2) = j+k+i - MIN(i,j,k) - MAX(i,j,k)
+                        nlist3(Nbrs,3) = MAX(i,j,k)
                     end if
                 end do
                 ! get threesomes from later (only larger i) rows
                 do m = nss(j,1),nss(j,2)
-                    k = list(m)
+                    k = nlist2(m)
                     if (k.gt.i) then
                         ! make sure not repeating 3-some from present i-row
                         do n = nss(i,1),nss(i,2)
-                            if (k.eq.list(n)) goto 11
+                            if (k.eq.nlist2(n)) goto 11
                         end do
                         ! add threesome
                         Nbrs = Nbrs + 1
-                        nlist(Nbrs,1) = MIN(i,j,k)
-                        nlist(Nbrs,2) = j+k+i - MIN(i,j,k) - MAX(i,j,k)
-                        nlist(Nbrs,3) = MAX(i,j,k)
+                        nlist3(Nbrs,1) = MIN(i,j,k)
+                        nlist3(Nbrs,2) = j+k+i - MIN(i,j,k) - MAX(i,j,k)
+                        nlist3(Nbrs,3) = MAX(i,j,k)
                     end if
 11                  continue
                 end do
@@ -218,10 +234,10 @@ CONTAINS
 ! remove j < i neighbors
     do i = 1,Natm
        do l = nss(i,1),nss(i,2)
-          j = list(l)
+          j = nlist2(l)
           do while (j.lt.i.and.nss(i,2).gt.l)
-             list(l) = list(nss(i,2))
-             j = list(l)
+             nlist2(l) = nlist2(nss(i,2))
+             j = nlist2(l)
              nss(i,2) = nss(i,2) - 1
           end do
           if (nss(i,2).eq.l.and.j.lt.i) nss(i,2) = nss(i,2) - 1
@@ -232,10 +248,10 @@ CONTAINS
    ! remove j < i neighbors
    do i = 1,Natm
        do l = nsslj(i,1),nsslj(i,2)
-           j = listlj(l)
+           j = nlistlj(l)
            do while (j.lt.i.and.nsslj(i,2).gt.l)
-               listlj(l) = listlj(nsslj(i,2))
-               j = listlj(l)
+               nlistlj(l) = nlistlj(nsslj(i,2))
+               j = nlistlj(l)
                nsslj(i,2) = nsslj(i,2) - 1
            end do
            if (nsslj(i,2).eq.l.and.j.lt.i) nsslj(i,2) = nsslj(i,2) - 1
@@ -243,16 +259,16 @@ CONTAINS
        end do
    end do
 
-   !write(*,"(7I10)")myid, Nbrs, MaxList, nbr_cnt, ML2, nbr_cntlj, MaxListlj
+   !write(*,"(7I10)")myid, Nbrs, ML3, nbr_cnt, ML2, nbr_cntlj, MLlj
 
-   if(Nbrs .ge. MaxList) then
-       write(*,"('Nbrs exceeded MaxList at ', I5, ' th processor, Nbrs = ', I11, 'MaxList = ', I11)")myid, Nbrs, MaxList
+   if(Nbrs .ge. ML3) then
+       write(*,"('Nbrs (triplets) exceeded ML3 at ', I5, ' th processor, Nbrs = ', I11, 'ML3 = ', I11)")myid, Nbrs, ML3
    end if
    if(nbr_cnt .ge. ML2) then
-       write(*,"('nbr_cnt exceeded ML2 at ', I5, ' th processor, nbr_cnt = ', I11, 'ML2 = ', I11)")myid, nbr_cnt, ML2
+       write(*,"('nbr_cnt (pairs) exceeded ML2 at ', I5, ' th processor, nbr_cnt = ', I11, 'ML2 = ', I11)")myid, nbr_cnt, ML2
    end if
-   if(nbr_cntlj .ge. MaxListlj) then
-       write(*,"('nbr_cntlj exceeded MaxListlj at ', I5, ' th processor, nbr_cntlj = ', I11, 'MaxListlj = ', I11)")myid, nbr_cntlj, MaxListlj
+   if(nbr_cntlj .ge. MLlj) then
+       write(*,"('nbr_cntlj (ion involved pairs) exceeded MLlj at ', I5, ' th processor, nbr_cntlj = ', I11, 'MLlj = ', I11)")myid, nbr_cntlj, MLlj
    end if
 
    !print*,myid, Nbrs, nbr_cnt, nbr_cntlj, Nl
@@ -281,7 +297,7 @@ CONTAINS
     do ii = 1,Nl
         i = il(ii)
         do l = mss(ii,1),mss(ii,2)
-            j = mlist(l)
+            j = mnlist2(l)
             xxij = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
             rij = SQRT( xxij(1)**2 + xxij(2)**2 + xxij(3)**2)
             r = rij*isigma(atype(i),atype(j))
@@ -293,7 +309,7 @@ CONTAINS
             end if
         end do
         do l = msslj(ii,1),msslj(ii,2)
-            j = mlistlj(l)
+            j = mnlistlj(l)
             xxij = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
             rij2 = SUM(xxij*xxij)
             if (rij2.lt.rlj2) then
@@ -313,9 +329,9 @@ CONTAINS
 
     do l = 1,Mbrs
 
-       i = mnlist(l,1)
-       j = mnlist(l,2)
-       k = mnlist(l,3)
+       i = mnlist3(l,1)
+       j = mnlist3(l,2)
+       k = mnlist3(l,3)
 
        xxij = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
        rij = SQRT( xxij(1)**2 + xxij(2)**2 + xxij(3)**2)
@@ -390,7 +406,7 @@ CONTAINS
     do ii = 1,Nl
         i = il(ii)
         do l = mss(ii,1),mss(ii,2)
-            j = mlist(l)
+            j = mnlist2(l)
             !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle !kallol
             if (i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle
             xxij = Xp(i,:) - Xp(j,:) - NINT( (Xp(i,:) - Xp(j,:))*iLb)*Lb
@@ -404,7 +420,7 @@ CONTAINS
         end do
 
         do l = msslj(ii,1),msslj(ii,2)
-            j = mlistlj(l)
+            j = mnlistlj(l)
             !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle !kallol
             if (i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle
             xxij = Xp(i,:) - Xp(j,:) - NINT( (Xp(i,:) - Xp(j,:))*iLb)*Lb
@@ -431,9 +447,9 @@ CONTAINS
 
     do l = 1,Mbrs
 
-       i = mnlist(l,1)
-       j = mnlist(l,2)
-       k = mnlist(l,3)
+       i = mnlist3(l,1)
+       j = mnlist3(l,2)
+       k = mnlist3(l,3)
 
        !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. sputter_index_l(k).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact .or. k.gt.Nsg+impact) cycle !kallol
        if(i.gt.Nsg+impact .or. j.gt.Nsg+impact .or. k.gt.Nsg+impact) cycle

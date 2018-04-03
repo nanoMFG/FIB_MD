@@ -539,6 +539,7 @@ CONTAINS
     close(2)
 
     print *,"Si atoms",m-1
+    print*, "Domain size: x,y,z"
     print*,Lb(1)*Nc1
     print*,Lb(2)*Nc2
     print*,Lb(3)*Nc3
