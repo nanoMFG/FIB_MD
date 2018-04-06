@@ -193,6 +193,10 @@ CONTAINS
     if(whichctrl .eq. 0) then
         call adjusttemp(V,temp,Ttar)
         call temperature(V,temp)
+        !progress report
+        if (atm_out.gt.0.and.MOD(lt,atm_out).eq.0) then
+          if (myid.eq.0) write(*,"(I10,2F10.4)")lt,time*1e12,temp
+        end if
     end if
 
     if(whichctrl .gt. 0) then
