@@ -713,8 +713,8 @@ CONTAINS
     mnlist3 = 0
     Mbrs = 0
 
-!loop through the local neighborlists and check if first atom is assigned to current
-!processor
+  !loop through the local neighborlists and check if first atom is assigned to current
+  !processor
     do l = 1,Nbrs
         if (P(nlist3(l,1)).eq.myid) then
             Mbrs = Mbrs + 1
@@ -747,7 +747,7 @@ CONTAINS
 
     do i = 1,Natm
         if (P(i).eq.myid) then !added by kallol, definition mismatch of ii
-            ii = ii + 1
+            ii = ii + 1 !counter for atoms on the processor
             if (ii.eq.1) then
                 mss(ii,1) = 1
                 msslj(ii,1) = 1
@@ -756,6 +756,7 @@ CONTAINS
                 msslj(ii,1) = msslj(ii-1,2) + 1
             end if
 
+            !map pointers nss to local mss
             mss(ii,2) = mss(ii,1) + nss(i,2) - nss(i,1)
             mnlist2(mss(ii,1):mss(ii,2)) = nlist2(nss(i,1):nss(i,2))
 

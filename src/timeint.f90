@@ -75,6 +75,9 @@ CONTAINS
 !     initial temperature increase
     if (Nt0 .eq. 0) then
         !initially increase the temperature
+        if (myid.eq.0) then
+          print *, "Initializing target temperature. . ."
+        end if
         Tau = 1.E-14 !accelerated for testing
         call TI(X,V,F,masslong,0,Ttar1,Nt,time,lt,temp)
 !        call writerestart (X,V,lt)
@@ -173,9 +176,6 @@ CONTAINS
             call onestep(X,V,F,masslong,whichctrl,Ttar,lt,time,temp)
         end do
     end if
-
-
-
   END SUBROUTINE TI
 
 
@@ -195,7 +195,10 @@ CONTAINS
         call temperature(V,temp)
     end if
 
-    if(whichctrl .gt. 0) call controlsidetemp (X,V,F, Ttar)
+    if(whichctrl .gt. 0) then
+        call controlsidetemp (X,V,F, Ttar)
+    end if
+
     !call temperature(V,temp)
 
     !X = X + V*Ts + 0.5*F*Ts*Ts/masslong
@@ -256,9 +259,14 @@ CONTAINS
 
     F = Fp
 
-    call iostuff(X,V,F,lt,time,temp)
+    if (whichctrl .gt. 0) then
+      call iostuff(X,V,F,lt,time,temp)
+    end if
+
     !call diagnostics(X,V,lt,time)
     !X_new = X
+
+
 !    if (whichctrl .eq. 1) then
 !        call calc_ion (lt,time, F)
 
@@ -376,10 +384,10 @@ CONTAINS
     time_per_step = ((MPI_WTIME()-wtime-at_time-ds_time-nt_time-f_time)/REAL(lt-Nt0))+at_time/at_count+nt_time/nt_count+ds_time/ds_count+f_time/f_count
     if(ds_count .eq. 0) time_per_step = ((MPI_WTIME()-wtime-at_time-nt_time-f_time)/REAL(lt-Nt0))+at_time/at_count+nt_time/nt_count+f_time/f_count
 
-    if (myid.eq.0) write(*, "('at_time = ',F6.2,'% of whole')")at_time/at_count / time_per_step*100
-    if (myid.eq.0) write(*, "('nt_time = ',F6.2,'% of whole')")nt_time/nt_count / time_per_step*100
-    if (myid.eq.0) write(*, "('ds_time = ',F6.2,'% of whole')")ds_time/ds_count / time_per_step*100
-    if (myid.eq.0) write(*, "(' f_time = ',F6.2,'% of whole')") f_time/f_count / time_per_step*100
+    if (myid.eq.0) write(*, "('at_time = ',F6.2,'% of whole')")(at_time/(at_time+nt_time+ds_time+f_time))*100
+    if (myid.eq.0) write(*, "('nt_time = ',F6.2,'% of whole')")(nt_time/(at_time+nt_time+ds_time+f_time))*100
+    if (myid.eq.0) write(*, "('ds_time = ',F6.2,'% of whole')")(ds_time/(at_time+nt_time+ds_time+f_time))*100
+    if (myid.eq.0) write(*, "(' f_time = ',F6.2,'% of whole')")(f_time/(at_time+nt_time+ds_time+f_time))*100
     if (myid.eq.0) print *,"TIME PER STEP: ", (MPI_WTIME()-wtime)/REAL(lt-Nt0)
     if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
     at_time = 0.0; nt_time = 0.0; ds_time = 0.0; f_time=0.0

@@ -47,9 +47,9 @@ CONTAINS
 !Nl is # atoms on each processor, Nlj is # ions fired
   SUBROUTINE init_nlist
 
-    ML3 = Nl*150   !Natm*110
+    ML3 = Nl*200   !Natm*150
     MLlj = Nlj*1500  !Nlj*10000 ! changed value kallol
-    ML2 = Nl*30        !Natm*50 ! kallol prev 20
+    ML2 = Nl*40        !Natm*50 ! kallol prev 20
     mnlistcnt = 150*Nl
     mlistcnt = 15*Nl
 
@@ -295,6 +295,7 @@ CONTAINS
     Utot = 0.
     u = 0.
     do ii = 1,Nl
+        !Stillinger-Weber 2 body potentital
         i = il(ii)
         do l = mss(ii,1),mss(ii,2)
             j = mnlist2(l)
@@ -308,6 +309,8 @@ CONTAINS
                 Utot = Utot + 2.*ul
             end if
         end do
+
+        !Moliere potential
         do l = msslj(ii,1),msslj(ii,2)
             j = mnlistlj(l)
             xxij = X(i,:) - X(j,:) - NINT( (X(i,:) - X(j,:))*iLb)*Lb
@@ -327,6 +330,7 @@ CONTAINS
 
     end do
 
+    !Stillinger-Weber 3 body potential
     do l = 1,Mbrs
 
        i = mnlist3(l,1)
@@ -363,6 +367,7 @@ CONTAINS
 
   END SUBROUTINE si_potential
 
+!function definition for part of S-W potential
   FUNCTION h(u,v,w)
     real        :: h,u,v,w
 

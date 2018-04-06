@@ -12,7 +12,7 @@ ${nlj}    \ Nlj, number of Ga ions 9
 2.0E-17    \ Ts_i, initial timestep 11
 2.0E-16    \ Ts_r, secondary timestep 12
 
-300.0    \ Ttar1, target temperature 1 13
+${Ttar1}    \ Ttar1, target temperature 1 13
 280.0    \ Ttar2, target temperature 2 14
 600.0    \ ke_limit_1, limit when to choose higher Tstep (changed from 1000) 15
 10.0    \ ke_limit_2, limit when to impact next ion 16
