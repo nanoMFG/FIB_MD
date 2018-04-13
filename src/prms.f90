@@ -24,7 +24,6 @@ MODULE prms
   integer              :: impact               ! impact number
   integer              :: startimpact          ! starting impact number, only valid if which=0, if 0, start from last, else strat from that impact using restart file.
   integer              :: ions                ! write impact number to restart file
-  integer, dimension(3):: divdir              ! direction of the division of atoms. 111 means division in 3 directions, 101 means in x and z direction
   integer, dimension(3):: Npc                 ! number of pieces in the x,y,z direction for atom division
   integer              :: Nt                  ! number timesteps
   real                 :: fwhm              !full width half max of ion distribution
@@ -78,7 +77,6 @@ MODULE prms
   real,dimension(2,2)  :: epssig              ! eps * sigma
 
   real                 :: Ttar1               ! Target Temperature 1
-  real                 :: Ttar2               ! Target Temperature 2
   real                 :: Qheat               ! Heat flux for #3
   real                 :: Tau                 ! Termostat prm
   real                 :: Tau_i, Tau_r
@@ -105,7 +103,6 @@ MODULE prms
   integer              :: atm_out             ! atom position output interval
   integer              :: atm_out_i, atm_out_r
   integer              :: abn_out             ! atom pos-vel output interval
-  integer              :: Tbr_out             ! temperature output interval
   integer              :: res_out             ! restart file output interval
   integer              :: zen_out             ! zone energy change
   integer              :: eng_out             ! energy output
@@ -129,7 +126,6 @@ MODULE prms
   integer, parameter :: out_unit  =   6  ! stdout
   integer, parameter :: atm_unit  =   7  ! atom locations
   integer, parameter :: rdf_unit  =   8  ! radial distribution function
-  integer, parameter :: Tbr_unit  =   9  ! temperature profies
   integer, parameter :: abn_unit  =  10  ! atoms+velocities in binary
   integer, parameter :: lat_unit  =  11  ! lattice definition
   integer, parameter :: res_unit  =  12  ! restart
@@ -148,7 +144,7 @@ MODULE prms
   integer, parameter :: ds_unit   =  25  ! atoms trajectory
   integer, parameter :: ran_unit  =  26  ! generated random ion positions
   integer, parameter :: snap_unit =  27  ! snapshot xyz file
-  
+
   real               :: Pi                         ! Pi (duh)
   real               :: srPi                       ! SQRT(Pi)
   real               :: thrd                       ! 1./3.
@@ -216,7 +212,6 @@ CONTAINS
     listfac = 1.1   ! this is extra padding of neighborlist. prev 1.05, higher value lists more atoms as neighbors, while they will be given 0 force. Kallol
 
     abn_out = -1
-    Tbr_out = -1000
     zen_out = -1
     Ntable = 12000  ! number of division in table, prev 10000 kallol
 
@@ -229,10 +224,8 @@ CONTAINS
         read(prm_unit,*) whichic
         read(prm_unit,*) startimpact
         read(prm_unit,*) eV
-        read(prm_unit,*) Nsg
         read(prm_unit,*) Nc1,Nc2,Nc3
         read(prm_unit,*) Npc(1), Npc(2), Npc(3)
-        read(prm_unit,*) divdir(1),divdir(2),divdir(3)
         read(prm_unit,*) Nlj
 
         read(prm_unit,*) Nt
@@ -240,7 +233,6 @@ CONTAINS
         read(prm_unit,*) Ts_r
 
         read(prm_unit,*) Ttar1
-        read(prm_unit,*) Ttar2
         read(prm_unit,*) ke_limit_1
         read(prm_unit,*) ke_limit_2
 
@@ -313,14 +305,12 @@ CONTAINS
     call MPI_BCAST(Nc2,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Nc3,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Npc,3,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
-    call MPI_BCAST(divdir,3,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Nlj,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Nt,1,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Ts_i,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Ts_r,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Lb,3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Ttar1,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
-    call MPI_BCAST(Ttar2,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(ke_limit_1,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(ke_limit_2,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
     call MPI_BCAST(Tau_i,1,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
@@ -411,7 +401,6 @@ CONTAINS
        write(out_unit,*)
        write(out_unit,*) " --- Temperature parameters ---- "
        write(out_unit,*) "Ttar1   = ",Ttar1
-       write(out_unit,*) "Ttar2   = ",Ttar2
        write(out_unit,*) "Qheat   = ",Qheat
        write(out_unit,*) "Tau     = ",Tau
        write(out_unit,*) "Tinit   = ",Tinit
@@ -426,7 +415,6 @@ CONTAINS
        write(out_unit,*) " ------ Output parameters ----- "
        write(out_unit,*) "atm_out   = ",atm_out
        write(out_unit,*) "abn_out   = ",atm_out
-       write(out_unit,*) "Tbr_out   = ",Tbr_out
        write(out_unit,*) "res_out   = ",res_out
        write(out_unit,*) "zen_out   = ",zen_out
        write(out_unit,*) "eng_out   = ",eng_out
@@ -540,10 +528,10 @@ CONTAINS
     close(2)
 
     print *,"Si atoms",m-1
-    print*, "Domain size: x,y,z"
-    print*,Lb(1)*Nc1
-    print*,Lb(2)*Nc2
-    print*,Lb(3)*Nc3
+    print*, "Domain size (nm): x,y,z"
+    print*,Lb(1)*Nc1*1e9
+    print*,Lb(2)*Nc2*1e9
+    print*,Lb(3)*Nc3*1e9
 
     Lb(1) = Lb(1)*Nc1
     Lb(2) = Lb(2)*Nc2

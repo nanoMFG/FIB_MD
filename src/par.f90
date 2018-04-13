@@ -160,12 +160,8 @@ CONTAINS
     real, dimension(Natm,3)   :: X, dummy_x
     integer                   :: i,j,l,ierr,maxdim,dum
     integer, dimension(3)     :: ijk
-!    real, dimension(3)        :: q,r,s	!modified for dimension by Josh
     integer                   :: q, r, s
-!    integer :: ri,qi,si	!Added by Josh
-!    q = [-1, 1, 2]
-!    r = q
-!    s = q
+
     P_big = -1
 
     if (myid .eq. 0) then
@@ -293,13 +289,6 @@ CONTAINS
     call MPI_ALLREDUCE(P_l,P,Natm, MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
     call MPI_ALLREDUCE(n_send_l,n_send,Np*Np, MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
 
-    !if(myid .eq. 1)then
-    !    do i=1,Np
-    !        write(44,"(33I6)")n_send(i,:), i
-    !    end do
-    !end if
-    !write(44,"(8I7)")i_send(1,:)
-
     do i=0,Np-1
         if(i .eq. myid) then
             do j=0,Np-1
@@ -330,8 +319,6 @@ CONTAINS
         end if
     end do
 
-    !call MPI_BARRIER(MPI_COMM_WORLD,ierr)
-
   END SUBROUTINE assignprocs_l
 
   SUBROUTINE collectsends
@@ -357,11 +344,6 @@ CONTAINS
              Smat(iw,PsL(ll)) = ll
           end do
        end do
-       !write(88,"('     |',19I5)") (ll,ll=0,Np-1)
-       !write(88,"('--------------------------------------------------')")
-       !do iw = 0,Np-1
-       !   write(88,"(I5,'|',19I5)") iw,(Smat(iw,ll),ll=0,Np-1)
-       !end do
     else
        call MPI_SEND(Nsr,1,MPI_INTEGER,0,0,MPI_COMM_WORLD,ierr)
        call MPI_SEND(Psr,Nsr,MPI_INTEGER,0,1,MPI_COMM_WORLD,ierr)
@@ -369,7 +351,6 @@ CONTAINS
 
     call MPI_BCAST(Smat, Np*Np, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     call makesendmaps(Smat)
-!    call MPI_BARRIER(MPI_COMM_WORLD,ierr); call MPI_FINALIZE(ierr); stop
 
   END SUBROUTINE collectsends
 
@@ -421,13 +402,6 @@ CONTAINS
         procSR = 0
         Ms = 0
     end if
-
-    !do is = 1,Ms
-    !    write(90+myid,"(I5,' -- ',2I5)")is,procSR(is,:)
-    !end do
-!!$    do is = 1,Ms
-!!$       write(100+myid,"(I5,' -- ',2I5)")is,Psr(procSR(is,1)),Psra(procSR(is,2))
-!!$    end do
 
   END SUBROUTINE makesendmaps
 
@@ -661,15 +635,6 @@ CONTAINS
        end if
    end do
 
-   !write(60+myid,"('--------')")
-   !write(60+myid,"(4I4)")Psr(1:Nsr)
-   !write(60+myid,"(4I4)")NIsf(1:Nsr)
-   !do i=1,MAXVAL(NIsfl)
-   !    write(60+myid,"(4I4)")Isf(i,:)
-   !end do
-   !write(60+myid,"('--------')")
-
-!    call MPI_BARRIER(MPI_COMM_WORLD,ll); call MPI_FINALIZE(ll); stop
   END SUBROUTINE findIsf
 
   SUBROUTINE si_nlistL(nlist3, ML3, Nbrs, mnlist3, Mbrs, nss, nlist2, ML2, mss, &

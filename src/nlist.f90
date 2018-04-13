@@ -49,13 +49,6 @@ CONTAINS
        LL(i) = HOC(Icell(i,1),Icell(i,2),Icell(i,3))
        HOC(Icell(i,1),Icell(i,2),Icell(i,3)) = i
    end do
-   !print*, LL(2222)
-   ! added by Kallo, checking value of LL
-   !open(29,file = 'll.dat')
-   !do i = 1,Natm
-   !    write(29,"(I10)")LL(i)
-   !end do
-   !close(29)
 
     if (N(1).gt.2) then
        HOC(0,:,:)        = HOC(N(1),:,:)

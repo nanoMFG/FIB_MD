@@ -50,9 +50,6 @@ CONTAINS
     X(Nsg+knc,2) = Xrand(ranindex,2)+Lb(2)/2.0-dy
     X(Nsg+knc,3) = knockz*Lb(3)/10.0
 
-!    if(myid .eq. 0) then
-!        write(*,"(I10,4E20.10,I10)")lt,X(Nsg+knc,1:3),V(Nsg+knc,3),Nsg+knc
-!    end if
 
   END SUBROUTINE knock
 

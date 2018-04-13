@@ -31,25 +31,41 @@ CONTAINS
   SUBROUTINE init
 
     call initparallel
-	print *, "Initparallel done"
+	if (myid.eq.0) then
+    print *, "Initparallel done"
+  end if
     call readprms
-	print *, "readprms done"
+  if (myid.eq.0) then
+    print *, "readprms done"
+  end if
     call initran
-	print *, "initran done"
+  if (myid.eq.0) then
+    print *, "initran done"
+  end if
     call initdata
-	print *, "initdata done"
+  if (myid.eq.0) then
+    print *, "initdata done"
+  end if
     call initparaops(X) ! previously Xi
-	print *, "initparaops done"
+  if (myid.eq.0) then
+    print *, "initparaops done"
+  end if
     call init_nlist
-	print *, "init_nlist done"
+  if (myid.eq.0) then
+    print *, "init_nlist done"
+  end if
     call initio
-	print *, "initio done"
+  if (myid.eq.0) then
+    print *, "initio done"
+  end if
     call mktables
-	print *, "mktables done"
-    call initmeans
-	print *, "initmeans done"
+  if (myid.eq.0) then
+    print *, "mktables done"
+  end if
     call si_nlist(X) ! previously Xi
-  print *,"si_nlist done"
+  if (myid.eq.0) then
+    print *,"si_nlist done"
+  end if
     if (myid.eq.0) then
        write(out_unit,*) "DONE INITIALIZING"
        write(out_unit,*) "--------------------------------"

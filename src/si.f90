@@ -412,7 +412,6 @@ CONTAINS
         i = il(ii)
         do l = mss(ii,1),mss(ii,2)
             j = mnlist2(l)
-            !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle !kallol
             if (i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle
             xxij = Xp(i,:) - Xp(j,:) - NINT( (Xp(i,:) - Xp(j,:))*iLb)*Lb
             rij = SQRT( xxij(1)**2 + xxij(2)**2 + xxij(3)**2)
@@ -426,7 +425,6 @@ CONTAINS
 
         do l = msslj(ii,1),msslj(ii,2)
             j = mnlistlj(l)
-            !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle !kallol
             if (i.gt.Nsg+impact .or. j.gt.Nsg+impact) cycle
             xxij = Xp(i,:) - Xp(j,:) - NINT( (Xp(i,:) - Xp(j,:))*iLb)*Lb
             rij2 = SUM(xxij*xxij)
@@ -456,7 +454,6 @@ CONTAINS
        j = mnlist3(l,2)
        k = mnlist3(l,3)
 
-       !if(sputter_index_l(i).gt.0 .or. sputter_index_l(j).gt.0 .or. sputter_index_l(k).gt.0 .or. i.gt.Nsg+impact .or. j.gt.Nsg+impact .or. k.gt.Nsg+impact) cycle !kallol
        if(i.gt.Nsg+impact .or. j.gt.Nsg+impact .or. k.gt.Nsg+impact) cycle
        isigij = isigma(atype(i),atype(j))
        isigik = isigma(atype(i),atype(k))

@@ -18,7 +18,6 @@ MODULE data
 
   real, allocatable, dimension(:,:)   :: X, X_old, X_new     ! atomic positions
   real, allocatable, dimension(:,:)   :: Xrand ! random atomic positions of the ions
-  integer, allocatable, dimension(:)  :: sputter_index,sputter_index_l,moved_index,moved_index_l ! index of the sputtered atoms
   real, allocatable, dimension(:,:)   :: Xi    ! initial atomic positions
   real, allocatable, dimension(:,:)   :: V     ! atomic velocities
   real, allocatable, dimension(:)     :: mass,ken  ! atomic mass
@@ -38,12 +37,7 @@ CONTAINS
 
     real      :: ran1
 
-    allocate (X(Natm,3),Xi(Natm,3),V(Natm,3),mass(Natm),atype(Natm),Xrand(Nrand,2), sputter_index(Natm),moved_index(Natm),sputter_index_l(Natm),moved_index_l(Natm), pp(Natm),ken(Natm))
-    !allocate (X_old(Natm,3), X_new(Natm,3))
-    sputter_index = 0
-    sputter_index_l = 0
-    moved_index = 0
-    moved_index_l = 0
+    allocate (X(Natm,3),Xi(Natm,3),V(Natm,3),mass(Natm),atype(Natm),Xrand(Nrand,2), pp(Natm),ken(Natm))
     call ic
 
   END SUBROUTINE initdata
@@ -97,8 +91,6 @@ CONTAINS
         Xi(Nsg+1:Natm,:) = X(Nsg+1:Natm,:)
         V(Nsg+ions+1:Natm,:) = 0.0
         call readrandimp(Xrand)
-        !call lattice(X,Xi)
-        !write(*,"('new_atom 7567',3E20.10)")V(7567,:)
 
     case(-2)
         call readlat(Xi,atype)
@@ -127,7 +119,6 @@ CONTAINS
     call readlat(X,atype)
     call initIons(X,atype)
     Xi = X
-    !call lattice(X,Xi)
 
   END SUBROUTINE initlat
 
@@ -153,8 +144,6 @@ CONTAINS
         end if
         close(1)
     end if
-    !call MPI_BCAST(X,Natm*3,MPI_REAL8,0,MPI_COMM_WORLD,ierr)
-    !call MPI_BCAST(atype,Natm,MPI_INTEGER,0,MPI_COMM_WORLD,ierr)
 
   END SUBROUTINE readlat
 

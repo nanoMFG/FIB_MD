@@ -20,9 +20,6 @@ MODULE out
 
   IMPLICIT none
 
-  integer                       :: NTbar
-  real,allocatable,dimension(:) :: TbarS
-
   integer                         :: NYen
   real,allocatable,dimension(:,:) :: YenS
 
@@ -92,50 +89,13 @@ CONTAINS
             TE = 0.5*mass(i)*(V(i,1)**2 + V(i,2)**2 + V(i,3)**2)*coef
         	  write(atm_unit,"(3F12.4,A8,I8,1ES14.3)")X(i,:)*1e10,tempatype,P(i),TE
             write(snap_unit,"(A8,3F10.4)")tempatype,X(i,:)*1e10
-            
+
         end do
         close(snap_unit)
         !write a line tracking the current system temperature and step number
-    		write(*,"(I10,2F10.4)")lt,time*1e12,temp
-            !write(*,"(I10,4E20.10,I10)")lt,X(Nsg+impact,3),V(Nsg+impact,3), MAXVAL(kin_eng), X(MAXLOC(kin_eng),3), MAXLOC(kin_eng)
+    		write(*,"(I10,F10.4,F10.2)")lt,time*1e12,temp
+
       end if
-
-!disabled, would ideally write output in parallel mode
-    if (myid .eq. -1) then
-        !added by Kallol
-        if(lt .gt. 0) then
-            write(fn, "('D/proc_',I2.2,'_',I9.9,'.dat')"),myid,lt
-            open(atm_unit, file=fn)
-            do ii = 1,Nl
-                i = il(ii)
-                write(atm_unit,"(3E20.10,3I3,7E20.10)")X(i,:),atype(i),P(i),i,0.5*mass(i)*SUM(V(i,:)**2),V(i,:),F(i,:)
-                do l = mss(ii,1),mss(ii,2)
-                    j = mnlist2(l)
-                    if(P(j).eq.myid) then
-                        !write(atm_unit,"(3E20.10,2I3)")X(j,:),atype(j),P(j)
-                    else
-                        write(atm_unit,"(3E20.10,3I3,7E20.10)")X(j,:),atype(j),20,j,0.5*mass(j)*SUM(V(j,:)**2),V(j,:),F(j,:)
-                    end if
-                end do
-            end do
-            do l = 1,Mbrs
-                i = mnlist3(l,1)
-                j = mnlist3(l,2)
-                k = mnlist3(l,3)
-                if(P(i).ne.myid) then
-                    write(atm_unit,"(3E20.10,3I3,7E20.10)")X(i,:),atype(i),30,i,0.5*mass(i)*SUM(V(i,:)**2),V(i,:),F(i,:)
-                end if
-                if(P(j).ne.myid) then
-                    write(atm_unit,"(3E20.10,3I3,7E20.10)")X(j,:),atype(j),30,j,0.5*mass(j)*SUM(V(j,:)**2),V(j,:),F(j,:)
-                end if
-                if(P(k).ne.myid) then
-                    write(atm_unit,"(3E20.10,3I3,7E20.10)")X(k,:),atype(k),30,k,0.5*mass(k)*SUM(V(k,:)**2),V(k,:),F(k,:)
-                end if
-            end do
-        end if
-        close(atm_unit)
-
-    end if
 
   END SUBROUTINE writeatoms
 
@@ -186,25 +146,16 @@ CONTAINS
               call writeatoms(X,V,F,lt,time,temp)
           end if
     end if
-!    call diagnostics(X,V,lt,time)
 
   END SUBROUTINE iostuff
 
-!initmeans initializes rolling average temperature parameters
-  SUBROUTINE initmeans
-    allocate (TbarS(Nlat(1)))
-    NTbar = 0
-    TbarS = 0.
-  END SUBROUTINE initmeans
-
-!diagnostics(X,V,lt,time) outputs temperatures and energies
+!diagnostics(X,V,lt,time) outputs energies
   SUBROUTINE diagnostics(X,V,lt,time)
     real, dimension(Natm,3)  :: X,V
     real, dimension(Natm)    :: q
     real                     :: time
     integer                     :: lt
 
-    real,dimension(Nlat(1))      :: Tbar
     real,dimension(Nlat(1),5)    :: Yen
 
     real                      :: T,KE,PE           ! Temperatures + Energies
@@ -230,23 +181,6 @@ CONTAINS
        KE = KE/epsSi/REAL(Natm)
        PE = PE/epsSi/REAL(Natm)
        write(eng_unit,"(E20.10,3F25.15,3E10.2)") time,KE,PE,KE+PE,Pm(:)
-    end if
-
-!rolling average temperature since last output
-    if (Tbr_out.gt.0) then
-       call compute_Tprof(V,Tbar)
-       TbarS = (Tbar + REAL(NTbar)*TbarS)/REAL(NTbar+1)
-       NTbar = NTbar + 1
-       if (MOD(lt,Tbr_out).eq.0.and.myid.eq.0) then
-          write(fn,"('D/Tbar.out',I9.9)")lt
-          open(Tbr_unit,file=fn)
-          do j = 1,Nlat(1)
-             write(Tbr_unit,"(3E20.10)")Xlat(j),TbarS(j)
-          end do
-          close(Tbr_unit)
-          NTbar = 0
-          TbarS = 0.
-       end if
     end if
 
   END SUBROUTINE diagnostics
