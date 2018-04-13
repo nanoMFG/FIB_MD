@@ -1,3 +1,4 @@
 #!/bin/sh
 
-/usr/bin/invoke_app -C "start_jupyter -t -T @tool fibmd.ipynb" -u anaconda2-4.4
+/usr/bin/invoke_app "$@" -C "start_jupyter -t -T @tool fibmd.ipynb" -t fibmd \
+                         -u anaconda2-4.4

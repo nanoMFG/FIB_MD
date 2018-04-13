@@ -65,4 +65,8 @@ ra:
 	rm D/*out* D/wav*.plt?????
 
 clean:
-	rm *.o *.mod
+	rm -f *.o *.mod
+
+distclean: clean
+	rm -f ../bin/mdrun2
+

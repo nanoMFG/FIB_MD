@@ -2,24 +2,21 @@
 4    \ whichic, initial condition, 4-starts from scratch, 0-starts from restart file, -2 starts from .dat file, modify details inside 2
 0    \ startimpact, it is activated only when whichic=0, if 0, start from last impact, if >0, start from that impact 3
 2000.0    \ eV, ion energy 4
-31992    \ Nsg, number of silicon/germanium 5
-12 12 4   \ Nc1,Nc2,Nc3, number of unit cells in x,y,z direction 6
+9 9 3   \ Nc1,Nc2,Nc3, number of unit cells in x,y,z direction 6
 2 2 1    \ Npc, number of divisions in x,y,z direction, Npc(1)*Npc(2)*Npc(3) = Number of processors. 7
-1 0 0    \ divdir, division of atoms in x,y,z directions, 111 means division of atoms in xyz direction, 100 means division in x direction only 8
 1    \ Nlj, number of Ga ions 9
 
 2000    \ Nt, number of total timesteps, frequency of ion bombardments 10
 2.0E-17    \ Ts_i, initial timestep 11
 2.0E-16    \ Ts_r, secondary timestep 12
 
-300.0    \ Ttar1, target temperature 1 13
-280.0    \ Ttar2, target temperature 2 14
+300.0    \ Ttar1, target temperature
 600.0    \ ke_limit_1, limit when to choose higher Tstep (changed from 1000) 15
 10.0    \ ke_limit_2, limit when to impact next ion 16
 
-1.E-13    \ Tau_i, time constant for velocity rescaling thermostat, use 1.E-15 for quenchin 17
+1.E-13    \ Tau_i, time constant for velocity rescaling thermostat, use 1.E-15 for quenching 17
 1.E-13    \ Tau_r, for the rest of the time 18
-30.0    \ Teps, tolerance in temperature 19
+30.0    \ Teps, tolerance in initial temperature 19
 
 150.0    \ Uo, initial velocities of atoms 20
 
@@ -27,7 +24,7 @@
 20    \ ntlist_r, rest of the time 22
 50    \ atlist_i, how frequently atoms are divided, also position is updated globally 23
 20    \ atlist_r, rest of the time 24
-500    \ dslist_i, write interval of the displaced atom, how often to check KE of the system to apply different Ts 25
+500    \ dslist_i, how often to check KE of the system to apply different Ts 25
 500    \ dslist_r, rest of the time 26
 
 50    \ atm_out_i, output frequency 27
@@ -50,7 +47,7 @@
 1.5    \ sidewidth, control temperature on sides in nm. 41
 1e-12    \ dti, time between impacts (was 2.0E-12) 42
 
-0.0001    \ FWHM, full width half max of incident ion distribution (in nm) 43
+2.0    \ FWHM, full width half max of incident ion distribution (in nm) 43
 
-45.0    \ Angle of off-normal incidence (from z axis), degrees (positive points to +x, negative to -x for projected angle = 0)
-45.0    \ Projected angle from x axis (0 is along +x, 90 is along +y, -90 along -y, etc)
+0.0   \angles of incidence for ion impacts, from z axis
+0.0  \angles of incidence for ion impacts, from x axis

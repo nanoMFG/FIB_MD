@@ -23,8 +23,8 @@ MODULE par
   integer, allocatable, dimension(:) :: Psra   ! processors to communicate with
   integer, allocatable, dimension(:)   :: Nisf ! number of forces to send to each proc
   integer, allocatable, dimension(:)   :: Nisa ! number of atoms to send to each proc
-  integer, allocatable, dimension(:,:) :: Isf  ! list of Fi's to send
-  integer, allocatable, dimension(:,:) :: Isa  ! list of atoms to send
+  integer, allocatable, dimension(:,:) :: Isf  ! nlist2 of Fi's to send
+  integer, allocatable, dimension(:,:) :: Isa  ! nlist2 of atoms to send
   integer, allocatable, dimension(:)   :: P, P_l, P_big      ! local processor
   integer, allocatable, dimension(:,:) :: P_send
 
@@ -72,8 +72,8 @@ CONTAINS
 
   END SUBROUTINE closeparaops
 
+!count atoms assigned to each processor
   SUBROUTINE findlocals
-
     integer  :: i,ierr
     integer, dimension(Natm) :: il_l
 
@@ -88,24 +88,9 @@ CONTAINS
    allocate(il(Nl))
    il = il_l(1:Nl)
 
-   !call MPI_BARRIER(MPI_COMM_WORLD,ierr)
-
   END SUBROUTINE findlocals
 
-  SUBROUTINE updateglobal(G)
-    real, dimension(Natm,3) :: G
-
-    integer      :: i
-    integer      :: ierr
-
-    do i = 1,Natm
-        call MPI_BCAST(G(i,1), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-        call MPI_BCAST(G(i,2), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-        call MPI_BCAST(G(i,3), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-    end do
-
-  END SUBROUTINE updateglobal
-
+!update value of G on processor 0 (myid.eq.0)
   SUBROUTINE updateroot(G)
     real, dimension(Natm,3) :: G
     real, dimension(3,Natm) :: Gl
@@ -135,6 +120,7 @@ CONTAINS
 
   END SUBROUTINE updateroot
 
+
   SUBROUTINE find_p_big (dummy_x)
     real, dimension(Natm,3) :: dummy_x
     integer                 :: i,j,l,ierr,dum
@@ -157,15 +143,11 @@ CONTAINS
 
   SUBROUTINE assignprocstaub(X)
 
-    real, dimension(Natm,3) :: X, dummy_x
-    integer :: i,j,l,ierr,maxdim,dum
-    integer, dimension(3)   :: ijk
-    real, dimension(3) :: q,r,s	!modified for dimension by Josh
+    real, dimension(Natm,3)   :: X, dummy_x
+    integer                   :: i,j,l,ierr,maxdim,dum
+    integer, dimension(3)     :: ijk
+    integer                   :: q, r, s
 
-    integer :: ri,qi,si	!Added by Josh
-    q = [-1, 1, 2]
-    r = q
-    s = q
     P_big = -1
 
     if (myid .eq. 0) then
@@ -184,14 +166,14 @@ CONTAINS
     end do
     dummy_x = X
     if(Npc(1).gt.1) then
-        do si=0,1,2
-            dummy_x(:,1)=X(:,1)+buff*s(si)
+        do s=-1,1,2
+            dummy_x(:,1)=X(:,1)+buff*s
             if(Npc(2).gt.1) then
-                do qi=0,1,2
-                    dummy_x(:,2)=X(:,2)+buff*q(qi)
+                do q=-1,1,2
+                    dummy_x(:,2)=X(:,2)+buff*q
                     if(Npc(3).gt.1) then
-                        do ri=0,1,2
-                            dummy_x(:,3)=X(:,3)+buff*r(ri)
+                        do r=-1,1,2
+                            dummy_x(:,3)=X(:,3)+buff*r
                             call find_p_big(dummy_x)
                         end do
                     else
@@ -293,13 +275,6 @@ CONTAINS
     call MPI_ALLREDUCE(P_l,P,Natm, MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
     call MPI_ALLREDUCE(n_send_l,n_send,Np*Np, MPI_INTEGER,MPI_SUM,MPI_COMM_WORLD,ierr)
 
-    !if(myid .eq. 1)then
-    !    do i=1,Np
-    !        write(44,"(33I6)")n_send(i,:), i
-    !    end do
-    !end if
-    !write(44,"(8I7)")i_send(1,:)
-
     do i=0,Np-1
         if(i .eq. myid) then
             do j=0,Np-1
@@ -330,8 +305,6 @@ CONTAINS
         end if
     end do
 
-    !call MPI_BARRIER(MPI_COMM_WORLD,ierr)
-
   END SUBROUTINE assignprocs_l
 
   SUBROUTINE collectsends
@@ -357,11 +330,6 @@ CONTAINS
              Smat(iw,PsL(ll)) = ll
           end do
        end do
-       !write(88,"('     |',19I5)") (ll,ll=0,Np-1)
-       !write(88,"('--------------------------------------------------')")
-       !do iw = 0,Np-1
-       !   write(88,"(I5,'|',19I5)") iw,(Smat(iw,ll),ll=0,Np-1)
-       !end do
     else
        call MPI_SEND(Nsr,1,MPI_INTEGER,0,0,MPI_COMM_WORLD,ierr)
        call MPI_SEND(Psr,Nsr,MPI_INTEGER,0,1,MPI_COMM_WORLD,ierr)
@@ -369,7 +337,6 @@ CONTAINS
 
     call MPI_BCAST(Smat, Np*Np, MPI_INTEGER, 0, MPI_COMM_WORLD, ierr)
     call makesendmaps(Smat)
-!    call MPI_BARRIER(MPI_COMM_WORLD,ierr); call MPI_FINALIZE(ierr); stop
 
   END SUBROUTINE collectsends
 
@@ -421,13 +388,6 @@ CONTAINS
         procSR = 0
         Ms = 0
     end if
-
-    !do is = 1,Ms
-    !    write(90+myid,"(I5,' -- ',2I5)")is,procSR(is,:)
-    !end do
-!!$    do is = 1,Ms
-!!$       write(100+myid,"(I5,' -- ',2I5)")is,Psr(procSR(is,1)),Psra(procSR(is,2))
-!!$    end do
 
   END SUBROUTINE makesendmaps
 
@@ -509,6 +469,8 @@ CONTAINS
 
   END FUNCTION notinlist
 
+!findIsa does something with passing information for pairs or triplets that contain
+!atoms from more than one processor
   SUBROUTINE findIsa
 
     integer :: zero=0
@@ -535,13 +497,13 @@ CONTAINS
                     call MPI_SEND(NIsf(ll),1,MPI_INTEGER,l,0,MPI_COMM_WORLD,ierr)
                     call MPI_SEND(Isf(1,ll),NIsf(ll),MPI_INTEGER,l,1,MPI_COMM_WORLD,ierr)
                 else
-                !disabled by Josh for open-mpi compiling (shouldn't need it anyhow?)
-!                    if(myid .ne. l) then ! added by kallol to prevent sending info to itself
-!                        call MPI_SEND(zero,1,MPI_INTEGER,l,0,MPI_COMM_WORLD,request, ierr)
-!                    end if
+                    if(myid .ne. l) then ! prevent sending info to itself
+                        call MPI_ISEND(zero,1,MPI_INTEGER,l,0,MPI_COMM_WORLD, request, ierr)
+                    end if
                 end if
             end do
         else
+
             call MPI_RECV(Nin,1,MPI_INTEGER,iw,0,MPI_COMM_WORLD,status,ierr)
             if (Nin.ne.0) then
                 Nsra = Nsra + 1
@@ -571,27 +533,32 @@ CONTAINS
 
   END SUBROUTINE findIsa
 
-  SUBROUTINE findIsf(mnlist,mnlistcnt,Mbrs,mss,mlist,ML, msslj,mlistlj,MaxListlj,mlistcnt)
+!findIsf finds interactions pairs/triplets that have extend beyond single processors
+  SUBROUTINE findIsf(mnlist3, mnlistcnt, Mbrs, mss, mnlist2, ML2, msslj, mnlistlj, MLlj, mlistcnt)
 
-    integer                       :: Mbrs,ML,MaxList,MaxListlj, mlistcnt, mnlistcnt
-    integer, dimension(mnlistcnt,3) :: mnlist
-    integer, dimension(Nl,2)      :: mss,msslj
-    integer, dimension(mlistcnt)     :: mlist
-    integer, dimension(MaxListlj)     :: mlistlj
+    integer                           :: Mbrs,ML2,ML3,MLlj, mlistcnt, mnlistcnt
+    integer, dimension(mnlistcnt,3)   :: mnlist3
+    integer, dimension(Nl,2)          :: mss,msslj
+    integer, dimension(mlistcnt)      :: mnlist2
+    integer, dimension(MLlj)          :: mnlistlj
 
-    integer, dimension(Np) :: Psrl
-    integer, dimension(0:Np-1) :: NIsfl
-    integer, dimension(Nl,0:Np-1) :: Isfl
-    integer                   :: ii,l,ll,j,i
+    integer, dimension(Np)            :: Psrl
+    integer, dimension(0:Np-1)        :: NIsfl
+    integer, dimension(Nl,0:Np-1)     :: Isfl
+    integer                           :: ii,l,ll,j,i
 
+!initialize
     Nsr = 0
     NIsfl = 0
     Psrl = -1
     Isfl = 0
-	!print *,"flag one"
+
+    !loop through all atoms assigned to processor
     do ii = 1,Nl
+        !pair interactions, using refined list mnlist2
         do l = mss(ii,1),mss(ii,2)
-            j = mlist(l)
+            j = mnlist2(l)
+            !check if second atom is assigned to processor
             if (P(j).ne.myid) then
                 if (notinlist(P(j),Psrl,Np)) then
                     Nsr = Nsr + 1
@@ -609,7 +576,7 @@ CONTAINS
 
     do ii = 1,Nl
         do l = msslj(ii,1),msslj(ii,2)
-            j = mlistlj(l)
+            j = mnlistlj(l)
             if (P(j).ne.myid) then
                 if (notinlist(P(j),Psrl,Np)) then
                     Nsr = Nsr + 1
@@ -625,7 +592,7 @@ CONTAINS
 
     do l = 1,Mbrs
         do ll = 2,3
-            j = mnlist(l,ll)
+            j = mnlist3(l,ll)
             if (P(j).ne.myid) then
                 if (notinlist(P(j),Psrl,Np)) then
                     Nsr = Nsr + 1
@@ -654,97 +621,84 @@ CONTAINS
        end if
    end do
 
-   !write(60+myid,"('--------')")
-   !write(60+myid,"(4I4)")Psr(1:Nsr)
-   !write(60+myid,"(4I4)")NIsf(1:Nsr)
-   !do i=1,MAXVAL(NIsfl)
-   !    write(60+myid,"(4I4)")Isf(i,:)
-   !end do
-   !write(60+myid,"('--------')")
-
-!    call MPI_BARRIER(MPI_COMM_WORLD,ll); call MPI_FINALIZE(ll); stop
   END SUBROUTINE findIsf
 
-  SUBROUTINE si_nlistL(nlist,MaxList,Nbrs,mnlist,Mbrs, nss, list,ML, mss,mlist, listlj,nsslj,mlistlj,msslj,MaxListlj, mnlistcnt, mlistcnt)
+  SUBROUTINE si_nlistL(nlist3, ML3, Nbrs, mnlist3, Mbrs, nss, nlist2, ML2, mss, &
+      mnlist2, nlistlj, nsslj, mnlistlj, msslj, MLlj, mnlistcnt, mlistcnt)
 
-    integer                       :: Nbrs,MaxList,MaxListlj, mnlistcnt, mlistcnt
-    integer, dimension(MaxList,3) :: nlist
+    integer                         :: Nbrs,ML3,MLlj, mnlistcnt, mlistcnt
+    integer, dimension(ML3,3)       :: nlist3
 
-    integer                       :: Mbrs
-    integer, dimension(mnlistcnt,3) :: mnlist
+    integer                         :: Mbrs
+    integer, dimension(mnlistcnt,3) :: mnlist3
 
-    integer, dimension(Natm,2)    :: nss, nsslj
-    integer                       :: ML
-    integer, dimension(ML)        :: list
-    integer, dimension(MaxListlj)     :: listlj, mlistlj
+    integer, dimension(Natm,2)      :: nss, nsslj
+    integer                         :: ML2
+    integer, dimension(ML2)         :: nlist2
+    integer, dimension(MLlj)        :: nlistlj, mnlistlj
 
-    integer, dimension(Nl,2)      :: mss, msslj
-    integer, dimension(mlistcnt)     :: mlist
-
-
+    integer, dimension(Nl,2)        :: mss, msslj
+    integer, dimension(mlistcnt)    :: mnlist2
 
     integer :: i,l,ii
 
-    !print*,"reached 1 by ", myid, 2*MaxList/Np, ML/Np
-    call ntom_list3(nlist,MaxList,Nbrs,mnlist,Mbrs,mnlistcnt)
-    !print*,"reached 2 by ", myid
-	!print *, "ntom_list3 done"
-    call ntom_list2(nss, list,ML, mss,mlist, nsslj,listlj,msslj,mlistlj,MaxListlj,mlistcnt)
-    !print *, "ntom list2 done"
-    call findIsf(mnlist,mnlistcnt,Mbrs,mss,mlist,ML, msslj,mlistlj,MaxListlj,mlistcnt)
-	!print *, "findIsf done"
+    call ntom_list3(nlist3, ML3, Nbrs, mnlist3, Mbrs, mnlistcnt)
+    call ntom_list2(nss, nlist2, ML2, mss, mnlist2, nsslj, nlistlj, msslj, mnlistlj, MLlj, mlistcnt)
+    call findIsf(mnlist3, mnlistcnt, Mbrs, mss, mnlist2, ML2, msslj, mnlistlj, MLlj, mlistcnt)
     call findIsa
-	!print *, "findIsa done"
     call collectsends
-	!print *, "collectsends done"
   END SUBROUTINE si_nlistL
 
-  SUBROUTINE ntom_list3(nlist,MaxList,Nbrs,mnlist,Mbrs,mnlistcnt)
+!ntom_list3() extracts all triplets where the first atom is on the assigned processor
+  SUBROUTINE ntom_list3(nlist3,ML3,Nbrs,mnlist3,Mbrs,mnlistcnt)
 
-    integer                       :: Nbrs,MaxList,mnlistcnt
-    integer, dimension(MaxList,3)    :: nlist
+    integer                         :: Nbrs, ML3, mnlistcnt
+    integer, dimension(ML3,3)       :: nlist3
 
-    integer                       :: Mbrs
-    integer, dimension(mnlistcnt,3) :: mnlist
+    integer                         :: Mbrs
+    integer, dimension(mnlistcnt,3) :: mnlist3
 
-    integer    :: i,l
+    integer    :: i, l
 
-    !print*,'Inside ntom_list3'
-    mnlist = 0 !added by Kallol, otherwise this variable is not initiated anywhere.
-    Mbrs = 0 !added by Kallol, otherwise this variable is not initiated anywhere.
+    !intialize counters
+    mnlist3 = 0
+    Mbrs = 0
+
+  !loop through the local neighborlists and check if first atom is assigned to current
+  !processor
     do l = 1,Nbrs
-        if (P(nlist(l,1)).eq.myid) then
+        if (P(nlist3(l,1)).eq.myid) then
             Mbrs = Mbrs + 1
             if(Mbrs .ge. mnlistcnt) print*, "********** Error, writing to unallocated space inside ntom_list3 ********", myid, Mbrs, mnlistcnt
-            mnlist(Mbrs,:) = nlist(l,:)
-
+            mnlist3(Mbrs,:) = nlist3(l,:)
        end if
    end do
-   !print*,"**************************",Mbrs, mnlistcnt
 
   END SUBROUTINE ntom_list3
 
-  SUBROUTINE ntom_list2(nss, list,ML, mss,mlist, nsslj,listlj,msslj,mlistlj,MaxListlj,mlistcnt)
+!ntom_list2() extracts all pair interactions where at least the first atom is on the assigned
+!processor
+  SUBROUTINE ntom_list2(nss, nlist2, ML2, mss, mnlist2, nsslj, nlistlj, msslj, mnlistlj, MLlj, mlistcnt)
 
-    integer, dimension(Natm,2)    :: nss, nsslj
-    integer                       :: ML,MaxListlj,mlistcnt
-    integer, dimension(ML)        :: list
-    integer, dimension(MaxListlj)     :: listlj, mlistlj
+    integer, dimension(Natm,2)        :: nss, nsslj
+    integer                           :: ML2, MLlj, mlistcnt
+    integer, dimension(ML2)           :: nlist2
+    integer, dimension(MLlj)          :: nlistlj, mnlistlj
 
-    integer, dimension(Nl,2)      :: mss, msslj
-    integer, dimension(mlistcnt)     :: mlist
+    integer, dimension(Nl,2)          :: mss, msslj
+    integer, dimension(mlistcnt)      :: mnlist2
 
+    integer                           :: i, ii
 
-    integer    :: i,ii
-
+!initialize counters, pointers
     ii = 0
     mss(:,1) = 0
     mss(:,2) = -1
-    mlist = 0 !added by Kallol, otherwise this variable is not initiated anywhere.
+    mnlist2 = 0
 
     do i = 1,Natm
         if (P(i).eq.myid) then !added by kallol, definition mismatch of ii
-            ii = ii + 1
+            ii = ii + 1 !counter for atoms on the processor
             if (ii.eq.1) then
                 mss(ii,1) = 1
                 msslj(ii,1) = 1
@@ -753,11 +707,12 @@ CONTAINS
                 msslj(ii,1) = msslj(ii-1,2) + 1
             end if
 
+            !map pointers nss to local mss
             mss(ii,2) = mss(ii,1) + nss(i,2) - nss(i,1)
-            mlist(mss(ii,1):mss(ii,2)) = list(nss(i,1):nss(i,2))
+            mnlist2(mss(ii,1):mss(ii,2)) = nlist2(nss(i,1):nss(i,2))
 
             msslj(ii,2) = msslj(ii,1) + nsslj(i,2) - nsslj(i,1)
-            mlistlj(msslj(ii,1):msslj(ii,2)) = listlj(nsslj(i,1):nsslj(i,2))
+            mnlistlj(msslj(ii,1):msslj(ii,2)) = nlistlj(nsslj(i,1):nsslj(i,2))
 
             if(mss(ii,2).ge. mlistcnt) print*, "***************** An error has occured inside ntom_list2*****************", myid, mss(ii,1), mss(ii,2), mlistcnt
         end if

@@ -31,27 +31,41 @@ CONTAINS
   SUBROUTINE init
 
     call initparallel
-	print *, "Initparallel done"
+	if (myid.eq.0) then
+    print *, "Initparallel done"
+  end if
     call readprms
-	print *, "readprms done"
+  if (myid.eq.0) then
+    print *, "readprms done"
+  end if
     call initran
-	print *, "initran done"
+  if (myid.eq.0) then
+    print *, "initran done"
+  end if
     call initdata
-	print *, "initdata done"
+  if (myid.eq.0) then
+    print *, "initdata done"
+  end if
     call initparaops(X) ! previously Xi
-	print *, "initparaops done"
+  if (myid.eq.0) then
+    print *, "initparaops done"
+  end if
     call init_nlist
-	print *, "init_nlist done"
+  if (myid.eq.0) then
+    print *, "init_nlist done"
+  end if
     call initio
-	print *, "initio done"
-    !call writeatoms(X,0)
+  if (myid.eq.0) then
+    print *, "initio done"
+  end if
     call mktables
-	print *, "mktables done"
-    !call TempList(X)
-    call initmeans
-	print *, "initmeans done"
-    call si_nlist(X,0) ! previously Xi
+  if (myid.eq.0) then
+    print *, "mktables done"
+  end if
+    call si_nlist(X) ! previously Xi
+  if (myid.eq.0) then
     print *,"si_nlist done"
+  end if
     if (myid.eq.0) then
        write(out_unit,*) "DONE INITIALIZING"
        write(out_unit,*) "--------------------------------"
@@ -64,8 +78,9 @@ CONTAINS
     real    :: r
     real    :: ran1
 
-    !if (myid.eq.0) write(out_unit,*) "INTIALIZING RANDOM"
-    r = ran1(ranseed)
+    !initranions generates fwhm.dat which dictates the random gaussian distribution
+    !of initial ion locations, based on parameters from siga.in, prms.f90
+
     call initranions
 
   END SUBROUTINE initran

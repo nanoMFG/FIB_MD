@@ -33,7 +33,7 @@ CONTAINS
 
   SUBROUTINE chainlist(LL,HOC,N,X)
     integer,dimension(Natm)                          :: LL    ! next in list pointer
-    integer,dimension(3)                             :: N     ! either Ncsr or Nclj
+    integer,dimension(3)                             :: N     ! either Ncsr or Nclj (# cells in each dimension)
     integer,dimension(0:N(1)+1,0:N(2)+1,0:N(3)+1)    :: HOC   ! Head-of-Chain pointer
                                                               ! with perioidic continuation
     real   ,dimension(Natm,3)                        :: X     ! particle positions
@@ -49,13 +49,6 @@ CONTAINS
        LL(i) = HOC(Icell(i,1),Icell(i,2),Icell(i,3))
        HOC(Icell(i,1),Icell(i,2),Icell(i,3)) = i
    end do
-   !print*, LL(2222)
-   ! added by Kallo, checking value of LL
-   !open(29,file = 'll.dat')
-   !do i = 1,Natm
-   !    write(29,"(I10)")LL(i)
-   !end do
-   !close(29)
 
     if (N(1).gt.2) then
        HOC(0,:,:)        = HOC(N(1),:,:)

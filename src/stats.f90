@@ -45,20 +45,6 @@ CONTAINS
 
   END SUBROUTINE potentialenergy
 
-  SUBROUTINE kineticenergyL(V,k)
-    real, dimension(Natm,3)  :: V
-    real, dimension(Nlat(1)) :: k
-
-    integer                  :: i
-
-    k = 0.
-    do i = 1,Natm
-       k(Lijk(i,1)) = k(Lijk(i,1)) + mass(i)*SUM(V(i,:)**2)
-    end do
-    k = k /2.
-
-  END SUBROUTINE kineticenergyL
-
   SUBROUTINE kineticenergy(V,KE)
     real, dimension(Natm,3)  :: V
     real                     :: KE,KE_l
