@@ -72,8 +72,8 @@ CONTAINS
 
   END SUBROUTINE closeparaops
 
+!count atoms assigned to each processor
   SUBROUTINE findlocals
-
     integer  :: i,ierr
     integer, dimension(Natm) :: il_l
 
@@ -88,24 +88,9 @@ CONTAINS
    allocate(il(Nl))
    il = il_l(1:Nl)
 
-   !call MPI_BARRIER(MPI_COMM_WORLD,ierr)
-
   END SUBROUTINE findlocals
 
-  SUBROUTINE updateglobal(G)
-    real, dimension(Natm,3) :: G
-
-    integer      :: i
-    integer      :: ierr
-
-    do i = 1,Natm
-        call MPI_BCAST(G(i,1), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-        call MPI_BCAST(G(i,2), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-        call MPI_BCAST(G(i,3), 1, MPI_REAL8, P(i), MPI_COMM_WORLD, ierr)
-    end do
-
-  END SUBROUTINE updateglobal
-
+!update value of G on processor 0 (myid.eq.0)
   SUBROUTINE updateroot(G)
     real, dimension(Natm,3) :: G
     real, dimension(3,Natm) :: Gl
@@ -134,6 +119,7 @@ CONTAINS
     end if
 
   END SUBROUTINE updateroot
+
 
   SUBROUTINE find_p_big (dummy_x)
     real, dimension(Natm,3) :: dummy_x
