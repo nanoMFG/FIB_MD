@@ -36,7 +36,8 @@ CONTAINS
         ranindex = NINT(ran1(ranseed)*Nrand)
         print*,'             |'
         print*,'           .\:/.'
-        print*,'KNOCK    --=>*<=--    RANINDEX', ranindex, 'ion ID', Nsg+knc
+!        print*,'KNOCK    --=>*<=--    RANINDEX', ranindex, 'ion ID', Nsg+knc
+        print*,'KNOCK    --=>*<=--    ion ID: ', Nsg+knc
         print*,'           //:\\'
     end if
 

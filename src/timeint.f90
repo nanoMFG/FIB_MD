@@ -309,11 +309,11 @@ CONTAINS
     if(myid.eq.0) write(*,"('Total time for ',I6,'th impact is ',F10.3,' seconds')")impact,MPI_WTIME()-ion_time
     if(myid.eq.0) then
         write(*, "('-----------------------------------------------------------------------------')")
-        write(*, "('| at_time', E20.10, ' at_count', I9, ' average', E20.10,' |')"),at_time,at_count,at_time/at_count
-        write(*, "('| nt_time', E20.10, ' nt_count', I9, ' average', E20.10,' |')"),nt_time,nt_count,nt_time/nt_count
-        write(*, "('| ds_time', E20.10, ' ds_count', I9, ' average', E20.10,' |')"),ds_time,ds_count,ds_time/ds_count
-        write(*, "('|  f_time', E20.10, '  f_count', I9, ' average', E20.10,' |')"), f_time, f_count, f_time/f_count
-        write(*, "('| wr_time = ', E20.10)"),wr_time
+        write(*, "('| at_time', E12.4, ' at_count', I9, ' average', E12.4,' |')"),at_time,at_count,at_time/at_count
+        write(*, "('| nt_time', E12.4, ' nt_count', I9, ' average', E12.4,' |')"),nt_time,nt_count,nt_time/nt_count
+        write(*, "('| ds_time', E12.4, ' ds_count', I9, ' average', E12.4,' |')"),ds_time,ds_count,ds_time/ds_count
+        write(*, "('|  f_time', E12.4, '  f_count', I9, ' average', E12.4,' |')"), f_time, f_count, f_time/f_count
+        write(*, "('| wr_time = ', E12.4)"),wr_time
         write(*, "('-----------------------------------------------------------------------------')")
     end if
 
@@ -324,8 +324,10 @@ CONTAINS
     if (myid.eq.0) write(*, "('nt_time = ',F6.2,'% of whole')")(nt_time/(at_time+nt_time+ds_time+f_time))*100
     if (myid.eq.0) write(*, "('ds_time = ',F6.2,'% of whole')")(ds_time/(at_time+nt_time+ds_time+f_time))*100
     if (myid.eq.0) write(*, "(' f_time = ',F6.2,'% of whole')")(f_time/(at_time+nt_time+ds_time+f_time))*100
-    if (myid.eq.0) print *,"TIME PER STEP: ", (MPI_WTIME()-wtime)/REAL(lt-Nt0)
-    if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
+    if (myid.eq.0) write(*, "('TIME PER STEP:',E12.4)")(MPI_WTIME()-wtime)/REAL(lt-Nt0)
+    if (myid.eq.0) write(*, "('Total Time in simulation:',E12.4)")(MPI_WTIME()-wtime)
+!    if (myid.eq.0) print *,"TIME PER STEP: ", (MPI_WTIME()-wtime)/REAL(lt-Nt0)
+!    if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
     at_time = 0.0; nt_time = 0.0; ds_time = 0.0; f_time=0.0
     at_count = 0; nt_count = 0; ds_count = 0; f_count = 0;
 
