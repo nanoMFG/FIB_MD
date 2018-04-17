@@ -54,14 +54,14 @@ CONTAINS
     test = .false.
     freerun = .false.
 
-    if(myid.eq.1) then
-      print *,"Timestep #, Time (ps), Temperature (K)"
-    end if
 
     !if starting fresh, write out initial configuration
     call temperature(V,temp)
     if(lt.eq.0) then
         wr_time = MPI_WTIME()
+        if(myid.eq.1) then
+          print *,"Timestep #, Time (ps), Temperature (K)"
+        end if
         call writeatoms(X,V,F,lt,time,temp) !X = X + Ts*V  !call sendposN(X)
         wr_time = MPI_WTIME()-wr_time
     end if
@@ -112,9 +112,6 @@ CONTAINS
             call calc_time(lt)
         end do
     end if
-
-    if (myid.eq.0) print *,"TIME PER STEP: ", (MPI_WTIME()-wtime)/REAL(lt-Nt0)
-    if (myid.eq.0) print *,"Total Time in simulation: ", (MPI_WTIME()-wtime)
 
   END SUBROUTINE tint
 
