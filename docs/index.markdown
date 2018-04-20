@@ -17,7 +17,7 @@ The 'KNOCK' line indicates that an ion has been fired at the surface, and is fol
 
 ### mdrun2.xyz
 
-The mdrun2.xyz file follows standard xyz file format. Each system snapshot is provided as a distinct chunk, with the first line indicating the number of atoms, the second line indicating the snapshot's time in the simulation along with column headers, and the following lines providing information on each atom in the system. The first three columns are atomic positions in Angstroms, the fourth column is the atomic type designator ('Si' or 'Ga'), the fifth column is the processor # responsible for the atom, and the sixth column is the kinetic energy of the atom in eV. It is suggested that this file be analyzed using Ovito.
+The mdrun2.xyz file follows an extended [xyz file format](https://en.wikipedia.org/wiki/XYZ_file_format). Each system snapshot is provided as a distinct chunk, with the first line indicating the number of atoms, the second line indicating the snapshot's time in the simulation along with column headers, and the following lines providing information on each atom in the system. The first three columns are atomic positions in Angstroms, the fourth column is the atomic type designator ('Si' or 'Ga'), the fifth column is the processor # responsible for the atom, and the sixth column is the kinetic energy of the atom in eV. It is suggested that this file be analyzed using Ovito.
 
 ## Ovito
 
@@ -40,6 +40,6 @@ Then, at the bottom of the right panel, check the box next to 'File contains tim
 
 ![Colored Atoms](https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/OvitoColored.png?token=AXG3bHhT2jRteFJc2rD8CTurPJYoIdA2ks5a4okNwA%3D%3D)
 
-If you enable the top-most 'Compute Property' option, the transparency of each atom will be adjusted according to its temperature. In the default setting, this will hide cold atoms, and can be useful for visualizing the damage cascades caused during/ immediately after an ion impact. 
+If you enable the top-most 'Compute Property' option, the transparency of each atom will be adjusted according to its temperature. In the default setting, this will hide cold atoms, and can be useful for visualizing the damage cascades caused during/ immediately after an ion impact.
 
 ![Transparency](https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/OvitoTransparency.png?token=AXG3bD0HKCYinFgxMFWVvWIx9cE3RBeyks5a4olywA%3D%3D)
