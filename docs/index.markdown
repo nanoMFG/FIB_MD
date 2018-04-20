@@ -7,13 +7,21 @@ The FIBMD tool's intended use is for visualization of sputtering and surface def
 
 ### out.log
 
-In the out.log, information is provided regarding the current state of the simulation. The first lines of "*x* done" indicate that initialization routines for the domain generation, input parameters, data arrays, etc., have completed. The lines reading "called ionrun *x*" indicate that for *x* = 1, small timesteps are being used, and for *x* = 2, large timesteps are being used. This is determined according to the ion energy description on nanohub.org/tools/fibmd. 
+In the out.log, information is provided regarding the current state of the simulation. The first lines of "*x* done" indicate that initialization routines for the domain generation, input parameters, data arrays, etc., have completed.
+
+<img src="https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/Columns.png?token=AXG3bDdZlDAH_3nNqjS-PilzWqiwSGNOks5a40tAwA%3D%3D" width = "300">
 
 As indicated by the column headers, the primary output's first column is the timestep number, the second column is the simulated time in picosends, and the third column is the average system temperature. This temperature does not include atoms that were sputtered and then frozen, or any gallium atoms.
 
+<img src = "https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/TimeReport.png?token=AXG3bL-ag0M9jEDkI2mScc_BEXnVZKouks5a40t_wA%3D%3D" width = "600">
+
 After temperature initialization and each ion firing, information is printed regarding the distribution of computational time across routines. 'at_time' is the time taken to geometrically redistribute atoms over the parallel processors, 'nt_time' is the time taken for generating neighborlists, 'ds_time' is the time taken to check the kinetic energies of all atoms and determine whether the timestep value should change, 'f_time' is the time taken to evaluate all atomic forces, and 'wr_time' is the time taken to write all output files. Similarly, the '*x_count*' indicates how many times each of the prevous operations were conducted. Each of these parameters is reset after reporting, so information printed for each ion firing is independent. 
 
-The 'KNOCK' line indicates that an ion has been fired at the surface, and is followed by the atomic ID of this ion. This ID is consistent with the numbering of atoms in the .xyz output files. 
+<img src = "https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/KnockIonrun1.png?token=AXG3bJcahA5ACJepnibSdKmb0idvOukQks5a40vkwA%3D%3D" width = "350">
+<img src = "https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/Ionrun2.png?token=AXG3bMrIXv-9HXhVxags3Zf8ibGlnCC9ks5a40wbwA%3D%3D" width = "250">
+
+The 'KNOCK' line indicates that an ion has been fired at the surface, and is followed by the atomic ID of this ion. This ID is consistent with the numbering of atoms in the .xyz output files. The lines reading "called ionrun *x*" indicate that for *x* = 1, small timesteps are being used, and for *x* = 2, large timesteps are being used. This is determined according to the ion energy description on the [nanohub FIBMD page](https://nanohub.org/tools/fibmd). 
+
 
 ### mdrun2.xyz
 
