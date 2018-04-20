@@ -43,6 +43,3 @@ Then, at the bottom of the right panel, check the box next to 'File contains tim
 If you enable the top-most 'Compute Property' option, the transparency of each atom will be adjusted according to its temperature. In the default setting, this will hide cold atoms, and can be useful for visualizing the damage cascades caused during/ immediately after an ion impact.
 
 ![Transparency](https://raw.githubusercontent.com/nanoMFG/FIB_MD/master/images/OvitoTransparency.png?token=AXG3bD0HKCYinFgxMFWVvWIx9cE3RBeyks5a4olywA%3D%3D)
-
-[The nanohub.org FIBMD Page](https://nanohub.org/tools/fibmd)
-
